@@ -18,6 +18,7 @@ import { NgxEditorModule, schema } from 'ngx-editor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AlertComponent } from './alert/alert.component';
+import { ManagerComponent } from './main/manager/manager.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AlertComponent } from './alert/alert.component';
     AddStatusComponent,
     NotFoundComponent,
     AlertComponent,
+    ManagerComponent,
   ],
   imports: [
     BrowserModule,

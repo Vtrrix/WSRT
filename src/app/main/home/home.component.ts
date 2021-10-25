@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProfileService } from 'src/app/services/profile.service';
+import { SideMenuService } from 'src/app/services/side-menu.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,10 @@ export class HomeComponent implements OnInit {
   // feilds: string[];
   // values: (string | string[])[];
 
-  constructor(private profileService: ProfileService) {
+  constructor(
+    private profileService: ProfileService,
+    private sideMenuService: SideMenuService
+  ) {
     this.showAlert = false;
     this.alertMessage = '';
     this.profileData = profileService.profileData;
@@ -22,6 +26,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sideMenuService.changeSideMenu([
+      { title: 'My Info', route: '/' },
+      { title: 'My Status', route: 'status' },
+    ]);
+
     this.profileService.getProfile().subscribe(
       (data) => {
         if (data[1] === 200) {

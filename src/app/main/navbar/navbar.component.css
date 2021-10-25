@@ -4,11 +4,11 @@
 .navbar-nav {
   margin-left: 20px;
 }
-.active {
+/* .active {
   border-bottom: 7px solid whitesmoke;
   margin-bottom: -25%;
   padding-bottom: 20%;
-}
+} */
 
 #menu-toggle {
   font-size: x-large;
