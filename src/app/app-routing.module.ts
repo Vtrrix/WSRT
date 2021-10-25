@@ -7,6 +7,7 @@ import { HomeComponent } from './main/home/home.component';
 import { MainComponent } from './main/main.component';
 import { ManagerComponent } from './main/manager/manager.component';
 import { StatusListComponent } from './main/status-list/status-list.component';
+import { TeamsComponent } from './main/teams/teams.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
@@ -20,8 +21,11 @@ const routes: Routes = [
       { path: 'editprofile', component: EditProfileComponent },
       { path: 'status', component: StatusListComponent },
       { path: 'addstatus', component: AddStatusComponent },
-      { path: 'manager', component: ManagerComponent },
-
+      {
+        path: 'manager',
+        component: ManagerComponent,
+        children: [{ path: '', component: TeamsComponent }],
+      },
       { path: '**', component: NotFoundComponent },
     ],
   },

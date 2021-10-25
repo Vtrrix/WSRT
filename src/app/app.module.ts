@@ -19,6 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AlertComponent } from './alert/alert.component';
 import { ManagerComponent } from './main/manager/manager.component';
+import { TeamsComponent } from './main/teams/teams.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ManagerComponent } from './main/manager/manager.component';
     NotFoundComponent,
     AlertComponent,
     ManagerComponent,
+    TeamsComponent,
   ],
   imports: [
     BrowserModule,

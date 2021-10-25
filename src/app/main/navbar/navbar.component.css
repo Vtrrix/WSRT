@@ -4,6 +4,9 @@
 .navbar-nav {
   margin-left: 20px;
 }
+.nav-item {
+  margin-right: 10px;
+}
 /* .active {
   border-bottom: 7px solid whitesmoke;
   margin-bottom: -25%;
