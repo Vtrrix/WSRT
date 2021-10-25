@@ -1,0 +1,119 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-lg-11 col-md-11">
+      <div class="row justify-content-center">
+        <div class="col-9">
+          <h2 class="heading h2">Add Status</h2>
+          <h3 class="heading h6 fw-normal">{{ timeStamp }}</h3>
+        </div>
+        <div class="col-3">
+          <p class="heading mt-5">ID : {{ statusID }}</p>
+        </div>
+      </div>
+      <hr />
+      <form
+        [formGroup]="addStatusForm"
+        (ngSubmit)="onSubmit()"
+        class="form-card mt-4"
+      >
+        <div class="row d-flex">
+          <div class="col-8">
+            <div class="row">
+              <div class="col-8">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="title"
+                    id="floatingInputTitle"
+                    placeholder="Title"
+                  />
+                  <label for="floatingInputTitle ">Title</label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label for="floatingInputFirstName " class="h4"
+                >Accomplishments Done :</label
+              >
+              <div class="NgxEditor__Wrapper">
+                <ngx-editor-menu [editor]="editor1" [toolbar]="toolbar">
+                </ngx-editor-menu>
+
+                <ngx-editor
+                  [editor]="editor1"
+                  formControlName="taskDone"
+                ></ngx-editor>
+              </div>
+            </div>
+            <div>
+              <label for="floatingInputFirstName " class="h4 mt-4"
+                >Concerns/Risks/Important topic:</label
+              >
+              <div class="NgxEditor__Wrapper">
+                <ngx-editor-menu [editor]="editor2" [toolbar]="toolbar">
+                </ngx-editor-menu>
+
+                <ngx-editor
+                  [editor]="editor2"
+                  formControlName="risk"
+                ></ngx-editor>
+              </div>
+            </div>
+            <div>
+              <label for="floatingInputFirstName " class="h4 mt-4"
+                >Plans for next week :</label
+              >
+              <div class="NgxEditor__Wrapper">
+                <ngx-editor-menu [editor]="editor3" [toolbar]="toolbar">
+                </ngx-editor-menu>
+
+                <ngx-editor
+                  [editor]="editor3"
+                  formControlName="nextWeekPlan"
+                ></ngx-editor>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <label>Leaves Planned:</label>
+            <span>
+              <button type="button" (click)="addLeave()" class="btn add-btn">
+                &plus;
+              </button>
+            </span>
+            <div
+              id="leaveContainer"
+              formArrayName="leaves"
+              class="form-floating"
+            >
+              <input
+                *ngFor="let leave of getControls(); let i = index"
+                type="date"
+                class="form-control"
+                [formControlName]="i"
+                placeholder="Leave"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div id="btn-container" class="col-sm-12">
+            <button
+              type="button"
+              [routerLink]="['/user', 'status']"
+              class="btn btn-save fw-bold text-uppercase"
+            >
+              Cancel
+            </button>
+            <button class="btn btn-save fw-bold text-uppercase" type="submit">
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-alert [errorMessage]="alertMessage" *ngIf="showAlert"></app-alert>
+</div>

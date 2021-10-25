@@ -1,0 +1,96 @@
+.heading {
+  font-size: 2rem;
+  margin-top: 25px;
+  margin-bottom: 30px;
+  padding-left: 20px;
+}
+
+.card {
+  border-radius: 10px !important;
+  margin-top: 40px;
+  margin-bottom: 60px;
+  border: 0px;
+}
+
+.form-card {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.form-card input,
+.form-card textarea {
+  padding: 10px 15px 0px 15px;
+  border: none;
+  border: 1px solid lightgrey;
+  border-radius: 6px;
+  margin-bottom: 25px;
+  margin-top: 2px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: arial;
+  color: #2c3e50;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.form-card input:focus,
+.form-card textarea:focus {
+  box-shadow: 0px 0px 0px 1.5px #acacac !important;
+  outline-width: 0;
+}
+
+.input-group {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.input-group input {
+  position: relative;
+  height: 80px;
+  margin-left: 1px;
+  margin-right: 1px;
+  border-radius: 6px;
+  padding-top: 30px;
+  padding-left: 25px;
+}
+
+.input-group label {
+  position: absolute;
+  height: 24px;
+  background: none;
+  border-radius: 6px;
+  line-height: 48px;
+  font-size: 15px;
+  color: gray;
+  width: 100%;
+  font-weight: 100;
+  padding-left: 25px;
+}
+input:-webkit-autofill {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+g-invalid.ng-touched {
+  border: 2px solid red;
+}
+#btn-container {
+  margin-right: 10px;
+  margin-left: 21vw;
+}
+.btn {
+  margin-left: 20px;
+  padding: 13px 20px 12px;
+  background-color: #ef4223;
+  border-radius: 4px;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #fff;
+  margin-bottom: 24px;
+}
+.btn:hover {
+  border: 1px solid #ef4223;
+  background-color: transparent;
+  color: #ef4223;
+}

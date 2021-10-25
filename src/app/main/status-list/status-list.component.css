@@ -1,0 +1,238 @@
+.card-1 {
+  border: none;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(252, 252, 252);
+}
+
+.option-btn {
+  border: none;
+  border-radius: 1.5rem;
+  width: 60%;
+  margin-left: 25px;
+  max-width: 120px;
+  max-height: 35px;
+  padding: 5px;
+  font-weight: 600;
+  color: #6c757d;
+  cursor: pointer;
+}
+
+.date-input {
+  padding: 10px 15px !important;
+  border: 1px solid lightgrey !important;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background-color: #fff !important;
+  color: #2c3e50;
+  font-size: 14px;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.date-input:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #512da8;
+  outline-width: 0;
+}
+
+::placeholder {
+  color: #bdbdbd;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: #bdbdbd;
+}
+
+::-ms-input-placeholder {
+  color: #bdbdbd;
+}
+
+button:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0;
+}
+.input-group {
+  width: 100%;
+  min-width: 300px;
+}
+.datepicker {
+  background-color: #fff;
+  border: none;
+  border-radius: 0 !important;
+}
+
+.datepicker-dropdown {
+  top: 0;
+  left: 0;
+}
+
+.datepicker table tr td.today,
+span.focused {
+  border-radius: 50% !important;
+  background-image: linear-gradient(#fff3e0, #ffe0b2);
+}
+
+.datepicker table tr td.today.range {
+  background-image: linear-gradient(#eeeeee, #eeeeee) !important;
+  border-radius: 0 !important;
+}
+
+thead tr:nth-child(3) th {
+  font-weight: bold !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.dow,
+.old-day,
+.day,
+.new-day {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 0px !important;
+}
+
+.old-day:hover,
+.day:hover,
+.new-day:hover,
+.month:hover,
+.year:hover,
+.decade:hover,
+.century:hover {
+  border-radius: 50% !important;
+  background-color: #eee;
+}
+
+.active {
+  border-radius: 50% !important;
+  background-image: linear-gradient(#90caf9, #64b5f6) !important;
+  color: #fff !important;
+}
+
+.range-start,
+.range-end {
+  border-radius: 50% !important;
+  background-image: linear-gradient(#ffa726, #ffa726) !important;
+}
+
+.prev,
+.next,
+.datepicker-switch {
+  border-radius: 0 !important;
+  padding: 10px 10px 10px 10px !important;
+  text-transform: uppercase;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.prev:hover,
+.next:hover,
+.datepicker-switch:hover {
+  background-color: inherit !important;
+  opacity: 1;
+}
+
+.btn-black {
+  background-color: #37474f !important;
+  color: #fff !important;
+  width: 100%;
+}
+
+.btn-black:hover {
+  color: #fff !important;
+  background-color: #000 !important;
+}
+.page-change-btn {
+  border: none;
+  border-radius: 1.5rem;
+  width: 60%;
+  margin-left: 25px;
+  max-width: 120px;
+  padding: 5px;
+  font-weight: 600;
+  color: #6c757d;
+  cursor: pointer;
+}
+.page-change-btn:hover {
+  color: black;
+}
+.option-btn:hover {
+  color: black;
+}
+.form-group {
+  margin: 10px 0;
+}
+.form-group.hidden {
+  width: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+.date-range-label {
+  min-width: 20%;
+}
+.date-input {
+  margin-bottom: 14px;
+}
+.date-input {
+  display: none;
+  /* border-radius: 1.5rem; */
+}
+.input-group-append {
+  width: 100%;
+}
+.custom-date-input-group {
+  min-width: 400px;
+  position: fixed;
+  transform: translate(37vw, -18vh);
+}
+.filter-btn {
+  transform: translateX(320%);
+}
+.date-btn {
+  /* min-width: 150px; */
+  /* transform: translateX(240%); */
+  border-radius: 1.5rem;
+}
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+.custom-day.range,
+.custom-day:hover {
+  background-color: rgb(2, 117, 216);
+  color: white;
+}
+.custom-day.faded {
+  background-color: rgba(2, 117, 216, 0.5);
+}
+
+.page-size {
+  padding: 5px 10px;
+  font-weight: 600;
+  color: #6c757d;
+  border-radius: 5px 0 0 5px;
+  background: #efefef;
+}
+.btn-page-size {
+  background: #efefef;
+}
+.btn-page-size:hover {
+  background: #e6e6e6;
+}
+/* .footer {
+  margin-bottom: 300px !important;
+} */

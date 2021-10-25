@@ -1,0 +1,221 @@
+<div class="container mt-5">
+  <div class="row px-4">
+    <h3 class="mb-5">Submitted Status List</h3>
+    <div class="row mb-4">
+      <div class="col-md-9 d-flex flex-row">
+        <input
+          type="button"
+          class="option-btn mx-0"
+          name="filterStatusListDefault"
+          value="Default"
+          (click)="filterStatus('default')"
+        />
+        <input
+          type="button"
+          class="option-btn"
+          name="filterStatusListThisMonth"
+          value="This Month"
+          (click)="filterStatus('thisMonth')"
+        />
+        <input
+          type="button"
+          class="option-btn"
+          name="filterStatusListLastMonth"
+          value="Last Month"
+          (click)="filterStatus('lastMonth')"
+        />
+        <input
+          type="button"
+          class="option-btn"
+          name="filterStatusListCustom"
+          value="Custom"
+          (click)="collapse.toggle()"
+        />
+        <div
+          #collapse="ngbCollapse"
+          class="custom-date-input-group"
+          [(ngbCollapse)]="isCollapsed"
+        >
+          <div class="card">
+            <div class="card-body">
+              <form class="form-inline">
+                <div class="form-group hidden">
+                  <div class="input-group date-input-group d-flex">
+                    <input
+                      name="datepicker"
+                      class="form-control date-input"
+                      ngbDatepicker
+                      #datepicker="ngbDatepicker"
+                      [autoClose]="'outside'"
+                      (dateSelect)="onDateSelection($event)"
+                      [displayMonths]="2"
+                      [dayTemplate]="t"
+                      outsideDays="hidden"
+                      [startDate]="fromDate!"
+                      tabindex="-1"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        type="button"
+                        class="btn date-btn btn-outline-secondary calendar"
+                        (click)="datepicker.toggle()"
+                        type="button"
+                      >
+                        Select Date
+                      </button>
+                      <button
+                        type="button"
+                        class="btn date-btn btn-outline-secondary filter-btn"
+                        (click)="filterStatus('custom')"
+                      >
+                        Filter
+                      </button>
+                    </div>
+
+                    <ng-template #t let-date let-focused="focused">
+                      <span
+                        class="custom-day"
+                        [class.focused]="focused"
+                        [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)"
+                        (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null"
+                      >
+                        {{ date.day }}
+                      </span>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <label class="date-range-label" for="dpFromDate">
+                      From :
+                    </label>
+
+                    <input
+                      #dpFromDate
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="dpFromDate"
+                      [value]="formatter.format(fromDate)"
+                      (input)="
+                        fromDate = validateInput(fromDate, dpFromDate.value)
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="form-group ml-2">
+                  <div class="input-group">
+                    <label class="date-range-label" for="dpToDate">
+                      To :
+                    </label>
+                    <input
+                      #dpToDate
+                      class="form-control"
+                      placeholder="yyyy-mm-dd"
+                      name="dpToDate"
+                      [value]="formatter.format(toDate)"
+                      (input)="toDate = validateInput(toDate, dpToDate.value)"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 d-flex flex-row-reverse">
+        <input
+          type="button"
+          class="option-btn"
+          name="btnAddMore"
+          value="Add Status"
+          [routerLink]="['/user', 'addstatus']"
+        />
+      </div>
+    </div>
+
+    <table class="table table-borderless table-responsive shadow card-1 p-4">
+      <thead>
+        <tr class="border-bottom">
+          <th><span class="ml-4">Status ID</span></th>
+          <th><span class="ml-2">Title</span></th>
+          <th><span class="ml-3">Status</span></th>
+          <th><span class="ml-3">Submitted Date & Time</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let status of currentStatusList" class="border-bottom">
+          <td>
+            <div class="p-2">
+              <span class="font-weight-bold">{{ status.status_id }}</span>
+            </div>
+          </td>
+          <td>
+            <div class="p-2">
+              <span class="font-weight-bold">{{ status.title }}</span>
+            </div>
+          </td>
+          <td>
+            <div class="p-2">
+              <span class="font-weight-bold">Submitted</span>
+            </div>
+          </td>
+          <td>
+            <div class="p-2">
+              <span class="font-weight-bold">{{
+                status.submit_time_stamp
+              }}</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row footer mb-5 mt-4">
+      <div class="col-md-6">
+        <div class="btn-group mr-3">
+          <div class="page-size">{{ pageSize }} items per page</div>
+          <div
+            class="btn-group"
+            ngbDropdown
+            role="group"
+            aria-label="Button group with nested dropdown"
+          >
+            <button
+              class="btn btn-page-size dropdown-toggle-split"
+              ngbDropdownToggle
+            ></button>
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <button ngbDropdownItem (click)="changePageSize(5)">
+                5 items per page
+              </button>
+              <button ngbDropdownItem (click)="changePageSize(10)">
+                10 items per page
+              </button>
+              <button ngbDropdownItem (click)="changePageSize(15)">
+                15 items per page
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 d-flex flex-row-reverse">
+        <input
+          (click)="nextPage()"
+          type="button"
+          class="page-change-btn"
+          name="btnNext"
+          value="Next"
+        />
+        <input
+          (click)="prevPage()"
+          type="button"
+          class="page-change-btn"
+          name="btnPrev"
+          value="Prev"
+        />
+      </div>
+    </div>
+  </div>
+  <app-alert [errorMessage]="alertMessage" *ngIf="showAlert"></app-alert>
+</div>

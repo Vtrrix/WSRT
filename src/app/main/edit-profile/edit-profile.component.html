@@ -1,0 +1,104 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card shadow p-3">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <h2 class="heading text-center">Edit Profile</h2>
+          </div>
+        </div>
+        <form
+          [formGroup]="editProfileForm"
+          (ngSubmit)="onSave()"
+          class="form-card"
+        >
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-4">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="firstName"
+                      id="floatingInputFirstName"
+                      placeholder="firstName"
+                    />
+                    <label for="floatingInputFirstName ">First Name</label>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="middleName"
+                      id="floatingInputMiddleName"
+                      placeholder="middleName"
+                    />
+                    <label for="floatingInputMiddleName ">Middle Name</label>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="lastName"
+                      id="floatingInputLastName"
+                      placeholder="lastName"
+                    />
+                    <label for="floatingInputLastName ">Last Name</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="phone"
+                  id="floatingInputPhone"
+                  placeholder="Phone"
+                />
+                <label for="floatingInputPhone ">Phone</label>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="address"
+                  id="floatingInputAddress"
+                  placeholder="address"
+                />
+                <label for="floatingInputAddress ">Address</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div id="btn-container" class="col-sm-12">
+              <button
+                type="button"
+                [routerLink]="['']"
+                class="btn btn-save fw-bold text-uppercase"
+              >
+                Cancel
+              </button>
+              <button class="btn btn-save fw-bold text-uppercase" type="submit">
+                Save
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <app-alert *ngIf="showAlert" [errorMessage]="alertMessage"></app-alert>
+</div>

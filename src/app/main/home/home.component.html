@@ -1,0 +1,106 @@
+<div class="container profile mt-3">
+  <form method="post" class="shadow p-5">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="profile-head">
+          <h4>{{ profileData.name }}</h4>
+          <h6 class="text-muted">{{ profileData.job_title }}</h6>
+        </div>
+      </div>
+      <div class="col-md-2 flex justify-content-center">
+        <input
+          [routerLink]="['editprofile']"
+          type="button"
+          class="profile-edit-btn"
+          name="btnEditProfile"
+          value="Edit Profile"
+        />
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div
+            class="tab-pane fade show active"
+            id="home"
+            role="tabpanel"
+            aria-labelledby="home-tab"
+          >
+            <div class="row">
+              <div class="col-md-6">
+                <label>Team</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{ profileData.team }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Manager</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{ profileData.manager }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Next Status Date</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{ profileData.next_status_date }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Leaves Planned</label>
+              </div>
+              <div class="col-md-6">
+                <p class="my-0">30 Sep 2021</p>
+                <p class="my-0">20 Aug 2021</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div
+            class="tab-pane fade show active"
+            id="home"
+            role="tabpanel"
+            aria-labelledby="home-tab"
+          >
+            <div class="row">
+              <div class="col-md-6">
+                <label>Phone</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{ profileData.phone }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>E-mail</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{ profileData.email }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Address</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{ profileData.address }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <app-alert [errorMessage]="alertMessage" *ngIf="showAlert"></app-alert>
+</div>

@@ -1,0 +1,20 @@
+<div class="d-flex" id="wrapper">
+  <div id="sidebar-wrapper">
+    <div class="sidebar-heading">
+      <img
+        class="logo"
+        src="https://www.cybintsolutions.com/wp-content/uploads/2021/04/WatchGuard-Logo-1.png"
+        alt="WatchGuard"
+      />
+    </div>
+    <app-side-menu></app-side-menu>
+  </div>
+
+  <div id="page-content-wrapper">
+    <!-- visible true if manager to show navbar navigation -->
+    <app-navbar [visible]="navbarVisible"></app-navbar>
+    <!-- pass breadcrumb path as crumbs i.e array of title and route -->
+    <app-breadcrumb [crumbs]="breadcrumb"></app-breadcrumb>
+    <router-outlet></router-outlet>
+  </div>
+</div>

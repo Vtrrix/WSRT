@@ -1,0 +1,35 @@
+.navbar {
+  background: #ec1e24;
+}
+.navbar-nav {
+  margin-left: 20px;
+}
+.active {
+  border-bottom: 7px solid whitesmoke;
+  margin-bottom: -25%;
+  padding-bottom: 20%;
+}
+
+#menu-toggle {
+  font-size: x-large;
+  font-weight: bolder;
+}
+.btn {
+  margin-left: 10px;
+  background: #ec1e24;
+  color: whitesmoke;
+}
+.btn-logout {
+  padding: 8px 12px 8px;
+  background-color: whitesmoke;
+  border-radius: 4px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #ec1e24;
+  margin-right: 1%;
+}
+.btn-logout:hover {
+  border: 1px solid whitesmoke;
+  background-color: transparent;
+  color: whitesmoke;
+}

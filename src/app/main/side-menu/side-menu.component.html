@@ -1,0 +1,8 @@
+<div id="menu" class="list-group list-group-flush">
+  <a
+    *ngFor="let menuElement of menuElements"
+    [routerLink]="menuElement.route"
+    class="list-group-item list-group-item-action"
+    >{{ menuElement.title }}</a
+  >
+</div>
