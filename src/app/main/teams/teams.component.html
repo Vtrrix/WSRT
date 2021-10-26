@@ -1,41 +1,53 @@
 <div class="container mt-5">
   <div class="row px-4">
-    <h3 class="mb-5">Teams</h3>
-
-    <table class="table table-borderless table-responsive shadow card-1 p-4">
+    <h3 class="mb-2">Manage Teams</h3>
+    <input
+      type="button"
+      class="option-btn mb-4 add-team-btn"
+      name="filterStatusListDefault"
+      value="Add Team"
+    />
+    <table
+      class="
+        table table-borderless table-hover table-responsive
+        shadow
+        card-1
+        p-4
+      "
+    >
       <thead>
         <tr class="border-bottom">
-          <th><span class="ml-4">Status ID</span></th>
-          <th><span class="ml-2">Title</span></th>
-          <th><span class="ml-3">Status</span></th>
-          <th><span class="ml-3">Submitted Date & Time</span></th>
+          <th><span class="ml-3">Name</span></th>
+          <th><span class="ml-3">Short Name</span></th>
+          <th><span class="ml-3">Description</span></th>
+          <th><span class="ml-3">Manager</span></th>
         </tr>
       </thead>
       <tbody>
-        <tr class="border-bottom">
+        <tr *ngFor="let team of teamsList" class="border-bottom">
           <td>
             <div class="p-2">
-              <span class="font-weight-bold">status.status_id </span>
+              <span class="font-weight-bold">{{ team.team_name }} </span>
             </div>
           </td>
           <td>
             <div class="p-2">
-              <span class="font-weight-bold"> status.title </span>
+              <span class="font-weight-bold"> {{ team.team_short_name }} </span>
             </div>
           </td>
           <td>
             <div class="p-2">
-              <span class="font-weight-bold">Submitted</span>
+              <span class="font-weight-bold">{{ team.description }}</span>
             </div>
           </td>
           <td>
-            <div class="p-2">
-              <span class="font-weight-bold"> status.submit_time_stamp </span>
+            <div *ngFor="let manager of team.managers" class="p-2">
+              <span class="font-weight-bold"> {{ manager }} </span>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <!-- <app-alert [errorMessage]="alertMessage" *ngIf="showAlert"></app-alert> -->
+  <app-alert [errorMessage]="alertMessage" *ngIf="showAlert"></app-alert>
 </div>
