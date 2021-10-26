@@ -20,6 +20,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AlertComponent } from './alert/alert.component';
 import { ManagerComponent } from './main/manager/manager.component';
 import { TeamsComponent } from './main/teams/teams.component';
+import { AddTeamComponent } from './main/add-team/add-team.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { TeamsComponent } from './main/teams/teams.component';
     AlertComponent,
     ManagerComponent,
     TeamsComponent,
+    AddTeamComponent,
   ],
   imports: [
     BrowserModule,

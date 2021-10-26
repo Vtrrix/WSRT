@@ -32,16 +32,18 @@ export class HomeComponent implements OnInit {
     ]);
 
     this.profileService.getProfile().subscribe(
-      (data) => {
-        if (data[1] === 200) {
-          this.profileService.setProfileData = data[0];
-          this.profileData = data[0];
+      (res) => {
+        console.log(res);
+
+        if (res.statusCode === 200) {
+          this.profileService.setProfileData = res.data;
+          this.profileData = res.data;
           // this.feilds = Object.keys(data[0]);
           // this.values = Object.values(data[0]);
           // console.log(this.feilds, this.values);
         } else {
           this.showAlert = true;
-          this.alertMessage = <string>(<unknown>data[0]);
+          this.alertMessage = <string>(<unknown>res.message);
         }
       },
       (error) => {

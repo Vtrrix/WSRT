@@ -1,0 +1,66 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-lg-11 col-md-11">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <h2 class="heading h2">Add Team</h2>
+        </div>
+      </div>
+      <hr />
+      <form class="form-card mt-4">
+        <div class="row d-flex">
+          <div class="col-8">
+            <div class="row">
+              <div class="col-8">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="floatingInputTeamName"
+                    placeholder="Team Name"
+                  />
+                  <label for="floatingInputTeamName ">Team Name</label>
+                </div>
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="floatingInputShortName"
+                    placeholder="Short Name"
+                  />
+                  <label for="floatingInputShortName">Short Name</label>
+                </div>
+                <div class="form-floating">
+                  <textarea
+                    name="description"
+                    id="floatingInputDescription"
+                    cols="30"
+                    rows="10"
+                  ></textarea>
+
+                  <label for="floatingInputShortName">Description</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div id="btn-container" class="col-sm-12">
+            <button
+              type="button"
+              [routerLink]="['/user', 'manager']"
+              class="btn btn-save fw-bold text-uppercase"
+            >
+              Cancel
+            </button>
+            <button class="btn btn-save fw-bold text-uppercase" type="submit">
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- <app-alert [errorMessage]="alertMessage" *ngIf="showAlert"></app-alert> -->
+</div>

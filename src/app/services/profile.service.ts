@@ -11,6 +11,7 @@ interface userProfile {
   email: string | null;
   name: string | null;
   phone: string | null;
+  role: string | null;
 }
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,7 @@ export class ProfileService {
       email: null,
       name: null,
       phone: null,
+      role: null,
     };
   }
 
@@ -41,7 +43,11 @@ export class ProfileService {
   }
 
   getProfile() {
-    return this.http.get<[userProfile, number]>(
+    return this.http.get<{
+      data: userProfile;
+      message: string;
+      statusCode: number;
+    }>(
       `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/users/${localStorage.getItem(
         'username'
       )}`,

@@ -1,11 +1,13 @@
 <div class="container mt-5">
   <div class="row px-4">
-    <h3 class="mb-2">Manage Teams</h3>
+    <h3 class="mb-4">Manage Teams</h3>
     <input
       type="button"
       class="option-btn mb-4 add-team-btn"
       name="filterStatusListDefault"
       value="Add Team"
+      *ngIf="isAdmin"
+      [routerLink]="['/user', 'manager', 'add-team']"
     />
     <table
       class="

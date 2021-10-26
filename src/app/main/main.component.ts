@@ -43,21 +43,24 @@ export class MainComponent implements OnInit {
     // If profile data does not exist call api else get data from service state
     if (this.profileService.getProfileData.teams_managed) {
       // to change visibility of navbar
+
       this.navbarVisible =
-        this.profileService.getProfileData.teams_managed.length === 0
-          ? false
-          : true;
+        this.profileService.getProfileData.role === 'manager' ||
+        this.profileService.getProfileData.role === 'admin'
+          ? true
+          : false;
     } else {
       this.profileService.getProfile().subscribe(
-        (data) => {
-          if (data[1] === 200) {
-            this.profileService.setProfileData = data[0];
+        (res) => {
+          if (res.statusCode === 200) {
+            this.profileService.setProfileData = res.data;
 
             // to change visibility of navbar
             this.navbarVisible =
-              this.profileService.getProfileData.teams_managed!.length === 0
-                ? false
-                : true;
+              this.profileService.getProfileData.role === 'manager' ||
+              this.profileService.getProfileData.role === 'admin'
+                ? true
+                : false;
           } else {
           }
         },
