@@ -21,6 +21,7 @@ import { AlertComponent } from './alert/alert.component';
 import { ManagerComponent } from './main/manager/manager.component';
 import { TeamsComponent } from './main/teams/teams.component';
 import { AddTeamComponent } from './main/add-team/add-team.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { AddTeamComponent } from './main/add-team/add-team.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgSelectModule,
     NgxEditorModule.forRoot({
       locals: {
         // menu
