@@ -34,4 +34,21 @@ export class TeamsService {
       }
     );
   }
+  addTeam() {
+    return this.http.post(
+      `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/teams`,
+      {
+        team_name: 'Test Team X',
+        team_short_name: 'TestTeamX',
+        status_frequency: 'weekly',
+        description: 'This is Test Team X',
+        managers: ['vtx2'],
+      },
+      {
+        headers: new HttpHeaders({
+          token: `${localStorage.getItem('token')}`,
+        }),
+      }
+    );
+  }
 }
