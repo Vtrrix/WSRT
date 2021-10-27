@@ -49,29 +49,6 @@
   overflow: hidden;
 }
 
-.input-group input,
-.input-group textarea {
-  position: relative;
-  height: 80px;
-  margin-left: 1px;
-  margin-right: 1px;
-  border-radius: 6px;
-  padding-top: 30px;
-  padding-left: 25px;
-}
-
-.input-group label {
-  position: absolute;
-  height: 24px;
-  background: none;
-  border-radius: 6px;
-  line-height: 48px;
-  font-size: 15px;
-  color: gray;
-  width: 100%;
-  font-weight: 100;
-  padding-left: 25px;
-}
 input:-webkit-autofill {
   -webkit-background-clip: text;
   background-clip: text;
@@ -101,4 +78,24 @@ input:-webkit-autofill {
   border: 1px solid #ef4223;
   background-color: transparent;
   color: #ef4223;
+}
+.custom-select {
+  cursor: pointer;
+  padding: 5px 5px;
+  background: lightgrey;
+  font-size: 17px;
+  line-height: 20px;
+  margin-bottom: 24px;
+  border: none;
+  min-width: 150px;
+  border-radius: 5px !important;
+}
+
+option {
+  background: #fff;
+  color: black;
+  font-size: 1rem;
+}
+.checkbox {
+  width: 20% !important;
 }
