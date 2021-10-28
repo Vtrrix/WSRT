@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.sideMenuService.changeSideMenu([
-      { title: 'My Info', route: '/' },
+      { title: 'My Info', route: '/user' },
       { title: 'My Status', route: 'status' },
     ]);
 

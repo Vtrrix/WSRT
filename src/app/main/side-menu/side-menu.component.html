@@ -2,6 +2,8 @@
   <a
     *ngFor="let menuElement of menuElements"
     [routerLink]="menuElement.route"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
     class="list-group-item list-group-item-action"
     >{{ menuElement.title }}</a
   >
