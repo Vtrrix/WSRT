@@ -16,5 +16,6 @@ export class SideMenuService {
 
   changeSideMenu(elements: { title: string; route: string }[]) {
     this.menuElements.next(elements);
+    console.log(elements);
   }
 }

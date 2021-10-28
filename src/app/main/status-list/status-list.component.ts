@@ -4,6 +4,7 @@ import {
   NgbDate,
   NgbDateParserFormatter,
 } from '@ng-bootstrap/ng-bootstrap';
+import { SideMenuService } from 'src/app/services/side-menu.service';
 import { StatusService } from 'src/app/services/status.service';
 
 @Component({
@@ -38,7 +39,8 @@ export class StatusListComponent implements OnInit {
   constructor(
     private statusService: StatusService,
     private calendar: NgbCalendar,
-    public formatter: NgbDateParserFormatter
+    public formatter: NgbDateParserFormatter,
+    private sideMenuService: SideMenuService
   ) {
     this.showAlert = false;
     this.alertMessage = '';
@@ -50,6 +52,11 @@ export class StatusListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sideMenuService.changeSideMenu([
+      { title: 'My Info', route: '/' },
+      { title: 'My Status', route: 'status' },
+    ]);
+
     this.statusService.lastStatusID = '-1';
     this.fetchStatus(this.pageSize);
   }

@@ -7,11 +7,14 @@
 .nav-item {
   margin-right: 10px;
 }
-/* .active {
+.nav-item:hover .nav-link {
+  color: #dfc2c3 !important;
+}
+.active {
   border-bottom: 7px solid whitesmoke;
   margin-bottom: -25%;
-  padding-bottom: 20%;
-} */
+  padding-bottom: 16px;
+}
 
 #menu-toggle {
   font-size: x-large;

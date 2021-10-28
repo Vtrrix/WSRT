@@ -33,8 +33,6 @@ export class HomeComponent implements OnInit {
 
     this.profileService.getProfile().subscribe(
       (res) => {
-        console.log(res);
-
         if (res.statusCode === 200) {
           this.profileService.setProfileData = res.data;
           this.profileData = res.data;

@@ -14,10 +14,20 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul *ngIf="visible" class="navbar-nav mt-2 mt-lg-0">
       <li class="nav-item">
-        <a class="nav-link text-light" [routerLink]="['/user']">User View </a>
+        <a
+          class="nav-link text-light"
+          [routerLink]="['/user']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >User View
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-light" [routerLink]="['/user', 'manager']"
+        <a
+          class="nav-link text-light"
+          [routerLink]="['/user', 'manager']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
           >Manager View</a
         >
       </li>
