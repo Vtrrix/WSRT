@@ -89,7 +89,7 @@ export class StatusListComponent implements OnInit {
   fetchStatus(size: number) {
     this.statusService.getStatusList(size).subscribe(
       (statusList) => {
-        if (statusList[1] === 200) {
+        if (statusList[2] === 200) {
           if (statusList[0].length !== 0) {
             // to update current view -------------
             statusList[0].map((status) => {
@@ -113,6 +113,8 @@ export class StatusListComponent implements OnInit {
               );
             }
             //----------------------------------------------------
+          } else {
+            this.currentStatusList = [];
           }
         } else {
           this.alertMessage = <string>(<unknown>statusList[0]);
@@ -132,7 +134,6 @@ export class StatusListComponent implements OnInit {
     // status id of last element of previous page
     this.statusService.lastStatusID =
       this.statusService.fullStatusListID[this.currentPage];
-    console.log(this.statusService.fullStatusListID);
 
     this.fetchStatus(this.pageSize);
   }
@@ -154,22 +155,25 @@ export class StatusListComponent implements OnInit {
     }
     if (type === 'thisMonth') {
       const date = new Date();
-
-      this.statusService.FromDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
-      this.statusService.ToDate = `${date.getFullYear()}-${date.getMonth()}-1`;
+      const toDate = new Date(date.getFullYear(), date.getMonth(), 1);
+      this.statusService.FromDate = `${toDate.getFullYear()}-${
+        toDate.getMonth() + 1
+      }-1`;
+      this.statusService.ToDate = `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()}`;
     }
     if (type === 'lastMonth') {
       const date = new Date();
+      const fromDate = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+      const toDate = new Date(date.getFullYear(), date.getMonth(), 0);
 
-      if (date.getMonth() == 1) {
-        this.statusService.FromDate = `${
-          date.getFullYear() - 1
-        }/12/${date.getDay()}`;
-        this.statusService.ToDate = `${date.getFullYear() - 1}-12-1`;
-      } else {
-        this.statusService.FromDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
-        this.statusService.ToDate = `${date.getFullYear()}-${date.getMonth()}-1`;
-      }
+      this.statusService.FromDate = `${fromDate.getFullYear()}-${
+        fromDate.getMonth() + 1
+      }-1`;
+      this.statusService.ToDate = `${toDate.getFullYear()}-${
+        toDate.getMonth() + 1
+      }-${toDate.getDate()}`;
     }
     if (type === 'custom') {
       this.statusService.FromDate = `${this.fromDate?.year}-${this.fromDate?.month}-${this.fromDate?.day}`;
