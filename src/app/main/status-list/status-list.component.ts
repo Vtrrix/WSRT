@@ -97,6 +97,8 @@ export class StatusListComponent implements OnInit {
 
         if (!statusList[1]) {
           this.nextVisible = false;
+        } else {
+          this.nextVisible = true;
         }
         if (statusList[2] === 200) {
           if (statusList[0].length !== 0) {
