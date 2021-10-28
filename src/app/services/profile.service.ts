@@ -12,6 +12,7 @@ interface userProfile {
   name: string | null;
   phone: string | null;
   role: string | null;
+  leaves_planned: string[] | null;
 }
 @Injectable({
   providedIn: 'root',
@@ -32,6 +33,7 @@ export class ProfileService {
       name: null,
       phone: null,
       role: null,
+      leaves_planned: null,
     };
   }
 

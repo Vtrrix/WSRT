@@ -58,8 +58,12 @@
                 <label>Leaves Planned</label>
               </div>
               <div class="col-md-6">
-                <p class="my-0">30 Sep 2021</p>
-                <p class="my-0">20 Aug 2021</p>
+                <p
+                  *ngFor="let leave of profileData.leaves_planned"
+                  class="my-0"
+                >
+                  {{ leave }}
+                </p>
               </div>
             </div>
           </div>

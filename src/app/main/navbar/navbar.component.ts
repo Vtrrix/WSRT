@@ -32,6 +32,7 @@ export class NavbarComponent implements OnInit {
       name: null,
       phone: null,
       role: null,
+      leaves_planned: null,
     };
     this.authService.logout();
   }
