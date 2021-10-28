@@ -208,6 +208,7 @@
       </div>
       <div class="col-md-6 d-flex flex-row-reverse">
         <input
+          *ngIf="nextVisible"
           (click)="nextPage()"
           type="button"
           class="page-change-btn"
@@ -215,6 +216,7 @@
           value="Next"
         />
         <input
+          *ngIf="prevVisible"
           (click)="prevPage()"
           type="button"
           class="page-change-btn"

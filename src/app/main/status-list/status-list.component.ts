@@ -13,6 +13,8 @@ import { StatusService } from 'src/app/services/status.service';
   styleUrls: ['./status-list.component.css'],
 })
 export class StatusListComponent implements OnInit {
+  nextVisible: boolean;
+  prevVisible: boolean;
   showAlert: boolean;
   alertMessage: string;
   public isCollapsed = true;
@@ -42,6 +44,8 @@ export class StatusListComponent implements OnInit {
     public formatter: NgbDateParserFormatter,
     private sideMenuService: SideMenuService
   ) {
+    this.nextVisible = true;
+    this.prevVisible = false;
     this.showAlert = false;
     this.alertMessage = '';
     this.pageSize = 5;
@@ -89,6 +93,11 @@ export class StatusListComponent implements OnInit {
   fetchStatus(size: number) {
     this.statusService.getStatusList(size).subscribe(
       (statusList) => {
+        console.log(statusList);
+
+        if (!statusList[1]) {
+          this.nextVisible = false;
+        }
         if (statusList[2] === 200) {
           if (statusList[0].length !== 0) {
             // to update current view -------------
@@ -131,6 +140,8 @@ export class StatusListComponent implements OnInit {
   nextPage() {
     this.currentPage++;
 
+    this.prevVisible = true;
+
     // status id of last element of previous page
     this.statusService.lastStatusID =
       this.statusService.fullStatusListID[this.currentPage];
@@ -139,6 +150,10 @@ export class StatusListComponent implements OnInit {
   }
   prevPage() {
     this.currentPage--;
+    this.nextVisible = true;
+    if (this.currentPage === 0) {
+      this.prevVisible = false;
+    }
     // status id of last element of previous to previous page
     this.statusService.lastStatusID =
       this.statusService.fullStatusListID[this.currentPage];
