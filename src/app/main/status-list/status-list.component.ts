@@ -147,7 +147,6 @@ export class StatusListComponent implements OnInit {
     // status id of last element of previous page
     this.statusService.lastStatusID =
       this.statusService.fullStatusListID[this.currentPage];
-
     this.fetchStatus(this.pageSize);
   }
   prevPage() {

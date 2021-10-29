@@ -145,31 +145,31 @@
     >
       <thead>
         <tr class="border-bottom">
-          <th><span class="ml-4">Status ID</span></th>
-          <th><span class="ml-2">Title</span></th>
-          <th><span class="ml-3">Status</span></th>
-          <th><span class="ml-3">Submitted Date & Time</span></th>
+          <th><span class="mx-5">Status ID</span></th>
+          <th><span class="mx-5">Title</span></th>
+          <th><span class="mx-5">Status</span></th>
+          <th><span class="mx-5">Submitted Date & Time</span></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let status of currentStatusList" class="border-bottom">
           <td>
-            <div class="py-2">
+            <div class="py-2 mx-5">
               <span class="font-weight-bold">{{ status.status_id }}</span>
             </div>
           </td>
           <td>
-            <div class="py-2">
+            <div class="py-2 mx-5">
               <span class="font-weight-bold">{{ status.title }}</span>
             </div>
           </td>
           <td>
-            <div class="py-2">
+            <div class="py-2 mx-5">
               <span class="font-weight-bold">Submitted</span>
             </div>
           </td>
           <td>
-            <div class="py-2">
+            <div class="py-2 mx-5">
               <span class="font-weight-bold">{{
                 status.submit_time_stamp
               }}</span>
