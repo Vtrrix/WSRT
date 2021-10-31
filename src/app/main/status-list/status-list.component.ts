@@ -91,6 +91,8 @@ export class StatusListComponent implements OnInit {
 
   // api call to get status
   fetchStatus(size: number) {
+    console.log(this.statusService.lastStatusID);
+
     this.statusService.getStatusList(size).subscribe(
       (statusList) => {
         console.log(statusList);
@@ -147,6 +149,7 @@ export class StatusListComponent implements OnInit {
     // status id of last element of previous page
     this.statusService.lastStatusID =
       this.statusService.fullStatusListID[this.currentPage];
+
     this.fetchStatus(this.pageSize);
   }
   prevPage() {

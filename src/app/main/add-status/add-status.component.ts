@@ -184,5 +184,6 @@ export class AddStatusComponent implements OnInit, OnDestroy {
           this.showAlert = true;
         }
       );
+    this.statusService.fullStatusListID = ['-1'];
   }
 }
