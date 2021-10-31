@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
@@ -10,12 +9,14 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class NavbarComponent implements OnInit {
   @Input() visible;
+  username: string | null;
   // to make navbar visible if manager
 
   constructor(
     private authService: AuthService,
     private profileService: ProfileService
   ) {
+    this.username = localStorage.getItem('username');
     this.visible = true;
   }
 

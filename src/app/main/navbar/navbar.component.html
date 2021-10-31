@@ -33,11 +33,23 @@
       </li>
     </ul>
   </div>
-  <button
-    (click)="onLogout()"
-    class="btn btn-logout fw-bold text-uppercase"
-    type="submit"
-  >
-    Sign Out
-  </button>
+  <div ngbDropdown class="d-inline-block">
+    <button
+      class="btn btn-options fw-bold"
+      id="dropdownBasic1"
+      ngbDropdownToggle
+    >
+      {{ username }}
+    </button>
+    <div
+      ngbDropdownMenu
+      class="dropdown-menu dropdown-menu-right"
+      aria-labelledby="dropdownBasic1"
+      class="dropdown-menu-right"
+    >
+      <button type="submit" (click)="onLogout()" ngbDropdownItem>
+        Sign Out
+      </button>
+    </div>
+  </div>
 </nav>
