@@ -74,10 +74,7 @@ input:-webkit-autofill {
 g-invalid.ng-touched {
   border: 2px solid red;
 }
-#btn-container {
-  margin-right: 10px;
-  margin-left: 21vw;
-}
+
 .btn {
   margin-left: 20px;
   padding: 13px 20px 12px;
