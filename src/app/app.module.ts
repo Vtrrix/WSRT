@@ -22,6 +22,7 @@ import { ManagerComponent } from './main/manager/manager.component';
 import { TeamsComponent } from './main/teams/teams.component';
 import { AddTeamComponent } from './main/add-team/add-team.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { StatusComponent } from './main/status/status.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ManagerComponent,
     TeamsComponent,
     AddTeamComponent,
+    StatusComponent,
   ],
   imports: [
     BrowserModule,

@@ -56,6 +56,18 @@ export class StatusService {
     );
   }
 
+  getStatus(statusID: string) {
+    return this.http.get<[status, string, number]>(
+      `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${localStorage.getItem(
+        'username'
+      )}/statuses/${statusID}`,
+      {
+        headers: new HttpHeaders({
+          token: `${localStorage.getItem('token')}`,
+        }),
+      }
+    );
+  }
   addStatus(
     status_id: string,
     title: string,

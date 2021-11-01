@@ -8,6 +8,7 @@ import { HomeComponent } from './main/home/home.component';
 import { MainComponent } from './main/main.component';
 import { ManagerComponent } from './main/manager/manager.component';
 import { StatusListComponent } from './main/status-list/status-list.component';
+import { StatusComponent } from './main/status/status.component';
 import { TeamsComponent } from './main/teams/teams.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'edit-profile', component: EditProfileComponent },
       { path: 'status', component: StatusListComponent },
       { path: 'add-status', component: AddStatusComponent },
+      { path: 'status/:statusID', component: StatusComponent },
       {
         path: 'manager',
         component: ManagerComponent,
