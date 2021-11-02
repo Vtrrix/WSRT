@@ -38,6 +38,11 @@ export class StatusComponent implements OnInit {
         console.log(res);
         if (<number>(<unknown>res[1]) === 200) {
           this.status = res[0];
+          this.fillData(
+            this.status.task_done,
+            this.status.next_week_plans,
+            this.status.concerns
+          );
           console.log(this.status);
         } else {
           console.log(res[0]);
@@ -47,5 +52,11 @@ export class StatusComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  fillData(taskDone: string, nextWeekPlan: string, risk: string) {
+    document.getElementById('taskDone')!.innerHTML = taskDone;
+    document.getElementById('nextWeekPlan')!.innerHTML = nextWeekPlan;
+    document.getElementById('risk')!.innerHTML = risk;
   }
 }

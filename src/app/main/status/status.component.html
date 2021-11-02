@@ -1,29 +1,46 @@
-<div class="container-fluid mt-4">
-  <div class="row justify-content-center">
-    <div class="col-lg-11 col-md-11">
-      <div class="row justify-content-center">
-        <div class="col-9">
-          <h2 class="heading h2">{{ status.title }}</h2>
-          <h3 class="heading h6 fw-normal">{{ status.submit_time_stamp }}</h3>
-        </div>
-        <div class="col-3">
-          <p class="heading mt-5">ID : {{ status.status_id }}</p>
-        </div>
-      </div>
-      <hr />
-
-      <div class="row d-flex">
-        <div class="col-8">
-          <div class="row">
-            <div class="col-8"></div>
+<div class="m-5">
+  <div class="container-fluid mt-4 shadow p-4 rounded">
+    <div class="row justify-content-center">
+      <div class="col-lg-11 col-md-11">
+        <div class="row justify-content-center">
+          <div class="col-9">
+            <h2 class="heading h2">{{ status.title }}</h2>
+            <h3 class="heading h6 fw-normal">{{ status.submit_time_stamp }}</h3>
           </div>
-          <div></div>
+          <div class="col-3">
+            <p class="heading mt-5">ID : {{ status.status_id }}</p>
+          </div>
         </div>
-        <div class="col-4">
-          <label>Leaves Planned:</label>
+        <hr />
+
+        <div class="row d-flex">
+          <div class="col-7">
+            <h4 class="mb-3">Accomplishments Done :</h4>
+            <div id="taskDone"></div>
+          </div>
+          <div class="col-5">
+            <div>
+              <h4 class="mb-3">Plans for next week :</h4>
+              <div id="nextWeekPlan"></div>
+            </div>
+            <hr />
+            <div>
+              <h4 class="mb-3">Concerns/Risks/Important topic:</h4>
+              <div id="risk"></div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="status.managerial_remarks" class="row d-flex mt-3">
+          <hr />
+          <div class="col-12">
+            <h4 class="mb-3">Remarks :</h4>
+            <div>
+              {{ status.managerial_remarks }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <!-- <app-alert [errorMessage]="alertMessage" *ngIf="showAlert"></app-alert> -->
   </div>
-  <!-- <app-alert [errorMessage]="alertMessage" *ngIf="showAlert"></app-alert> -->
 </div>

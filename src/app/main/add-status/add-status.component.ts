@@ -102,6 +102,7 @@ export class AddStatusComponent implements OnInit, OnDestroy {
 
   calculateStatusID() {
     const tempLastStatusID = this.statusService.lastStatusID;
+
     let lastStatusWeek;
     this.statusService.lastStatusID = this.statusService.fullStatusListID[0];
     this.statusService.getStatusList(1).subscribe((status) => {
@@ -146,9 +147,9 @@ export class AddStatusComponent implements OnInit, OnDestroy {
             this.statusNumber;
         }
       }
-    });
 
-    this.statusService.lastStatusID = tempLastStatusID;
+      this.statusService.lastStatusID = tempLastStatusID;
+    });
   }
 
   getControls() {
