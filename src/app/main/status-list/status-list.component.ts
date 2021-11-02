@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   NgbCalendar,
   NgbDate,
@@ -42,7 +43,8 @@ export class StatusListComponent implements OnInit {
     private statusService: StatusService,
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter,
-    private sideMenuService: SideMenuService
+    private sideMenuService: SideMenuService,
+    private router: Router
   ) {
     this.nextVisible = true;
     this.prevVisible = false;
@@ -91,12 +93,8 @@ export class StatusListComponent implements OnInit {
 
   // api call to get status
   fetchStatus(size: number) {
-    console.log(this.statusService.lastStatusID);
-
     this.statusService.getStatusList(size).subscribe(
       (statusList) => {
-        console.log(statusList);
-
         if (!statusList[1]) {
           this.nextVisible = false;
         } else {
@@ -246,5 +244,9 @@ export class StatusListComponent implements OnInit {
     return parsed && this.calendar.isValid(NgbDate.from(parsed))
       ? NgbDate.from(parsed)
       : currentValue;
+  }
+
+  onStatusClick(event: any) {
+    this.router.navigate(['/user', 'status', `${event.path[0].innerText}`]);
   }
 }

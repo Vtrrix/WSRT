@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { StatusService } from 'src/app/services/status.service';
+import { status, StatusService } from 'src/app/services/status.service';
 
 @Component({
   selector: 'app-status',
@@ -9,12 +9,23 @@ import { StatusService } from 'src/app/services/status.service';
 })
 export class StatusComponent implements OnInit {
   statusID: string;
+  status: status;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private statusService: StatusService
   ) {
     this.statusID = '';
+    this.status = {
+      title: '',
+      concerns: '',
+      status_read: false,
+      task_done: '',
+      status_id: '',
+      next_week_plans: '',
+      submit_time_stamp: '',
+      managerial_remarks: '',
+    };
   }
 
   ngOnInit(): void {
@@ -22,8 +33,19 @@ export class StatusComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.statusID = params.statusID;
     });
-    this.statusService.getStatus(this.statusID).subscribe((res) => {
-      console.log(res);
-    });
+    this.statusService.getStatus(this.statusID).subscribe(
+      (res) => {
+        console.log(res);
+        if (<number>(<unknown>res[1]) === 200) {
+          this.status = res[0];
+          console.log(this.status);
+        } else {
+          console.log(res[0]);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
