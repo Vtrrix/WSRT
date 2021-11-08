@@ -246,7 +246,7 @@ export class StatusListComponent implements OnInit {
       : currentValue;
   }
 
-  onStatusClick(event: any) {
-    this.router.navigate(['/user', 'status', `${event.path[0].innerText}`]);
+  onStatusClick(id: string) {
+    this.router.navigate(['/user', 'status', id]);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProfileService } from 'src/app/services/profile.service';
 import { TeamsService } from 'src/app/services/teams.service';
 
@@ -21,7 +22,8 @@ export class TeamsComponent implements OnInit {
   }[];
   constructor(
     private teamsService: TeamsService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private router: Router
   ) {
     this.isAdmin = false;
 
@@ -56,6 +58,9 @@ export class TeamsComponent implements OnInit {
         }
       );
     }
+  }
+  onTeamClick(teamName: string) {
+    this.router.navigate(['/user', 'manager', 'members', teamName]);
   }
 
   getTeams() {

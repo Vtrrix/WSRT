@@ -154,7 +154,7 @@
       <tbody>
         <tr
           *ngFor="let status of currentStatusList"
-          (click)="onStatusClick($event)"
+          (click)="onStatusClick(status.status_id)"
           class="border-bottom"
         >
           <td>

@@ -11,7 +11,6 @@ export class StatusComponent implements OnInit {
   statusID: string;
   status: status;
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private statusService: StatusService
   ) {
@@ -29,7 +28,6 @@ export class StatusComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.params.statusID);
     this.route.params.subscribe((params: Params) => {
       this.statusID = params.statusID;
     });

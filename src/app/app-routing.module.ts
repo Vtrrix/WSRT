@@ -31,8 +31,8 @@ const routes: Routes = [
         children: [
           { path: '', component: TeamsComponent },
           { path: 'add-team', component: AddTeamComponent },
-          { path: 'add-team', component: AddTeamComponent },
-          { path: 'members', component: MemberListComponent },
+          { path: 'members', redirectTo: 'members/All' },
+          { path: 'members/:teamName', component: MemberListComponent },
         ],
       },
       { path: '**', component: NotFoundComponent },
