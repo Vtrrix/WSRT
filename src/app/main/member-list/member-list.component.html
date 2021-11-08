@@ -24,35 +24,37 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="border-bottom">
+        <tr *ngFor="let member of memberList" class="border-bottom">
           <td>
             <div class="py-2 mx-4">
-              <span class="font-weight-bold"> Vivek Sony </span>
+              <span class="font-weight-bold"> {{ member.name }} </span>
             </div>
           </td>
           <td>
             <div class="py-2 mx-2">
-              <span class="font-weight-bold"> SDE-I </span>
+              <span class="font-weight-bold"> {{ member.job_title }} </span>
             </div>
           </td>
           <td>
             <div class="py-2 mx-2">
-              <span class="font-weight-bold">WGC</span>
+              <span class="font-weight-bold">{{ member.team }}</span>
             </div>
           </td>
           <td>
             <div class="py-2 mx-2">
-              <span class="font-weight-bold">9082058042</span>
+              <span class="font-weight-bold">{{ member.phone }}</span>
             </div>
           </td>
           <td>
             <div class="py-2 mx-2">
-              <span class="font-weight-bold"> Vivek.Sony@Watchguard.com </span>
+              <span class="font-weight-bold">{{ member.email }} </span>
             </div>
           </td>
           <td>
             <div class="py-2 mx-2">
-              <span class="font-weight-bold"> New Status </span>
+              <span class="font-weight-bold">
+                {{ member.latest_status_seen ? "Seen" : "New Status" }}
+              </span>
             </div>
           </td>
         </tr>

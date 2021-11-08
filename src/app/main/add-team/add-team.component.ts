@@ -46,7 +46,9 @@ export class AddTeamComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUsers().subscribe(
       (res) => {
-        this.userList = res[0];
+        console.log(res);
+
+        this.userList = res.data;
       },
       (error) => {
         console.log(error);
