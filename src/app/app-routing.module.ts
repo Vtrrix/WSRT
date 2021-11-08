@@ -7,6 +7,7 @@ import { EditProfileComponent } from './main/edit-profile/edit-profile.component
 import { HomeComponent } from './main/home/home.component';
 import { MainComponent } from './main/main.component';
 import { ManagerComponent } from './main/manager/manager.component';
+import { MemberListComponent } from './main/member-list/member-list.component';
 import { StatusListComponent } from './main/status-list/status-list.component';
 import { StatusComponent } from './main/status/status.component';
 import { TeamsComponent } from './main/teams/teams.component';
@@ -30,6 +31,8 @@ const routes: Routes = [
         children: [
           { path: '', component: TeamsComponent },
           { path: 'add-team', component: AddTeamComponent },
+          { path: 'add-team', component: AddTeamComponent },
+          { path: 'members', component: MemberListComponent },
         ],
       },
       { path: '**', component: NotFoundComponent },

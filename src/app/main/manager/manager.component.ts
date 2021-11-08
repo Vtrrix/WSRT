@@ -12,7 +12,7 @@ export class ManagerComponent implements OnInit {
   ngOnInit(): void {
     this.sideMenuService.changeSideMenu([
       { title: 'Manage Team', route: '/user/manager' },
-      // { title: 'Team Members', route: '' },
+      { title: 'Team Members', route: '/user/manager/members' },
       // { title: 'Member Status', route: '' },
       // { title: 'Settings', route: '' },
     ]);

@@ -23,6 +23,7 @@ import { TeamsComponent } from './main/teams/teams.component';
 import { AddTeamComponent } from './main/add-team/add-team.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { StatusComponent } from './main/status/status.component';
+import { MemberListComponent } from './main/member-list/member-list.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { StatusComponent } from './main/status/status.component';
     TeamsComponent,
     AddTeamComponent,
     StatusComponent,
+    MemberListComponent,
   ],
   imports: [
     BrowserModule,
