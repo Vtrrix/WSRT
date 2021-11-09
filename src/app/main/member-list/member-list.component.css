@@ -1,0 +1,15 @@
+.option-btn {
+  border: none;
+  border-radius: 1.5rem;
+  width: 60%;
+  margin-left: 25px;
+  max-width: 120px;
+  max-height: 35px;
+  padding: 5px;
+  font-weight: 600;
+  color: #6c757d;
+  cursor: pointer;
+}
+.option-btn:hover {
+  color: black;
+}

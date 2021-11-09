@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { user, UserService } from 'src/app/services/user.service';
+import { team, TeamsService } from 'src/app/services/teams.service';
 
 @Component({
   selector: 'app-member-list',
@@ -9,10 +10,16 @@ import { user, UserService } from 'src/app/services/user.service';
 })
 export class MemberListComponent implements OnInit {
   teamShortName: string;
+  teamsList: team[];
   memberList: user[];
-  constructor(private route: ActivatedRoute, private userService: UserService) {
+  constructor(
+    private route: ActivatedRoute,
+    private teamsService: TeamsService,
+    private userService: UserService
+  ) {
     this.teamShortName = '';
     this.memberList = [];
+    this.teamsList = [];
   }
 
   ngOnInit(): void {
@@ -23,5 +30,16 @@ export class MemberListComponent implements OnInit {
         this.memberList = res.data;
       });
     });
+    this.teamsService.getTeams().subscribe(
+      (res) => {
+        if (res.statusCode === 200) {
+          this.teamsList = res.data;
+        } else {
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

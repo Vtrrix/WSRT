@@ -2,7 +2,25 @@
   <div class="row px-4">
     <h3 class="mb-5">Team Members</h3>
     <div class="row mb-4">
-      <div class="col-md-3 d-flex">All(21)</div>
+      <div class="col-md-3 d-flex">
+        <input
+          *ngFor="let team of teamsList"
+          type="button"
+          class="option-btn mx-2"
+          name="filterStatusListDefault"
+          value="All"
+          [routerLink]="['/user', 'manager', 'members', 'All']"
+          routerLinkActive="router-link-active"
+        />
+        <input
+          *ngFor="let team of teamsList"
+          type="button"
+          class="option-btn mx-2"
+          name="filterStatusListDefault"
+          [routerLink]="['/user', 'manager', 'members', team.team_short_name]"
+          [value]="team.team_short_name"
+        />
+      </div>
     </div>
 
     <table

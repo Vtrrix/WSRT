@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProfileService } from 'src/app/services/profile.service';
-import { TeamsService } from 'src/app/services/teams.service';
+import { team, TeamsService } from 'src/app/services/teams.service';
 
 @Component({
   selector: 'app-teams',
@@ -13,13 +13,7 @@ export class TeamsComponent implements OnInit {
 
   showAlert: boolean;
   alertMessage: string;
-  teamsList: {
-    team_name: string;
-    managers: string[];
-    description: string;
-    status_frequency: string;
-    team_short_name: string;
-  }[];
+  teamsList: team[];
   constructor(
     private teamsService: TeamsService,
     private profileService: ProfileService,
