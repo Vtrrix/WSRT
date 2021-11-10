@@ -75,8 +75,6 @@ export class StatusListComponent implements OnInit {
   }
 
   convertDate(stamp: string): string {
-    console.log(stamp);
-
     const date = stamp
       .slice(0, stamp.indexOf(' '))
       .split('-')
@@ -95,21 +93,21 @@ export class StatusListComponent implements OnInit {
   // api call to get status
   fetchStatus(size: number) {
     this.statusService.getStatusList(size).subscribe(
-      (statusList) => {
-        if (!statusList[1]) {
+      (res) => {
+        if (!res.data.hasMorePages) {
           this.nextVisible = false;
         } else {
           this.nextVisible = true;
         }
-        if (statusList[2] === 200) {
-          if (statusList[0].length !== 0) {
+        if (res.statusCode === 200) {
+          if (res.data.status_list.length !== 0) {
             // to update current view -------------
-            statusList[0].map((status) => {
+            res.data.status_list.map((status) => {
               status.submit_time_stamp = this.convertDate(
                 status.submit_time_stamp
               );
             });
-            this.currentStatusList = [...statusList[0]];
+            this.currentStatusList = [...res.data.status_list];
             //-----------------------------------
 
             // to update fullStatusListID if needed------------------
@@ -129,7 +127,7 @@ export class StatusListComponent implements OnInit {
             this.currentStatusList = [];
           }
         } else {
-          this.alertMessage = <string>(<unknown>statusList[0]);
+          this.alertMessage = <string>(<unknown>res.data.status_list);
           this.showAlert = true;
         }
       },

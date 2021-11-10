@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 
 interface loginResponse {
   message: boolean;
-  error: boolean;
-  success: string;
+  statusCode: number;
   data: {
     username: string;
     id_token: string;

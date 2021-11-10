@@ -106,7 +106,7 @@ export class AddStatusComponent implements OnInit, OnDestroy {
     let lastStatusWeek;
     this.statusService.lastStatusID = this.statusService.fullStatusListID[0];
     this.statusService.getStatusList(1).subscribe((status) => {
-      if (status[0].length === 0) {
+      if (status.data.status_list.length === 0) {
         this.statusID =
           this.currentdate.getFullYear() +
           '-' +
@@ -117,16 +117,16 @@ export class AddStatusComponent implements OnInit, OnDestroy {
           this.getWeek(this.currentdate) +
           '-0001';
       } else {
-        lastStatusWeek = status[0][0].status_id.slice(
-          status[0][0].status_id.indexOf('K') + 1
+        lastStatusWeek = status.data.status_list[0].status_id.slice(
+          status.data.status_list[0].status_id.indexOf('K') + 1
         );
         lastStatusWeek = lastStatusWeek.slice(0, lastStatusWeek.indexOf('-'));
 
         if (lastStatusWeek == this.getWeek(this.currentdate).toString()) {
           let newStatusNumber =
             parseInt(
-              status[0][0].status_id.slice(
-                status[0][0].status_id.lastIndexOf('-') + 1
+              status.data.status_list[0].status_id.slice(
+                status.data.status_list[0].status_id.lastIndexOf('-') + 1
               )
             ) + 1;
 
@@ -172,11 +172,11 @@ export class AddStatusComponent implements OnInit, OnDestroy {
         this.addStatusForm.value.leaves
       )
       .subscribe(
-        (data) => {
-          if (data[1] === 201) {
+        (res) => {
+          if (res.statusCode === 201) {
             this.router.navigate(['/user', 'status']);
           } else {
-            this.alertMessage = data[0];
+            this.alertMessage = res.message;
             this.showAlert = true;
           }
         },

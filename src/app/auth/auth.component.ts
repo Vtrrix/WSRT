@@ -44,7 +44,7 @@ export class AuthComponent implements OnInit {
     const password = this.loginForm.value.password;
     this.authService.login(username, password).subscribe(
       (resData) => {
-        if (resData.success) {
+        if (resData.statusCode === 200) {
           localStorage.setItem('token', resData.data.id_token);
           localStorage.setItem('username', resData.data.username);
           this.router.navigate(['']);

@@ -34,8 +34,8 @@ export class StatusComponent implements OnInit {
     this.statusService.getStatus(this.statusID).subscribe(
       (res) => {
         console.log(res);
-        if (<number>(<unknown>res[1]) === 200) {
-          this.status = res[0];
+        if (<number>(<unknown>res.statusCode) === 200) {
+          this.status = res.data;
           this.fillData(
             this.status.task_done,
             this.status.next_week_plans,
@@ -43,7 +43,7 @@ export class StatusComponent implements OnInit {
           );
           console.log(this.status);
         } else {
-          console.log(res[0]);
+          console.log(res.meassage);
         }
       },
       (error) => {

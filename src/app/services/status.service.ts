@@ -31,7 +31,10 @@ export class StatusService {
 
   getStatusList(pageSize: number) {
     if (this.FromDate && this.ToDate) {
-      return this.http.get<[status[], boolean, number]>(
+      return this.http.get<{
+        data: { status_list: status[]; hasMorePages: boolean };
+        statusCode: number;
+      }>(
         `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${localStorage.getItem(
           'username'
         )}/statuses?key=${this.lastStatusID}&limit=${pageSize}&start_date=${
@@ -44,7 +47,10 @@ export class StatusService {
         }
       );
     }
-    return this.http.get<[status[], boolean, number]>(
+    return this.http.get<{
+      data: { status_list: status[]; hasMorePages: boolean };
+      statusCode: number;
+    }>(
       `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${localStorage.getItem(
         'username'
       )}/statuses?key=${this.lastStatusID}&limit=${pageSize}`,
@@ -57,7 +63,11 @@ export class StatusService {
   }
 
   getStatus(statusID: string) {
-    return this.http.get<[status, string, number]>(
+    return this.http.get<{
+      data: status;
+      meassage: string;
+      statusCode: number;
+    }>(
       `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${localStorage.getItem(
         'username'
       )}/statuses/${statusID}`,
@@ -77,7 +87,11 @@ export class StatusService {
     concerns: string,
     leaves_planned: string[]
   ) {
-    return this.http.post<[string, number]>(
+    return this.http.post<{
+      message: string;
+      data: string;
+      statusCode: number;
+    }>(
       `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${localStorage.getItem(
         'username'
       )}/statuses`,
