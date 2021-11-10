@@ -1,24 +1,35 @@
 <div class="container mt-5">
   <div class="row px-4">
     <h3 class="mb-5">Team Members</h3>
-    <div class="row mb-4">
-      <div class="col-md-3 d-flex">
+    <div class="row mb-3">
+      <div class="col-3 d-flex">
         <input
           *ngFor="let team of teamsList"
           type="button"
           class="option-btn mx-2"
-          name="filterStatusListDefault"
+          name="allMembers"
           value="All"
           [routerLink]="['/user', 'manager', 'members', 'All']"
-          routerLinkActive="router-link-active"
+          routerLinkActive="active"
         />
+        <input
+          *ngFor="let team of teamsList; let i = index"
+          type="button"
+          class="option-btn mx-2"
+          [name]="i"
+          [routerLink]="['/user', 'manager', 'members', team.team_short_name]"
+          routerLinkActive="active"
+          [value]="team.team_short_name"
+        />
+      </div>
+      <div class="col-9 d-flex flex-row-reverse">
         <input
           *ngFor="let team of teamsList"
           type="button"
-          class="option-btn mx-2"
-          name="filterStatusListDefault"
-          [routerLink]="['/user', 'manager', 'members', team.team_short_name]"
-          [value]="team.team_short_name"
+          class="option-btn"
+          name="addUser"
+          (click)="openModal(content)"
+          value="Invite User"
         />
       </div>
     </div>
@@ -78,6 +89,81 @@
         </tr>
       </tbody>
     </table>
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Invite User</h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-card">
+          <div class="row justify-content-center">
+            <div class="col-6">
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingInputFirstName"
+                  placeholder="Username"
+                />
+                <label for="floatingInputFirstName ">Username</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingInputFirstName"
+                  placeholder="Job"
+                />
+                <label for="floatingInputFirstName ">Job</label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingInputMiddleName"
+                  placeholder="Email"
+                />
+                <label for="floatingInputMiddleName ">Email</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingInputMiddleName"
+                  placeholder="Team"
+                />
+                <label for="floatingInputMiddleName ">Team</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12 d-flex flex-row-reverse">
+              <button class="btn fw-bold text-uppercase" type="submit">
+                Save
+              </button>
+              <button
+                type="button"
+                (click)="modal.dismiss('Cancel click')"
+                class="btn fw-bold text-uppercase"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </ng-template>
   </div>
+
   <!-- <app-alert [errorMessage]="alertMessage" *ngIf="showAlert"></app-alert> -->
 </div>

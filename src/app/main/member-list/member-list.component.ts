@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { user, UserService } from 'src/app/services/user.service';
 import { team, TeamsService } from 'src/app/services/teams.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-member-list',
@@ -15,7 +16,8 @@ export class MemberListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private teamsService: TeamsService,
-    private userService: UserService
+    private userService: UserService,
+    private modalService: NgbModal
   ) {
     this.teamShortName = '';
     this.memberList = [];
@@ -41,5 +43,10 @@ export class MemberListComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  openModal(content: any) {
+    console.log(content);
+
+    this.modalService.open(content, { centered: true, size: 'lg' });
   }
 }

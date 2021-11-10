@@ -24,6 +24,7 @@ import { AddTeamComponent } from './main/add-team/add-team.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { StatusComponent } from './main/status/status.component';
 import { MemberListComponent } from './main/member-list/member-list.component';
+import { AddUserComponent } from './main/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MemberListComponent } from './main/member-list/member-list.component';
     AddTeamComponent,
     StatusComponent,
     MemberListComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,

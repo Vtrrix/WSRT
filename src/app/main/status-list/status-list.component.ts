@@ -95,6 +95,8 @@ export class StatusListComponent implements OnInit {
   fetchStatus(size: number) {
     this.statusService.getStatusList(size).subscribe(
       (statusList) => {
+        console.log(statusList);
+
         if (!statusList[1]) {
           this.nextVisible = false;
         } else {
