@@ -32,6 +32,11 @@ export class UserService {
         'username'
       )}`;
     }
+    if (!teamShortName) {
+      url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/users?manager_username=${localStorage.getItem(
+        'username'
+      )}`;
+    }
     return this.http.get<{ data: user[]; message: string; statusCode: number }>(
       url,
       {
