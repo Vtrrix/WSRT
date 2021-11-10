@@ -75,6 +75,8 @@ export class StatusListComponent implements OnInit {
   }
 
   convertDate(stamp: string): string {
+    console.log(stamp);
+
     const date = stamp
       .slice(0, stamp.indexOf(' '))
       .split('-')
@@ -82,12 +84,11 @@ export class StatusListComponent implements OnInit {
       .join('/');
     const time =
       stamp.slice(stamp.indexOf(' '), stamp.indexOf(':')) +
+      ':' +
       stamp
         .slice(stamp.indexOf(':') + 1)
-        .slice(
-          stamp.slice(stamp.indexOf(':') + 1).indexOf(':'),
-          stamp.slice(stamp.indexOf(':') + 1).indexOf('.')
-        );
+        .slice(0, stamp.slice(stamp.indexOf(':') + 1).indexOf(':'));
+
     return date + time;
   }
 
@@ -95,8 +96,6 @@ export class StatusListComponent implements OnInit {
   fetchStatus(size: number) {
     this.statusService.getStatusList(size).subscribe(
       (statusList) => {
-        console.log(statusList);
-
         if (!statusList[1]) {
           this.nextVisible = false;
         } else {
