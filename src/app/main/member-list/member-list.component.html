@@ -102,74 +102,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-card">
-          <div class="row justify-content-center">
-            <div class="col-6">
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="floatingInputFirstName"
-                  placeholder="Username"
-                />
-                <label for="floatingInputFirstName ">Username</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="floatingInputFirstName"
-                  placeholder="Job"
-                />
-                <label for="floatingInputFirstName ">Job</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="floatingInputFirstName"
-                  placeholder="Manager"
-                />
-                <label for="floatingInputFirstName ">Manager</label>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="floatingInputMiddleName"
-                  placeholder="Email"
-                />
-                <label for="floatingInputMiddleName ">Email</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="floatingInputMiddleName"
-                  placeholder="Team"
-                />
-                <label for="floatingInputMiddleName ">Team</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-12 d-flex flex-row-reverse">
-              <button class="btn fw-bold text-uppercase" type="submit">
-                Save
-              </button>
-              <button
-                type="button"
-                (click)="modal.dismiss('Cancel click')"
-                class="btn fw-bold text-uppercase"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </form>
+        <app-add-user></app-add-user>
       </div>
     </ng-template>
   </div>
