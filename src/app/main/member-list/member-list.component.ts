@@ -28,7 +28,6 @@ export class MemberListComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.teamShortName = params.teamName;
       this.userService.getUsers(this.teamShortName).subscribe((res) => {
-        console.log(res);
         this.memberList = res.data;
       });
     });
@@ -45,8 +44,6 @@ export class MemberListComponent implements OnInit {
     );
   }
   openModal(content: any) {
-    console.log(content);
-
     this.modalService.open(content, { centered: true, size: 'lg' });
   }
 }

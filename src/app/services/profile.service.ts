@@ -62,7 +62,7 @@ export class ProfileService {
   }
 
   updateProfile(name: string, address: string, phone: string) {
-    return this.http.put<[string, number]>(
+    return this.http.put<{ data: string; statusCode: number }>(
       `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/users/${localStorage.getItem(
         'username'
       )}`,

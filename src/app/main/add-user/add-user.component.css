@@ -1,4 +1,5 @@
-input {
+input,
+select {
   padding: 10px 15px 0px 15px;
   border: none;
   border: 1px solid lightgrey;
@@ -12,13 +13,18 @@ input {
   font-size: 14px;
   letter-spacing: 1px;
 }
-input:focus {
+input:focus,
+select:focus {
   box-shadow: 0px 0px 0px 1.5px #acacac !important;
   outline-width: 0;
 }
-input:-webkit-autofill {
+input:-webkit-autofill,
+select:-webkit-autofill {
   -webkit-background-clip: text;
   background-clip: text;
+}
+select {
+  padding: 10px 15px 0px 15px !important;
 }
 
 .btn {

@@ -21,8 +21,6 @@ export class UserService {
   }
 
   getUsers(teamShortName?: string) {
-    console.log(teamShortName);
-
     let url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/users?manager_username=${localStorage.getItem(
       'username'
     )}`;
@@ -39,6 +37,34 @@ export class UserService {
     }
     return this.http.get<{ data: user[]; message: string; statusCode: number }>(
       url,
+      {
+        headers: new HttpHeaders({
+          token: `${localStorage.getItem('token')}`,
+        }),
+      }
+    );
+  }
+
+  inviteUser(
+    username: string,
+    email: string,
+    job: string,
+    team: string,
+    manager: string
+  ) {
+    return this.http.post<{
+      message: string;
+      data: string;
+      statusCode: number;
+    }>(
+      `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/users`,
+      {
+        username: username,
+        team: team,
+        email: email,
+        job_title: job,
+        manager: manager,
+      },
       {
         headers: new HttpHeaders({
           token: `${localStorage.getItem('token')}`,

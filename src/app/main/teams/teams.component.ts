@@ -69,7 +69,7 @@ export class TeamsComponent implements OnInit {
       },
       (error) => {
         this.showAlert = true;
-        this.alertMessage = error.message;
+        this.alertMessage = error.error.message;
       }
     );
   }

@@ -54,16 +54,18 @@ export class EditProfileComponent implements OnInit {
     const phone = this.editProfileForm.value.phone;
 
     this.profileService.updateProfile(name, address, phone).subscribe(
-      (data) => {
-        if (data[1] === 201) {
+      (res) => {
+        console.log(res);
+
+        if (res.statusCode === 201) {
           this.router.navigate(['']);
         } else {
-          this.alertMessage = data[0];
+          this.alertMessage = res.data;
           this.showAlert = true;
         }
       },
       (error) => {
-        this.alertMessage = error.message;
+        this.alertMessage = error.error.message;
 
         this.showAlert = true;
       }

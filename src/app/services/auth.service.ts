@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 interface loginResponse {
-  message: boolean;
+  message: string;
   statusCode: number;
   data: {
     username: string;

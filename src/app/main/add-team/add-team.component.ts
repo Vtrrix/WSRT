@@ -46,8 +46,6 @@ export class AddTeamComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUsers().subscribe(
       (res) => {
-        console.log(res);
-
         this.userList = res.data;
       },
       (error) => {
@@ -66,7 +64,6 @@ export class AddTeamComponent implements OnInit {
       )
       .subscribe(
         (res) => {
-          console.log(res);
           this.router.navigate(['/user', 'manager']);
         },
         (error) => {
@@ -76,11 +73,9 @@ export class AddTeamComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.addTeamForm);
     this.addTeamForm.value.managers.map((manager: user) => {
       this.managerList.push(manager.username);
     });
-    console.log(this.managerList);
 
     this.addTeam();
   }

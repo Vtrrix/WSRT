@@ -181,7 +181,7 @@ export class AddStatusComponent implements OnInit, OnDestroy {
           }
         },
         (error) => {
-          this.alertMessage = error.message;
+          this.alertMessage = error.error.message;
           this.showAlert = true;
         }
       );

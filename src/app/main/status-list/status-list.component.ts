@@ -132,7 +132,7 @@ export class StatusListComponent implements OnInit {
         }
       },
       (error) => {
-        this.alertMessage = error.message;
+        this.alertMessage = error.error.message;
         this.showAlert = true;
       }
     );

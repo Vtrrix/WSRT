@@ -43,18 +43,19 @@ export class AuthComponent implements OnInit {
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
     this.authService.login(username, password).subscribe(
-      (resData) => {
-        if (resData.statusCode === 200) {
-          localStorage.setItem('token', resData.data.id_token);
-          localStorage.setItem('username', resData.data.username);
+      (res) => {
+        if (res.statusCode === 200) {
+          localStorage.setItem('token', res.data.id_token);
+          localStorage.setItem('username', res.data.username);
           this.router.navigate(['']);
           // route to home page
         } else {
+          this.errorMessage = res.message;
           this.showAlert = true;
         }
       },
       (error) => {
-        this.errorMessage = error.message;
+        this.errorMessage = error.error.message;
         this.showAlert = true;
         console.log(error);
       }

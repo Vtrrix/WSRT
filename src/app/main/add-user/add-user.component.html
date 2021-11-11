@@ -1,4 +1,4 @@
-<form class="form-card">
+<form [formGroup]="inviteUserForm" (ngSubmit)="onSubmit()" class="form-card">
   <div class="row justify-content-center">
     <div class="col-6">
       <div class="form-floating mb-3">
@@ -7,96 +7,60 @@
           class="form-control"
           id="floatingInputFirstName"
           placeholder="Username"
+          formControlName="username"
         />
         <label for="floatingInputFirstName ">Username</label>
       </div>
       <div class="form-floating mb-3">
-        <div ngbDropdown class="d-inline-block">
-          <label for="floatingInputMiddleName ">Job : </label>
-
-          <button
-            type="button"
-            class="btn drop-down-btn"
-            id="dropdownBasic1"
-            ngbDropdownToggle
-          >
-            {{ selectedJob }}
-          </button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button
-              type="button"
-              *ngFor="let job of jobPositions"
-              ngbDropdownItem
-              (click)="onJobSelect(job)"
-            >
-              {{ job }}
-            </button>
-          </div>
-        </div>
+        <select
+          class="form-control"
+          formControlName="job"
+          id="inputGroupSelect01"
+        >
+          <option value="">Select a Job</option>
+          <option *ngFor="let job of jobPositions" [value]="job">
+            {{ job }}
+          </option>
+        </select>
       </div>
       <div class="form-floating mb-3">
-        <div ngbDropdown class="d-inline-block">
-          <label for="floatingInputMiddleName ">Manager : </label>
-
-          <button
-            type="button"
-            class="btn drop-down-btn"
-            id="dropdownBasic1"
-            ngbDropdownToggle
-          >
-            {{ selectedManager }}
-          </button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button
-              type="button"
-              *ngFor="let job of jobPositions"
-              ngbDropdownItem
-              (click)="onJobSelect(job)"
-            >
-              {{ job }}
-            </button>
-          </div>
-        </div>
+        <select
+          (click)="loadManagers()"
+          class="form-control"
+          id="inputGroupSelect02"
+          formControlName="manager"
+        >
+          <option value="">Select a Manager</option>
+          <option *ngFor="let manager of managers" [value]="manager">
+            {{ manager }}
+          </option>
+        </select>
       </div>
     </div>
     <div class="col-6">
       <div class="form-floating mb-3">
         <input
-          type="text"
+          type="email"
           class="form-control"
           id="floatingInputMiddleName"
           placeholder="Email"
+          formControlName="email"
         />
         <label for="floatingInputMiddleName ">Email</label>
       </div>
       <div class="form-floating mb-3">
-        <div ngbDropdown class="d-inline-block">
-          <label for="floatingInputMiddleName ">Team : </label>
+        <select
+          formControlName="team"
+          class="form-control"
+          id="inputGroupSelect02"
+        >
+          <option value="">Select a Team</option>
+          <option *ngFor="let team of teams" [value]="team.team_short_name">
+            {{ team.team_name }}
 
-          <button
-            type="button"
-            class="btn drop-down-btn"
-            id="dropdownBasic1"
-            ngbDropdownToggle
-          >
-            <span>
-              {{ selectedTeam.team_name }}
-            </span>
-            <span *ngIf="selectedTeam.team_short_name !== ''">
-              ({{ selectedTeam.team_short_name }})
-            </span>
-          </button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button
-              type="button"
-              *ngFor="let team of teams"
-              ngbDropdownItem
-              (click)="onTeamSelect(team)"
-            >
-              {{ team.team_name }}
-            </button>
-          </div>
-        </div>
+            ({{ team.team_short_name }})
+          </option>
+        </select>
       </div>
     </div>
   </div>
