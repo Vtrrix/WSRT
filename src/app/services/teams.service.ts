@@ -6,6 +6,7 @@ export interface team {
   managers: string[];
   description: string;
   status_frequency: string;
+  weekly_status_day: string;
   team_short_name: string;
 }
 
@@ -38,6 +39,7 @@ export class TeamsService {
     teamName: string,
     shortName: string,
     frequency: 'weekly' | 'daily',
+    weeklyStatusDay: string,
     description: string,
     managers: string[]
   ) {
@@ -47,6 +49,7 @@ export class TeamsService {
         team_name: teamName,
         team_short_name: shortName,
         status_frequency: frequency,
+        weekly_status_day: weeklyStatusDay,
         description: description,
         managers: managers,
       },

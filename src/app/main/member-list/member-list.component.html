@@ -2,9 +2,8 @@
   <div class="row px-4">
     <h3 class="mb-5">Team Members</h3>
     <div class="row mb-3">
-      <div class="col-3 d-flex">
+      <div class="col-9 d-flex">
         <input
-          *ngFor="let team of teamsList"
           type="button"
           class="option-btn mx-2"
           name="allMembers"
@@ -22,9 +21,9 @@
           [value]="team.team_short_name"
         />
       </div>
-      <div class="col-9 d-flex flex-row-reverse">
+      <div class="col-3 d-flex flex-row-reverse">
         <input
-          *ngFor="let team of teamsList"
+          *ngIf="role === 'admin'"
           type="button"
           class="option-btn"
           name="addUser"
@@ -44,7 +43,7 @@
     >
       <thead>
         <tr class="border-bottom">
-          <th><span class="mx-4">User Name</span></th>
+          <th><span class="mx-4">Name</span></th>
           <th><span class="mx-2">Job Title</span></th>
           <th><span class="mx-2">Team</span></th>
           <th><span class="mx-2">Mobile</span></th>

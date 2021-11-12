@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { team, TeamsService } from 'src/app/services/teams.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -17,7 +18,8 @@ export class AddUserComponent implements OnInit {
 
   constructor(
     private teamsService: TeamsService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
     this.inviteUserForm = new FormGroup({
       username: new FormControl(null, [
@@ -76,6 +78,7 @@ export class AddUserComponent implements OnInit {
       .subscribe(
         (res) => {
           console.log(res);
+          this.router.navigate(['/user', 'manager', 'members']);
         },
         (error) => {
           console.log(error);

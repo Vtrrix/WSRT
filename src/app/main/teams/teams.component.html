@@ -21,6 +21,7 @@
         <tr class="border-bottom">
           <th><span class="ml-3">Name</span></th>
           <th><span class="ml-3">Short Name</span></th>
+          <th><span class="ml-3">Status Frequency</span></th>
           <th><span class="ml-3">Description</span></th>
           <th><span class="ml-3">Manager</span></th>
         </tr>
@@ -39,6 +40,16 @@
           <td>
             <div class="p-2">
               <span class="font-weight-bold"> {{ team.team_short_name }} </span>
+            </div>
+          </td>
+          <td>
+            <div class="p-2">
+              <span class="font-weight-bold">{{ team.status_frequency }}</span>
+              <span
+                *ngIf="team.status_frequency === 'weekly'"
+                class="font-weight-bold mx-1"
+                >({{ team.weekly_status_day }})</span
+              >
             </div>
           </td>
           <td>

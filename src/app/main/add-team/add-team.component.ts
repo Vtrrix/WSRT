@@ -13,6 +13,7 @@ export class AddTeamComponent implements OnInit {
   userList: user[];
   addTeamForm: FormGroup;
   managerList: string[];
+  selectedStatusFrequency: string;
 
   selected = [{ id: 3, name: 'Volkswagen Ford' }];
   constructor(
@@ -39,8 +40,11 @@ export class AddTeamComponent implements OnInit {
         Validators.maxLength(60),
       ]),
       statusFrequency: new FormControl(null, Validators.required),
+      weeklyStatusDay: new FormControl(null, Validators.required),
+
       managers: new FormControl(null, Validators.required),
     });
+    this.selectedStatusFrequency = '';
   }
 
   ngOnInit(): void {
@@ -52,6 +56,9 @@ export class AddTeamComponent implements OnInit {
         console.log(error);
       }
     );
+    this.addTeamForm.valueChanges.subscribe((data) => {
+      this.selectedStatusFrequency = data.statusFrequency;
+    });
   }
   addTeam() {
     this.teamsService
@@ -59,6 +66,7 @@ export class AddTeamComponent implements OnInit {
         this.addTeamForm.value.teamName,
         this.addTeamForm.value.shortName,
         this.addTeamForm.value.statusFrequency,
+        this.addTeamForm.value.weeklyStatusDay,
         this.addTeamForm.value.description,
         this.managerList
       )

@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { user, UserService } from 'src/app/services/user.service';
 import { team, TeamsService } from 'src/app/services/teams.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-member-list',
@@ -10,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./member-list.component.css'],
 })
 export class MemberListComponent implements OnInit {
+  role: string | null;
   teamShortName: string;
   teamsList: team[];
   memberList: user[];
@@ -17,8 +19,10 @@ export class MemberListComponent implements OnInit {
     private route: ActivatedRoute,
     private teamsService: TeamsService,
     private userService: UserService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private profileService: ProfileService
   ) {
+    this.role = null;
     this.teamShortName = '';
     this.memberList = [];
     this.teamsList = [];
@@ -42,6 +46,23 @@ export class MemberListComponent implements OnInit {
         console.log(error);
       }
     );
+
+    if (this.profileService.getProfileData.role === null) {
+      this.profileService.getProfile().subscribe(
+        (res) => {
+          if (res.statusCode === 200) {
+            this.profileService.setProfileData = res.data;
+            this.role = this.profileService.getProfileData.role;
+          } else {
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.role = this.profileService.getProfileData.role;
+    }
   }
   openModal(content: any) {
     this.modalService.open(content, { centered: true, size: 'lg' });
