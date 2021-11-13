@@ -49,7 +49,11 @@ export class EditProfileComponent implements OnInit {
     this.editProfileForm.reset();
   }
   onSave() {
-    const name = `${this.editProfileForm.value.firstName} ${this.editProfileForm.value.middleName} ${this.editProfileForm.value.lastName}`;
+    const name = `${this.editProfileForm.value.firstName} ${
+      this.editProfileForm.value.middleName
+        ? this.editProfileForm.value.middleName
+        : ''
+    } ${this.editProfileForm.value.lastName}`;
     const address = this.editProfileForm.value.address;
     const phone = this.editProfileForm.value.phone;
 
