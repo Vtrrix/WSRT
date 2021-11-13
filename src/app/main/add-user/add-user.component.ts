@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { team, TeamsService } from 'src/app/services/teams.service';
@@ -10,8 +10,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent implements OnInit {
-  inviteUserForm: FormGroup;
+  @Input() closeModal: () => void;
 
+  inviteUserForm: FormGroup;
   jobPositions: string[];
   teams: team[];
   managers: string[];
@@ -21,6 +22,7 @@ export class AddUserComponent implements OnInit {
     private userService: UserService,
     private router: Router
   ) {
+    this.closeModal = () => {};
     this.inviteUserForm = new FormGroup({
       username: new FormControl(null, [
         Validators.required,
@@ -84,5 +86,6 @@ export class AddUserComponent implements OnInit {
           console.log(error);
         }
       );
+    this.closeModal();
   }
 }
