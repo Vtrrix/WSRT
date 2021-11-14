@@ -34,7 +34,7 @@ export class TeamsComponent implements OnInit {
       this.isAdmin =
         this.profileService.getProfileData.role === 'admin' ? true : false;
     } else {
-      this.profileService.getProfile().subscribe(
+      this.profileService.getProfile(null).subscribe(
         (res) => {
           if (res.statusCode === 200) {
             this.profileService.setProfileData = res.data;
@@ -54,7 +54,7 @@ export class TeamsComponent implements OnInit {
     }
   }
   onTeamClick(teamName: string) {
-    this.router.navigate(['/user', 'manager', 'members', teamName]);
+    this.router.navigate(['/user', 'manager', 'teams', teamName]);
   }
 
   getTeams() {

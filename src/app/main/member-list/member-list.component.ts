@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { user, UserService } from 'src/app/services/user.service';
 import { team, TeamsService } from 'src/app/services/teams.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -20,7 +20,8 @@ export class MemberListComponent implements OnInit {
     private teamsService: TeamsService,
     private userService: UserService,
     private modalService: NgbModal,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private router: Router
   ) {
     this.role = null;
     this.teamShortName = '';
@@ -48,7 +49,7 @@ export class MemberListComponent implements OnInit {
     );
 
     if (this.profileService.getProfileData.role === null) {
-      this.profileService.getProfile().subscribe(
+      this.profileService.getProfile(null).subscribe(
         (res) => {
           if (res.statusCode === 200) {
             this.profileService.setProfileData = res.data;
@@ -66,5 +67,14 @@ export class MemberListComponent implements OnInit {
   }
   openModal(content: any) {
     this.modalService.open(content, { centered: true, size: 'lg' });
+  }
+  onMemberClick(memberName: string) {
+    this.router.navigate([
+      'user',
+      'manager',
+      'teams',
+      this.teamShortName,
+      memberName,
+    ]);
   }
 }

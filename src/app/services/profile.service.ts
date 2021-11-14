@@ -44,21 +44,24 @@ export class ProfileService {
     this.profileData = data;
   }
 
-  getProfile() {
+  getProfile(username: string | null) {
+    console.log(username);
+
+    let url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/users/${username}`;
+    if (!username) {
+      url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/users/${localStorage.getItem(
+        'username'
+      )}`;
+    }
     return this.http.get<{
       data: userProfile;
       message: string;
       statusCode: number;
-    }>(
-      `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/users/${localStorage.getItem(
-        'username'
-      )}`,
-      {
-        headers: new HttpHeaders({
-          token: `${localStorage.getItem('token')}`,
-        }),
-      }
-    );
+    }>(url, {
+      headers: new HttpHeaders({
+        token: `${localStorage.getItem('token')}`,
+      }),
+    });
   }
 
   updateProfile(name: string, address: string, phone: string) {

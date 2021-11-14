@@ -7,6 +7,7 @@ import { EditProfileComponent } from './main/edit-profile/edit-profile.component
 import { HomeComponent } from './main/home/home.component';
 import { MainComponent } from './main/main.component';
 import { ManagerComponent } from './main/manager/manager.component';
+import { MemberDetailsComponent } from './main/member-details/member-details.component';
 import { MemberListComponent } from './main/member-list/member-list.component';
 import { StatusListComponent } from './main/status-list/status-list.component';
 import { StatusComponent } from './main/status/status.component';
@@ -23,16 +24,20 @@ const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'edit-profile', component: EditProfileComponent },
       { path: 'status', component: StatusListComponent },
-      { path: 'add-status', component: AddStatusComponent },
       { path: 'status/:statusID', component: StatusComponent },
+      { path: 'add-status', component: AddStatusComponent },
       {
         path: 'manager',
         component: ManagerComponent,
         children: [
           { path: '', component: TeamsComponent },
           { path: 'add-team', component: AddTeamComponent },
-          { path: 'members', redirectTo: 'members/All' },
-          { path: 'members/:teamName', component: MemberListComponent },
+          { path: 'teams/:teamName', component: MemberListComponent },
+
+          {
+            path: 'teams/:teamName/:memberName',
+            component: MemberDetailsComponent,
+          },
         ],
       },
       { path: '**', component: NotFoundComponent },

@@ -8,6 +8,7 @@ import { SideMenuService } from 'src/app/services/side-menu.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  @Input() username: string | null;
   showAlert: boolean;
   alertMessage: string;
   profileData;
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
     private profileService: ProfileService,
     private sideMenuService: SideMenuService
   ) {
+    this.username = null;
     this.showAlert = false;
     this.alertMessage = '';
     this.profileData = profileService.profileData;
@@ -31,7 +33,7 @@ export class HomeComponent implements OnInit {
       { title: 'My Status', route: 'status' },
     ]);
 
-    this.profileService.getProfile().subscribe(
+    this.profileService.getProfile(this.username).subscribe(
       (res) => {
         if (res.statusCode === 200) {
           this.profileService.setProfileData = res.data;

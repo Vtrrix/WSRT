@@ -80,7 +80,7 @@ export class AddUserComponent implements OnInit {
       .subscribe(
         (res) => {
           console.log(res);
-          this.router.navigate(['/user', 'manager', 'members']);
+          this.router.navigate(['/user', 'manager', 'teams', 'All']);
         },
         (error) => {
           console.log(error);

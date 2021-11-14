@@ -8,7 +8,7 @@
           class="option-btn mx-2"
           name="allMembers"
           value="All"
-          [routerLink]="['/user', 'manager', 'members', 'All']"
+          [routerLink]="['/user', 'manager', 'teams', 'All']"
           routerLinkActive="active"
         />
         <input
@@ -16,7 +16,7 @@
           type="button"
           class="option-btn mx-2"
           [name]="i"
-          [routerLink]="['/user', 'manager', 'members', team.team_short_name]"
+          [routerLink]="['/user', 'manager', 'teams', team.team_short_name]"
           routerLinkActive="active"
           [value]="team.team_short_name"
         />
@@ -52,7 +52,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let member of memberList" class="border-bottom">
+        <tr
+          *ngFor="let member of memberList"
+          (click)="onMemberClick(member.username)"
+          class="border-bottom"
+        >
           <td>
             <div class="py-2 mx-4">
               <span class="font-weight-bold"> {{ member.name }} </span>

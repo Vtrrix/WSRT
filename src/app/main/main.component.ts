@@ -50,7 +50,7 @@ export class MainComponent implements OnInit {
           ? true
           : false;
     } else {
-      this.profileService.getProfile().subscribe(
+      this.profileService.getProfile(null).subscribe(
         (res) => {
           if (res.statusCode === 200) {
             this.profileService.setProfileData = res.data;
