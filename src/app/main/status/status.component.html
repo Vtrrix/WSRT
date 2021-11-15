@@ -30,13 +30,64 @@
             </div>
           </div>
         </div>
-        <div *ngIf="status.managerial_remarks" class="row d-flex mt-3">
+        <div
+          *ngIf="status.managerial_remarks && !isManager"
+          class="row d-flex mt-3"
+        >
           <hr />
           <div class="col-12">
             <h4 class="mb-3">Remarks :</h4>
             <div>
               {{ status.managerial_remarks }}
             </div>
+          </div>
+        </div>
+        <div *ngIf="isManager" class="row d-flex mt-3">
+          <hr />
+          <div class="col-12">
+            <form
+              [formGroup]="remarkForm"
+              (ngSubmit)="onSubmit()"
+              class="form-card mt-1"
+            >
+              <label for="floatingInputShortName" class="h5">Remarks :</label>
+
+              <div class="form-floating">
+                <textarea
+                  name="remarks"
+                  id="floatingInputRemarks"
+                  cols="30"
+                  rows="5"
+                  formControlName="remark"
+                ></textarea>
+              </div>
+              <div class="row mt-1">
+                <div
+                  id="btn-container"
+                  class="col-sm-12 d-flex flex-row-reverse"
+                >
+                  <button
+                    class="btn btn-save fw-bold text-uppercase"
+                    type="submit"
+                  >
+                    Submit
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-save fw-bold text-uppercase"
+                    [routerLink]="[
+                      '/user',
+                      'manager',
+                      'teams',
+                      teamName,
+                      username
+                    ]"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

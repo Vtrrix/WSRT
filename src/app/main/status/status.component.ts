@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { status, StatusService } from 'src/app/services/status.service';
 
@@ -9,6 +10,10 @@ import { status, StatusService } from 'src/app/services/status.service';
 })
 export class StatusComponent implements OnInit {
   @Input() username: string | null;
+  @Input() isManager: boolean;
+  @Input() teamName: string;
+
+  remarkForm: FormGroup;
 
   statusID: string;
   status: status;
@@ -17,7 +22,17 @@ export class StatusComponent implements OnInit {
     private statusService: StatusService
   ) {
     this.username = null;
+    this.isManager = false;
+    this.teamName = '';
     this.statusID = '';
+
+    this.remarkForm = new FormGroup({
+      remark: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(150),
+      ]),
+    });
     this.status = {
       title: '',
       concerns: '',
@@ -36,7 +51,6 @@ export class StatusComponent implements OnInit {
     });
     this.statusService.getStatus(this.statusID, this.username).subscribe(
       (res) => {
-        console.log(res);
         if (<number>(<unknown>res.statusCode) === 200) {
           this.status = res.data;
           this.fillData(
@@ -44,7 +58,23 @@ export class StatusComponent implements OnInit {
             this.status.next_week_plans,
             this.status.concerns
           );
-          console.log(this.status);
+
+          this.remarkForm.controls['remark'].setValue(
+            res.data.managerial_remarks
+          );
+
+          // to post status as read by manager to API
+          if (this.username && !res.data.status_read) {
+            this.statusService
+              .addRemark(
+                this.remarkForm.value.remark,
+                this.username,
+                this.statusID
+              )
+              .subscribe((res) => {
+                console.log(res);
+              });
+          }
         } else {
           console.log(res.meassage);
         }
@@ -59,5 +89,15 @@ export class StatusComponent implements OnInit {
     document.getElementById('taskDone')!.innerHTML = taskDone;
     document.getElementById('nextWeekPlan')!.innerHTML = nextWeekPlan;
     document.getElementById('risk')!.innerHTML = risk;
+  }
+
+  onSubmit() {
+    if (this.username) {
+      this.statusService
+        .addRemark(this.remarkForm.value.remark, this.username, this.statusID)
+        .subscribe((res) => {
+          console.log(res);
+        });
+    }
   }
 }

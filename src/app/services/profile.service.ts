@@ -45,8 +45,6 @@ export class ProfileService {
   }
 
   getProfile(username: string | null) {
-    console.log(username);
-
     let url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/users/${username}`;
     if (!username) {
       url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/users/${localStorage.getItem(
