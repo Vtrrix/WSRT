@@ -84,7 +84,13 @@
           </td>
           <td>
             <div class="py-2 mx-2">
-              <span class="font-weight-bold">
+              <ng-template #noStatus>
+                <span class="font-weight-bold"> No Status </span></ng-template
+              >
+              <span
+                *ngIf="member.latest_status_seen !== undefined; else noStatus"
+                class="font-weight-bold"
+              >
                 {{ member.latest_status_seen ? "Seen" : "New Status" }}
               </span>
             </div>
