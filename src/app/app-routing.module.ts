@@ -9,6 +9,7 @@ import { MainComponent } from './main/main.component';
 import { ManagerComponent } from './main/manager/manager.component';
 import { MemberDetailsComponent } from './main/member-details/member-details.component';
 import { MemberListComponent } from './main/member-list/member-list.component';
+import { MemberStatusComponent } from './main/member-status/member-status.component';
 import { StatusListComponent } from './main/status-list/status-list.component';
 import { StatusComponent } from './main/status/status.component';
 import { TeamsComponent } from './main/teams/teams.component';
@@ -33,10 +34,13 @@ const routes: Routes = [
           { path: '', component: TeamsComponent },
           { path: 'add-team', component: AddTeamComponent },
           { path: 'teams/:teamName', component: MemberListComponent },
-
           {
             path: 'teams/:teamName/:memberName',
             component: MemberDetailsComponent,
+          },
+          {
+            path: 'teams/:teamName/:memberName/:statusID',
+            component: MemberStatusComponent,
           },
         ],
       },

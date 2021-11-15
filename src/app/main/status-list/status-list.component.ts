@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   NgbCalendar,
   NgbDate,
@@ -17,6 +17,7 @@ export class StatusListComponent implements OnInit {
   // for managerial view
   @Input() username: string | null;
   @Input() inManagerView: boolean;
+  @Input() teamName: string;
 
   nextVisible: boolean;
   prevVisible: boolean;
@@ -48,7 +49,8 @@ export class StatusListComponent implements OnInit {
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter,
     private sideMenuService: SideMenuService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     // To handle home component with manager view member
 
@@ -57,7 +59,9 @@ export class StatusListComponent implements OnInit {
 
     // 2. If null will fetch current user data else provided user data
     this.username = null;
-    // -------------------------------------
+    //3. To use teamname in routing on specific status click
+    this.teamName = '';
+    // -----------------------------------------------
     this.nextVisible = true;
     this.prevVisible = false;
     this.showAlert = false;
@@ -260,6 +264,19 @@ export class StatusListComponent implements OnInit {
   }
 
   onStatusClick(id: string) {
-    this.router.navigate(['/user', 'status', id]);
+    console.log(this.inManagerView);
+
+    if (this.inManagerView) {
+      this.router.navigate([
+        '/user',
+        'manager',
+        'teams',
+        this.teamName,
+        this.username,
+        id,
+      ]);
+    } else {
+      this.router.navigate(['/user', 'status', id]);
+    }
   }
 }

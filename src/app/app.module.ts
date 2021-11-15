@@ -26,6 +26,7 @@ import { StatusComponent } from './main/status/status.component';
 import { MemberListComponent } from './main/member-list/member-list.component';
 import { AddUserComponent } from './main/add-user/add-user.component';
 import { MemberDetailsComponent } from './main/member-details/member-details.component';
+import { MemberStatusComponent } from './main/member-status/member-status.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { MemberDetailsComponent } from './main/member-details/member-details.com
     MemberListComponent,
     AddUserComponent,
     MemberDetailsComponent,
+    MemberStatusComponent,
   ],
   imports: [
     BrowserModule,
