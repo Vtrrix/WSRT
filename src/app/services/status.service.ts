@@ -29,37 +29,26 @@ export class StatusService {
     this.ToDate = null;
   }
 
-  getStatusList(pageSize: number) {
+  getStatusList(pageSize: number, username: string | null) {
+    let url: string;
+    let urlUsername = username;
+    if (!urlUsername) {
+      urlUsername = localStorage.getItem('username');
+    }
+
     if (this.FromDate && this.ToDate) {
-      return this.http.get<{
-        data: { status_list: status[]; hasMorePages: boolean };
-        statusCode: number;
-      }>(
-        `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${localStorage.getItem(
-          'username'
-        )}/statuses?key=${this.lastStatusID}&limit=${pageSize}&start_date=${
-          this.FromDate
-        }&end_date=${this.ToDate}`,
-        {
-          headers: new HttpHeaders({
-            token: `${localStorage.getItem('token')}`,
-          }),
-        }
-      );
+      url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&start_date=${this.FromDate}&end_date=${this.ToDate}`;
+    } else {
+      url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}`;
     }
     return this.http.get<{
       data: { status_list: status[]; hasMorePages: boolean };
       statusCode: number;
-    }>(
-      `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${localStorage.getItem(
-        'username'
-      )}/statuses?key=${this.lastStatusID}&limit=${pageSize}`,
-      {
-        headers: new HttpHeaders({
-          token: `${localStorage.getItem('token')}`,
-        }),
-      }
-    );
+    }>(url, {
+      headers: new HttpHeaders({
+        token: `${localStorage.getItem('token')}`,
+      }),
+    });
   }
 
   getStatus(statusID: string) {

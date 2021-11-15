@@ -105,7 +105,7 @@ export class AddStatusComponent implements OnInit, OnDestroy {
 
     let lastStatusWeek;
     this.statusService.lastStatusID = this.statusService.fullStatusListID[0];
-    this.statusService.getStatusList(1).subscribe((status) => {
+    this.statusService.getStatusList(1, null).subscribe((status) => {
       if (status.data.status_list.length === 0) {
         this.statusID =
           this.currentdate.getFullYear() +

@@ -9,6 +9,7 @@
       </div>
       <div class="col-md-2 flex justify-content-center">
         <input
+          *ngIf="!inManagerView"
           [routerLink]="['edit-profile']"
           type="button"
           class="profile-edit-btn"

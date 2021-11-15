@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   NgbCalendar,
@@ -14,6 +14,10 @@ import { StatusService } from 'src/app/services/status.service';
   styleUrls: ['./status-list.component.css'],
 })
 export class StatusListComponent implements OnInit {
+  // for managerial view
+  @Input() username: string | null;
+  @Input() inManagerView: boolean;
+
   nextVisible: boolean;
   prevVisible: boolean;
   showAlert: boolean;
@@ -46,6 +50,14 @@ export class StatusListComponent implements OnInit {
     private sideMenuService: SideMenuService,
     private router: Router
   ) {
+    // To handle home component with manager view member
+
+    // 1. To check if manager checking member
+    this.inManagerView = false;
+
+    // 2. If null will fetch current user data else provided user data
+    this.username = null;
+    // -------------------------------------
     this.nextVisible = true;
     this.prevVisible = false;
     this.showAlert = false;
@@ -58,10 +70,12 @@ export class StatusListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sideMenuService.changeSideMenu([
-      { title: 'My Info', route: '/' },
-      { title: 'My Status', route: 'status' },
-    ]);
+    if (!this.inManagerView) {
+      this.sideMenuService.changeSideMenu([
+        { title: 'My Info', route: '/user' },
+        { title: 'My Status', route: 'status' },
+      ]);
+    }
 
     this.statusService.lastStatusID = '-1';
     this.fetchStatus(this.pageSize);
@@ -92,7 +106,7 @@ export class StatusListComponent implements OnInit {
 
   // api call to get status
   fetchStatus(size: number) {
-    this.statusService.getStatusList(size).subscribe(
+    this.statusService.getStatusList(size, this.username).subscribe(
       (res) => {
         if (!res.data.hasMorePages) {
           this.nextVisible = false;

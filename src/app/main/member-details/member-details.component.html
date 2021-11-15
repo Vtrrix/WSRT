@@ -1,1 +1,12 @@
-<app-home *ngIf="memberName !== ''" [username]="memberName"></app-home>
+<app-home
+  *ngIf="memberName !== ''"
+  [username]="memberName"
+  [inManagerView]="true"
+></app-home>
+<div class="mx-4">
+  <app-status-list
+    *ngIf="memberName !== ''"
+    [username]="memberName"
+    [inManagerView]="true"
+  ></app-status-list>
+</div>
