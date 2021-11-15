@@ -19,7 +19,8 @@ export class StatusComponent implements OnInit {
   status: status;
   constructor(
     private route: ActivatedRoute,
-    private statusService: StatusService
+    private statusService: StatusService,
+    private router: Router
   ) {
     this.username = null;
     this.isManager = false;
@@ -95,9 +96,21 @@ export class StatusComponent implements OnInit {
     if (this.username) {
       this.statusService
         .addRemark(this.remarkForm.value.remark, this.username, this.statusID)
-        .subscribe((res) => {
-          console.log(res);
-        });
+        .subscribe(
+          (res) => {
+            console.log(res);
+            this.router.navigate([
+              '/user',
+              'manager',
+              'teams',
+              this.teamName,
+              this.username,
+            ]);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     }
   }
 }
