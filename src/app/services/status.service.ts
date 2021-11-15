@@ -51,21 +51,23 @@ export class StatusService {
     });
   }
 
-  getStatus(statusID: string) {
+  getStatus(statusID: string, username: string | null) {
+    let url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${localStorage.getItem(
+      'username'
+    )}/statuses/${statusID}`;
+
+    if (username) {
+      url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${username}/statuses/${statusID}`;
+    }
     return this.http.get<{
       data: status;
       meassage: string;
       statusCode: number;
-    }>(
-      `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${localStorage.getItem(
-        'username'
-      )}/statuses/${statusID}`,
-      {
-        headers: new HttpHeaders({
-          token: `${localStorage.getItem('token')}`,
-        }),
-      }
-    );
+    }>(url, {
+      headers: new HttpHeaders({
+        token: `${localStorage.getItem('token')}`,
+      }),
+    });
   }
   addStatus(
     status_id: string,

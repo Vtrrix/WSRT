@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { status, StatusService } from 'src/app/services/status.service';
 
@@ -8,12 +8,15 @@ import { status, StatusService } from 'src/app/services/status.service';
   styleUrls: ['./status.component.css'],
 })
 export class StatusComponent implements OnInit {
+  @Input() username: string | null;
+
   statusID: string;
   status: status;
   constructor(
     private route: ActivatedRoute,
     private statusService: StatusService
   ) {
+    this.username = null;
     this.statusID = '';
     this.status = {
       title: '',
@@ -31,7 +34,7 @@ export class StatusComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.statusID = params.statusID;
     });
-    this.statusService.getStatus(this.statusID).subscribe(
+    this.statusService.getStatus(this.statusID, this.username).subscribe(
       (res) => {
         console.log(res);
         if (<number>(<unknown>res.statusCode) === 200) {
