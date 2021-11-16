@@ -60,13 +60,17 @@ export class HomeComponent implements OnInit {
             } else {
               this.showAlert = true;
               this.alertMessage = <string>(<unknown>res.message);
-              this.router.navigate(['user', '404']);
+              localStorage.removeItem('username');
+              localStorage.removeItem('token');
+              this.router.navigate(['user', 'login']);
             }
           },
           (error) => {
             this.showAlert = true;
             this.alertMessage = error.error.message;
-            this.router.navigate(['user', '404']);
+            localStorage.removeItem('username');
+            localStorage.removeItem('token');
+            this.router.navigate(['user', 'login']);
           }
         );
       }
