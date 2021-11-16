@@ -25,10 +25,17 @@
     </div>
   </div>
 </div>
-<app-home *ngIf="memberName !== ''" [inManagerView]="true"></app-home>
+<div *ngIf="memberName === 'none'" class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1>Please Select A User</h1>
+    </div>
+  </div>
+</div>
+<app-home *ngIf="memberName !== 'none'" [inManagerView]="true"></app-home>
 <div class="mx-4">
   <app-status-list
-    *ngIf="memberName !== ''"
+    *ngIf="memberName !== 'none'"
     [inManagerView]="true"
   ></app-status-list>
 </div>

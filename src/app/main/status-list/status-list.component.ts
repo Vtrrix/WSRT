@@ -84,9 +84,10 @@ export class StatusListComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.username = params.memberName;
       this.teamName = params.teamName;
-
-      this.statusService.lastStatusID = '-1';
-      this.fetchStatus(this.pageSize);
+      if (this.username !== 'none') {
+        this.statusService.lastStatusID = '-1';
+        this.fetchStatus(this.pageSize);
+      }
     });
   }
 

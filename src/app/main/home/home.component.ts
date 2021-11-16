@@ -48,26 +48,28 @@ export class HomeComponent implements OnInit {
     }
     this.route.params.subscribe((params: Params) => {
       this.username = params.memberName;
-      this.profileService.getProfile(this.username).subscribe(
-        (res) => {
-          if (res.statusCode === 200) {
-            this.profileService.setProfileData = res.data;
-            this.profileData = res.data;
-            // this.feilds = Object.keys(data[0]);
-            // this.values = Object.values(data[0]);
-            // console.log(this.feilds, this.values);
-          } else {
+      if (this.username !== 'none') {
+        this.profileService.getProfile(this.username).subscribe(
+          (res) => {
+            if (res.statusCode === 200) {
+              this.profileService.setProfileData = res.data;
+              this.profileData = res.data;
+              // this.feilds = Object.keys(data[0]);
+              // this.values = Object.values(data[0]);
+              // console.log(this.feilds, this.values);
+            } else {
+              this.showAlert = true;
+              this.alertMessage = <string>(<unknown>res.message);
+              this.router.navigate(['user', '404']);
+            }
+          },
+          (error) => {
             this.showAlert = true;
-            this.alertMessage = <string>(<unknown>res.message);
+            this.alertMessage = error.error.message;
             this.router.navigate(['user', '404']);
           }
-        },
-        (error) => {
-          this.showAlert = true;
-          this.alertMessage = error.error.message;
-          this.router.navigate(['user', '404']);
-        }
-      );
+        );
+      }
     });
   }
 }

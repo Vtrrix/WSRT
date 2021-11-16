@@ -13,7 +13,7 @@ export class ManagerComponent implements OnInit {
     this.sideMenuService.changeSideMenu([
       { title: 'Manage Team', route: '/user/manager' },
       { title: 'Team Members', route: '/user/manager/teams/All' },
-      { title: 'Member Status', route: '/user/manager/teams/All/asd' },
+      { title: 'Member Status', route: '/user/manager/teams/All/none' },
       // { title: 'Settings', route: '' },
     ]);
   }
