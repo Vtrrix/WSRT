@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { user, UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-member-details',
@@ -9,9 +10,11 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class MemberDetailsComponent implements OnInit {
   memberName: string;
   teamName: string;
-  constructor(private route: ActivatedRoute) {
+  memberList: user[];
+  constructor(private route: ActivatedRoute, private userService: UserService) {
     this.memberName = '';
     this.teamName = '';
+    this.memberList = [];
   }
 
   ngOnInit(): void {
@@ -19,5 +22,19 @@ export class MemberDetailsComponent implements OnInit {
       this.memberName = params.memberName;
       this.teamName = params.teamName;
     });
+
+    if (this.userService.userList.length) {
+      this.memberList = this.userService.userList;
+    } else {
+      this.userService.getUsers().subscribe(
+        (res) => {
+          this.userService.userList = res.data;
+          this.memberList = res.data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 }

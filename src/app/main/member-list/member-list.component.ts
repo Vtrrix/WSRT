@@ -34,6 +34,7 @@ export class MemberListComponent implements OnInit {
       this.teamShortName = params.teamName;
       this.userService.getUsers(this.teamShortName).subscribe((res) => {
         this.memberList = res.data;
+        this.userService.userList = this.memberList;
       });
     });
     this.teamsService.getTeams().subscribe(

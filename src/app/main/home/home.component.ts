@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProfileService } from 'src/app/services/profile.service';
 import { SideMenuService } from 'src/app/services/side-menu.service';
 
@@ -9,7 +9,7 @@ import { SideMenuService } from 'src/app/services/side-menu.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  @Input() username: string | null;
+  username: string | null;
   @Input() inManagerView: boolean;
   showAlert: boolean;
   alertMessage: string;
@@ -20,7 +20,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private profileService: ProfileService,
     private sideMenuService: SideMenuService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     // To handle home component with manager view member
 
@@ -45,26 +46,28 @@ export class HomeComponent implements OnInit {
         { title: 'My Status', route: 'status' },
       ]);
     }
-
-    this.profileService.getProfile(this.username).subscribe(
-      (res) => {
-        if (res.statusCode === 200) {
-          this.profileService.setProfileData = res.data;
-          this.profileData = res.data;
-          // this.feilds = Object.keys(data[0]);
-          // this.values = Object.values(data[0]);
-          // console.log(this.feilds, this.values);
-        } else {
+    this.route.params.subscribe((params: Params) => {
+      this.username = params.memberName;
+      this.profileService.getProfile(this.username).subscribe(
+        (res) => {
+          if (res.statusCode === 200) {
+            this.profileService.setProfileData = res.data;
+            this.profileData = res.data;
+            // this.feilds = Object.keys(data[0]);
+            // this.values = Object.values(data[0]);
+            // console.log(this.feilds, this.values);
+          } else {
+            this.showAlert = true;
+            this.alertMessage = <string>(<unknown>res.message);
+            this.router.navigate(['user', '404']);
+          }
+        },
+        (error) => {
           this.showAlert = true;
-          this.alertMessage = <string>(<unknown>res.message);
+          this.alertMessage = error.error.message;
           this.router.navigate(['user', '404']);
         }
-      },
-      (error) => {
-        this.showAlert = true;
-        this.alertMessage = error.error.message;
-        this.router.navigate(['user', '404']);
-      }
-    );
+      );
+    });
   }
 }

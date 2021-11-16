@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import {
   NgbCalendar,
   NgbDate,
@@ -15,9 +15,9 @@ import { StatusService } from 'src/app/services/status.service';
 })
 export class StatusListComponent implements OnInit {
   // for managerial view
-  @Input() username: string | null;
+  username: string | null;
   @Input() inManagerView: boolean;
-  @Input() teamName: string;
+  teamName: string;
 
   nextVisible: boolean;
   prevVisible: boolean;
@@ -81,8 +81,13 @@ export class StatusListComponent implements OnInit {
       ]);
     }
 
-    this.statusService.lastStatusID = '-1';
-    this.fetchStatus(this.pageSize);
+    this.route.params.subscribe((params: Params) => {
+      this.username = params.memberName;
+      this.teamName = params.teamName;
+
+      this.statusService.lastStatusID = '-1';
+      this.fetchStatus(this.pageSize);
+    });
   }
 
   changePageSize(size: number) {
@@ -264,8 +269,6 @@ export class StatusListComponent implements OnInit {
   }
 
   onStatusClick(id: string) {
-    console.log(this.inManagerView);
-
     if (this.inManagerView) {
       this.router.navigate([
         '/user',

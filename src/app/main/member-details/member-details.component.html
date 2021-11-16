@@ -1,13 +1,34 @@
-<app-home
-  *ngIf="memberName !== ''"
-  [username]="memberName"
-  [inManagerView]="true"
-></app-home>
+<div class="container user-list-dropdown">
+  <div class="row">
+    <div class="col-12 d-flex flex-row-reverse">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn mx-4" id="dropdownBasic1" ngbDropdownToggle>
+          Select User
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button
+            *ngFor="let member of memberList"
+            [routerLink]="[
+              '/user',
+              'manager',
+              'teams',
+              teamName,
+              member.username
+            ]"
+            routerLinkActive="router-link-active"
+            ngbDropdownItem
+          >
+            {{ member.name }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-home *ngIf="memberName !== ''" [inManagerView]="true"></app-home>
 <div class="mx-4">
   <app-status-list
     *ngIf="memberName !== ''"
-    [username]="memberName"
     [inManagerView]="true"
-    [teamName]="teamName"
   ></app-status-list>
 </div>

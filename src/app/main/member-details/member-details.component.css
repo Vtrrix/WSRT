@@ -1,0 +1,19 @@
+.user-list-dropdown {
+  margin-bottom: -20px;
+}
+.btn {
+  margin-left: 20px;
+  padding: 13px 20px 12px;
+  background-color: #ef4223;
+  border-radius: 4px;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #fff;
+  margin-bottom: 24px;
+}
+.btn:hover {
+  border: 1px solid #ef4223;
+  background-color: transparent;
+  color: #ef4223;
+}
