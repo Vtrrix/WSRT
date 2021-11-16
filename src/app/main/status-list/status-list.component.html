@@ -157,6 +157,9 @@
           *ngFor="let status of currentStatusList"
           (click)="onStatusClick(status.status_id)"
           class="border-bottom"
+          [ngStyle]="{
+            background: status.status_read === false ? '#EFEFEF' : '#FCFCFC'
+          }"
         >
           <td>
             <div class="py-2 mx-5">
@@ -169,9 +172,23 @@
             </div>
           </td>
           <td>
-            <div class="py-2 mx-5">
+            <ng-template #UserView>
+              <div class="py-2 mx-5">
+                <ng-template #Submitted>
+                  <span class="font-weight-bold">Submitted</span>
+                </ng-template>
+
+                <span
+                  *ngIf="status.status_read; else Submitted"
+                  class="font-weight-bold"
+                  >Seen</span
+                >
+              </div>
+            </ng-template>
+
+            <div *ngIf="inManagerView; else UserView" class="py-2 mx-5">
               <ng-template #Submitted>
-                <span class="font-weight-bold">Submitted</span>
+                <span class="font-weight-bold">New Status</span>
               </ng-template>
 
               <span
