@@ -118,8 +118,6 @@ export class StatusListComponent implements OnInit {
   fetchStatus(size: number) {
     this.statusService.getStatusList(size, this.username).subscribe(
       (res) => {
-        console.log(res);
-
         if (!res.data.hasMorePages) {
           this.nextVisible = false;
         } else {

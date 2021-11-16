@@ -23,18 +23,14 @@ export class MemberDetailsComponent implements OnInit {
       this.teamName = params.teamName;
     });
 
-    if (this.userService.userList.length) {
-      this.memberList = this.userService.userList;
-    } else {
-      this.userService.getUsers().subscribe(
-        (res) => {
-          this.userService.userList = res.data;
-          this.memberList = res.data;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
+    this.userService.getUsers().subscribe(
+      (res) => {
+        this.userService.userList = res.data;
+        this.memberList = res.data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

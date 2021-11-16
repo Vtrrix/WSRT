@@ -10,19 +10,8 @@ import { ProfileService } from '../services/profile.service';
 export class MainComponent implements OnInit {
   navbarVisible: boolean;
   // visible true if manager to show navbar navigation
-  breadcrumb: { title: string; route: string }[];
 
   constructor(private router: Router, private profileService: ProfileService) {
-    this.breadcrumb = [
-      {
-        title: 'Home',
-        route: '',
-      },
-      {
-        title: 'Status',
-        route: '',
-      },
-    ];
     this.navbarVisible = false;
   }
 
