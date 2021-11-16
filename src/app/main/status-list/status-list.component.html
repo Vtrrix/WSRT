@@ -158,7 +158,10 @@
           (click)="onStatusClick(status.status_id)"
           class="border-bottom"
           [ngStyle]="{
-            background: status.status_read === false ? '#EFEFEF' : '#FCFCFC'
+            background:
+              status.status_read === false && inManagerView
+                ? '#EFEFEF'
+                : '#FCFCFC'
           }"
         >
           <td>
