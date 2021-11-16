@@ -104,13 +104,21 @@ export class StatusService {
   }
 
   addRemark(remark: string, username: string, statusID: string) {
-    return this.http.put<{ data: string; message: string; statusCode: number }>(
+    let reqBody: {
+      managerial_remarks?: string;
+    } = {
+      managerial_remarks: remark,
+    };
+    if (remark === '') {
+      reqBody = {};
+    }
+    return this.http.put<{
+      data: string;
+      message: string;
+      statusCode: number;
+    }>(
       `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${username}/statuses/${statusID}`,
-
-      {
-        managerial_remarks: remark,
-        status_read: true,
-      },
+      reqBody,
       {
         headers: new HttpHeaders({
           token: `${localStorage.getItem('token')}`,
