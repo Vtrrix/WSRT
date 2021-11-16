@@ -1,4 +1,4 @@
-<div class="btn-group btn-breadcrumb mt-3 mx-3">
+<div *ngIf="crumbs.length > 1" class="btn-group btn-breadcrumb mt-3 mx-3">
   <a
     *ngFor="let crumb of crumbs"
     [routerLink]="crumb.route"
