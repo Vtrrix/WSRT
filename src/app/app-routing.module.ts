@@ -33,6 +33,12 @@ const routes: Routes = [
         children: [
           { path: '', component: TeamsComponent },
           { path: 'add-team', component: AddTeamComponent },
+          {
+            path: 'teams',
+            pathMatch: 'full',
+            redirectTo: '/user/manager/teams/All',
+          },
+
           { path: 'teams/:teamName', component: MemberListComponent },
           {
             path: 'teams/:teamName/:memberName',

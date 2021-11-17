@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
               this.alertMessage = <string>(<unknown>res.message);
               localStorage.removeItem('username');
               localStorage.removeItem('token');
-              this.router.navigate(['user', 'login']);
+              this.router.navigate(['/login']);
             }
           },
           (error) => {
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
             this.alertMessage = error.error.message;
             localStorage.removeItem('username');
             localStorage.removeItem('token');
-            this.router.navigate(['user', 'login']);
+            this.router.navigate(['/login']);
           }
         );
       }
