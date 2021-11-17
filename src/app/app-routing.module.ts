@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
+import { ChangePasswordComponent } from './auth/change-password/change-password.component';
+import { LoginComponent } from './auth/login/login.component';
 import { AddStatusComponent } from './main/add-status/add-status.component';
 import { AddTeamComponent } from './main/add-team/add-team.component';
 import { EditProfileComponent } from './main/edit-profile/edit-profile.component';
@@ -17,7 +19,17 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'user', pathMatch: 'full' },
-  { path: 'login', component: AuthComponent },
+  {
+    path: 'login',
+    component: AuthComponent,
+    children: [
+      { path: '', component: LoginComponent },
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent,
+      },
+    ],
+  },
   {
     path: 'user',
     component: MainComponent,

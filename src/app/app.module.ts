@@ -27,6 +27,8 @@ import { MemberListComponent } from './main/member-list/member-list.component';
 import { AddUserComponent } from './main/add-user/add-user.component';
 import { MemberDetailsComponent } from './main/member-details/member-details.component';
 import { MemberStatusComponent } from './main/member-status/member-status.component';
+import { ChangePasswordComponent } from './auth/change-password/change-password.component';
+import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { MemberStatusComponent } from './main/member-status/member-status.compon
     AddUserComponent,
     MemberDetailsComponent,
     MemberStatusComponent,
+    ChangePasswordComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
