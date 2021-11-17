@@ -36,18 +36,20 @@ export class AuthService {
       }
     );
   }
-  // changePassword(otp: number , password: string) {
-  //   return this.http.post<{
-  //     data: string;
-  //     message: string;
-  //     status_code: number;
-  //   }>(
-  //     'https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/forgot_password',
-  //     {
-  //       username: username,
-  //     }
-  //   );
-  // }
+  changePassword(username: string, otp: string, password: string) {
+    return this.http.post<{
+      data: string;
+      message: string;
+      status_code: number;
+    }>(
+      'https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/confirm_forgot_password',
+      {
+        username: username,
+        code: otp,
+        password: password,
+      }
+    );
+  }
 
   logout() {
     localStorage.removeItem('token');

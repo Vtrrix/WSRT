@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 import { LoginComponent } from './auth/login/login.component';
-import { RequestOtpComponent } from './auth/request-otp/request-otp.component';
 import { AddStatusComponent } from './main/add-status/add-status.component';
 import { AddTeamComponent } from './main/add-team/add-team.component';
 import { EditProfileComponent } from './main/edit-profile/edit-profile.component';
@@ -25,10 +24,7 @@ const routes: Routes = [
     component: AuthComponent,
     children: [
       { path: '', component: LoginComponent },
-      {
-        path: 'request-otp',
-        component: RequestOtpComponent,
-      },
+
       {
         path: 'change-password',
         component: ChangePasswordComponent,

@@ -54,6 +54,21 @@ export class ChangePasswordComponent implements OnInit {
     );
   }
   onSubmit() {
+    this.authService
+      .changePassword(
+        this.requestOtpForm.value.username,
+        this.changePasswordForm.value.otp,
+        this.changePasswordForm.value.password
+      )
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.router.navigate(['/login']);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     console.log(this.changePasswordForm);
   }
 }
