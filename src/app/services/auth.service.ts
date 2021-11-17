@@ -24,6 +24,30 @@ export class AuthService {
       }
     );
   }
+  requestOtp(username: string) {
+    return this.http.post<{
+      data: string;
+      message: string;
+      status_code: number;
+    }>(
+      'https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/forgot_password',
+      {
+        username: username,
+      }
+    );
+  }
+  // changePassword(otp: number , password: string) {
+  //   return this.http.post<{
+  //     data: string;
+  //     message: string;
+  //     status_code: number;
+  //   }>(
+  //     'https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/forgot_password',
+  //     {
+  //       username: username,
+  //     }
+  //   );
+  // }
 
   logout() {
     localStorage.removeItem('token');
