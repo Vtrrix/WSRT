@@ -19,6 +19,21 @@
   cursor: pointer;
 }
 
+.search-input {
+  border: 1px solid #6c757d;
+  border-radius: 1.5rem;
+  width: 60%;
+  max-width: 260px;
+  max-height: 35px;
+  padding: 5px;
+  padding-left: 15px;
+  font-weight: 600;
+  color: #6c757d;
+}
+.search-btn {
+  margin-left: 10px !important;
+  max-width: 50px !important;
+}
 .date-input {
   padding: 10px 15px !important;
   border: 1px solid lightgrey !important;

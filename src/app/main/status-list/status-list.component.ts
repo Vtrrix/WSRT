@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import {
   NgbCalendar,
@@ -14,6 +15,8 @@ import { StatusService } from 'src/app/services/status.service';
   styleUrls: ['./status-list.component.css'],
 })
 export class StatusListComponent implements OnInit {
+  searchForm: FormGroup;
+
   // for managerial view
   username: string | null;
   @Input() inManagerView: boolean;
@@ -71,6 +74,10 @@ export class StatusListComponent implements OnInit {
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     this.currentPage = 0;
     this.currentStatusList = [];
+
+    this.searchForm = new FormGroup({
+      searchQuery: new FormControl(null, [Validators.required]),
+    });
   }
 
   ngOnInit(): void {
@@ -91,6 +98,11 @@ export class StatusListComponent implements OnInit {
     });
   }
 
+  onSearch() {
+    console.log(this.searchForm);
+    this.statusService.lastStatusID = '-1';
+    this.statusService.fullStatusListID = ['-1'];
+  }
   changePageSize(size: number) {
     this.pageSize = size;
     this.statusService.lastStatusID = '-1';

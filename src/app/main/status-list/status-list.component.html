@@ -2,6 +2,28 @@
   <div class="row px-4">
     <h3 class="mb-5">Submitted Status List</h3>
     <div class="row mb-4">
+      <div class="col-md-12 mb-3">
+        <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+          <input
+            class="search-input"
+            name="search"
+            formControlName="searchQuery"
+            placeholder="Search..."
+          />
+          <button type="submit" class="option-btn search-btn">
+            <div
+              style="
+                -webkit-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                -o-transform: rotate(45deg);
+                transform: rotate(-45deg);
+              "
+            >
+              &#9906;
+            </div>
+          </button>
+        </form>
+      </div>
       <div class="col-md-9 d-flex flex-row">
         <input
           type="button"
