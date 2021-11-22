@@ -102,6 +102,7 @@ export class StatusListComponent implements OnInit {
     console.log(this.searchForm);
     this.statusService.lastStatusID = '-1';
     this.statusService.fullStatusListID = ['-1'];
+    this.fetchStatus(this.pageSize);
   }
   changePageSize(size: number) {
     this.pageSize = size;
@@ -128,50 +129,52 @@ export class StatusListComponent implements OnInit {
 
   // api call to get status
   fetchStatus(size: number) {
-    this.statusService.getStatusList(size, this.username).subscribe(
-      (res) => {
-        if (!res.data.hasMorePages) {
-          this.nextVisible = false;
-        } else {
-          this.nextVisible = true;
-        }
-        if (res.statusCode === 200) {
-          if (res.data.status_list.length !== 0) {
-            // to update current view -------------
-            res.data.status_list.map((status) => {
-              status.submit_time_stamp = this.convertDate(
-                status.submit_time_stamp
-              );
-            });
-            this.currentStatusList = [...res.data.status_list];
-            //-----------------------------------
-
-            // to update fullStatusListID if needed------------------
-            if (
-              !this.statusService.fullStatusListID.includes(
-                this.currentStatusList[this.currentStatusList.length - 1]
-                  .status_id
-              )
-            ) {
-              this.statusService.fullStatusListID.push(
-                this.currentStatusList[this.currentStatusList.length - 1]
-                  .status_id
-              );
-            }
-            //----------------------------------------------------
+    this.statusService
+      .getStatusList(size, this.username, this.searchForm.value.searchQuery)
+      .subscribe(
+        (res) => {
+          if (!res.data.hasMorePages) {
+            this.nextVisible = false;
           } else {
-            this.currentStatusList = [];
+            this.nextVisible = true;
           }
-        } else {
-          this.alertMessage = <string>(<unknown>res.data.status_list);
+          if (res.statusCode === 200) {
+            if (res.data.status_list.length !== 0) {
+              // to update current view -------------
+              res.data.status_list.map((status) => {
+                status.submit_time_stamp = this.convertDate(
+                  status.submit_time_stamp
+                );
+              });
+              this.currentStatusList = [...res.data.status_list];
+              //-----------------------------------
+
+              // to update fullStatusListID if needed------------------
+              if (
+                !this.statusService.fullStatusListID.includes(
+                  this.currentStatusList[this.currentStatusList.length - 1]
+                    .status_id
+                )
+              ) {
+                this.statusService.fullStatusListID.push(
+                  this.currentStatusList[this.currentStatusList.length - 1]
+                    .status_id
+                );
+              }
+              //----------------------------------------------------
+            } else {
+              this.currentStatusList = [];
+            }
+          } else {
+            this.alertMessage = <string>(<unknown>res.data.status_list);
+            this.showAlert = true;
+          }
+        },
+        (error) => {
+          this.alertMessage = error.error.message;
           this.showAlert = true;
         }
-      },
-      (error) => {
-        this.alertMessage = error.error.message;
-        this.showAlert = true;
-      }
-    );
+      );
   }
 
   nextPage() {

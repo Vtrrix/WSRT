@@ -29,7 +29,11 @@ export class StatusService {
     this.ToDate = null;
   }
 
-  getStatusList(pageSize: number, username: string | null) {
+  getStatusList(
+    pageSize: number,
+    username: string | null,
+    searchString: string | null
+  ) {
     let url: string;
     let urlUsername = username;
     if (!urlUsername) {
@@ -38,9 +42,17 @@ export class StatusService {
 
     if (this.FromDate && this.ToDate) {
       url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&start_date=${this.FromDate}&end_date=${this.ToDate}`;
+      if (searchString) {
+        url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&start_date=${this.FromDate}&end_date=${this.ToDate}&search_key=${searchString}`;
+      }
     } else {
       url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}`;
+      if (searchString) {
+        url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&search_key=${searchString}`;
+      }
     }
+    console.log(url);
+
     return this.http.get<{
       data: { status_list: status[]; hasMorePages: boolean };
       statusCode: number;
