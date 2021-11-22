@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StaticDataService } from 'src/app/services/static-data.service';
 import { TeamsService } from 'src/app/services/teams.service';
 import { user, UserService } from 'src/app/services/user.service';
 
@@ -14,15 +15,21 @@ export class AddTeamComponent implements OnInit {
   addTeamForm: FormGroup;
   managerList: string[];
   selectedStatusFrequency: string;
-
+  // staticData----------------------
+  statusFrequencyList: string[];
+  weekDayList: string[];
+  //---------------------------------
   selected = [{ id: 3, name: 'Volkswagen Ford' }];
   constructor(
     private teamsService: TeamsService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private staticDataService: StaticDataService
   ) {
     this.managerList = [];
     this.userList = [];
+    this.statusFrequencyList = [];
+    this.weekDayList = [];
     this.addTeamForm = new FormGroup({
       teamName: new FormControl(null, [
         Validators.required,
@@ -48,6 +55,29 @@ export class AddTeamComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (
+      this.staticDataService.staticData.status_frequencies.length === 0 ||
+      this.staticDataService.staticData.weekly_status_days.length === 0
+    ) {
+      this.staticDataService.getStaticData().subscribe(
+        (res) => {
+          console.log(res);
+          this.staticDataService.staticData = res.data;
+          this.weekDayList =
+            this.staticDataService.staticData.weekly_status_days;
+          this.statusFrequencyList =
+            this.staticDataService.staticData.status_frequencies;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.weekDayList = this.staticDataService.staticData.weekly_status_days;
+      this.statusFrequencyList =
+        this.staticDataService.staticData.status_frequencies;
+    }
+
     this.userService.getUsers().subscribe(
       (res) => {
         this.userList = res.data;
@@ -57,6 +87,8 @@ export class AddTeamComponent implements OnInit {
       }
     );
     this.addTeamForm.valueChanges.subscribe((data) => {
+      console.log(data);
+
       this.selectedStatusFrequency = data.statusFrequency;
     });
   }

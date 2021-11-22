@@ -57,8 +57,12 @@
                     class="custom-select mx-3"
                     id="inputStatusFrequency"
                   >
-                    <option value="weekly">Weekly</option>
-                    <option value="daily">Daily</option>
+                    <option
+                      *ngFor="let statusFrequency of statusFrequencyList"
+                      [value]="statusFrequency"
+                    >
+                      {{ statusFrequency }}
+                    </option>
                   </select>
                 </div>
                 <div
@@ -72,13 +76,12 @@
                     class="custom-select mx-3"
                     id="inputStatusFrequency"
                   >
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thursday">Thursday</option>
-                    <option value="Friday">Friday</option>
-                    <option value="Saturday">Saturday</option>
-                    <option value="Sunday">Sunday</option>
+                    <option
+                      *ngFor="let weekDay of weekDayList"
+                      [value]="weekDay"
+                    >
+                      {{ weekDay }}
+                    </option>
                   </select>
                 </div>
                 <div class="d-flex mx-4">

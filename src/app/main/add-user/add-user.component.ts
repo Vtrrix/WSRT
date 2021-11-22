@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StaticDataService } from 'src/app/services/static-data.service';
 import { team, TeamsService } from 'src/app/services/teams.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -13,14 +14,18 @@ export class AddUserComponent implements OnInit {
   @Input() closeModal: () => void;
 
   inviteUserForm: FormGroup;
-  jobPositions: string[];
   teams: team[];
   managers: string[];
+
+  // staticData----------------------
+  jobPositions: string[];
+  //---------------------------------
 
   constructor(
     private teamsService: TeamsService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private staticDataService: StaticDataService
   ) {
     this.closeModal = () => {};
     this.inviteUserForm = new FormGroup({
@@ -35,18 +40,27 @@ export class AddUserComponent implements OnInit {
       manager: new FormControl('', [Validators.required]),
     });
 
-    this.jobPositions = [
-      'Software Engineer',
-      'Engineering Manager',
-      'Test Automation Engineer',
-      'Backend Developer',
-      'Frontend Developer',
-    ];
+    this.jobPositions = [];
     this.teams = [];
     this.managers = [];
   }
 
   ngOnInit(): void {
+    if (this.staticDataService.staticData.job_titles.length === 0) {
+      this.staticDataService.getStaticData().subscribe(
+        (res) => {
+          console.log(res);
+          this.staticDataService.staticData = res.data;
+          this.jobPositions = this.staticDataService.staticData.job_titles;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.jobPositions = this.staticDataService.staticData.job_titles;
+    }
+
     this.teamsService.getTeams().subscribe(
       (res) => {
         this.teams = res.data;
