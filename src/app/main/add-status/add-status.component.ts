@@ -106,36 +106,10 @@ export class AddStatusComponent implements OnInit, OnDestroy {
 
     let lastStatusWeek;
     this.statusService.lastStatusID = this.statusService.fullStatusListID[0];
-    this.statusService.getStatusList(1, null, null).subscribe((status) => {
-      if (status.data.status_list.length === 0) {
-        this.statusID =
-          this.currentdate.getFullYear() +
-          '-' +
-          this.currentdate
-            .toLocaleString('default', { month: 'short' })
-            .toUpperCase() +
-          '-WK' +
-          this.getWeek(this.currentdate) +
-          '-0001';
-      } else {
-        lastStatusWeek = status.data.status_list[0].status_id.slice(
-          status.data.status_list[0].status_id.indexOf('K') + 1
-        );
-        lastStatusWeek = lastStatusWeek.slice(0, lastStatusWeek.indexOf('-'));
-
-        if (lastStatusWeek == this.getWeek(this.currentdate).toString()) {
-          let newStatusNumber =
-            parseInt(
-              status.data.status_list[0].status_id.slice(
-                status.data.status_list[0].status_id.lastIndexOf('-') + 1
-              )
-            ) + 1;
-
-          this.statusNumber = newStatusNumber.toString();
-
-          this.statusNumber = this.statusNumber.padStart(4, '0');
-
-          // update status ID
+    this.statusService
+      .getStatusList(1, null, null, true)
+      .subscribe((status) => {
+        if (status.data.status_list.length === 0) {
           this.statusID =
             this.currentdate.getFullYear() +
             '-' +
@@ -144,31 +118,59 @@ export class AddStatusComponent implements OnInit, OnDestroy {
               .toUpperCase() +
             '-WK' +
             this.getWeek(this.currentdate) +
-            '-' +
-            this.statusNumber;
+            '-0001';
         } else {
-          let newStatusNumber = 1;
+          lastStatusWeek = status.data.status_list[0].status_id.slice(
+            status.data.status_list[0].status_id.indexOf('K') + 1
+          );
+          lastStatusWeek = lastStatusWeek.slice(0, lastStatusWeek.indexOf('-'));
 
-          this.statusNumber = newStatusNumber.toString();
+          if (lastStatusWeek == this.getWeek(this.currentdate).toString()) {
+            let newStatusNumber =
+              parseInt(
+                status.data.status_list[0].status_id.slice(
+                  status.data.status_list[0].status_id.lastIndexOf('-') + 1
+                )
+              ) + 1;
 
-          this.statusNumber = this.statusNumber.padStart(4, '0');
+            this.statusNumber = newStatusNumber.toString();
 
-          // update status ID
-          this.statusID =
-            this.currentdate.getFullYear() +
-            '-' +
-            this.currentdate
-              .toLocaleString('default', { month: 'short' })
-              .toUpperCase() +
-            '-WK' +
-            this.getWeek(this.currentdate) +
-            '-' +
-            this.statusNumber;
+            this.statusNumber = this.statusNumber.padStart(4, '0');
+
+            // update status ID
+            this.statusID =
+              this.currentdate.getFullYear() +
+              '-' +
+              this.currentdate
+                .toLocaleString('default', { month: 'short' })
+                .toUpperCase() +
+              '-WK' +
+              this.getWeek(this.currentdate) +
+              '-' +
+              this.statusNumber;
+          } else {
+            let newStatusNumber = 1;
+
+            this.statusNumber = newStatusNumber.toString();
+
+            this.statusNumber = this.statusNumber.padStart(4, '0');
+
+            // update status ID
+            this.statusID =
+              this.currentdate.getFullYear() +
+              '-' +
+              this.currentdate
+                .toLocaleString('default', { month: 'short' })
+                .toUpperCase() +
+              '-WK' +
+              this.getWeek(this.currentdate) +
+              '-' +
+              this.statusNumber;
+          }
         }
-      }
 
-      this.statusService.lastStatusID = tempLastStatusID;
-    });
+        this.statusService.lastStatusID = tempLastStatusID;
+      });
   }
 
   getControls() {

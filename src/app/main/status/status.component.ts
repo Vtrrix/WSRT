@@ -113,4 +113,30 @@ export class StatusComponent implements OnInit {
         );
     }
   }
+  navigateStatus(direction: 'next' | 'prev') {
+    if (direction === 'next') {
+      this.statusService.getStatusList(1, this.username, null, true).subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      this.statusService.getStatusList(1, this.username, null, false).subscribe(
+        (res) => {
+          console.log(res);
+          this.router.navigate([
+            '/user',
+            'status',
+            res.data.status_list[0].status_id,
+          ]);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
 }

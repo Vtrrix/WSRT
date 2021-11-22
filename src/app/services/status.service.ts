@@ -32,7 +32,8 @@ export class StatusService {
   getStatusList(
     pageSize: number,
     username: string | null,
-    searchString: string | null
+    searchString: string | null,
+    ascending: boolean
   ) {
     let url: string;
     let urlUsername = username;
@@ -41,14 +42,14 @@ export class StatusService {
     }
 
     if (this.FromDate && this.ToDate) {
-      url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&start_date=${this.FromDate}&end_date=${this.ToDate}`;
+      url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&start_date=${this.FromDate}&end_date=${this.ToDate}&ascending=${ascending}`;
       if (searchString) {
-        url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&start_date=${this.FromDate}&end_date=${this.ToDate}&search_key=${searchString}`;
+        url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&start_date=${this.FromDate}&end_date=${this.ToDate}&search_key=${searchString}}&ascending=${ascending}`;
       }
     } else {
-      url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}`;
+      url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&ascending=${ascending}`;
       if (searchString) {
-        url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&search_key=${searchString}`;
+        url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&search_key=${searchString}}&ascending=${ascending}`;
       }
     }
     console.log(url);

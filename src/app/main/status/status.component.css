@@ -44,3 +44,19 @@ input:-webkit-autofill {
   background-color: transparent;
   color: #ef4223;
 }
+
+.arrow-btn {
+  border: none;
+  border-radius: 1.5rem;
+  width: 60%;
+  margin-left: 8px;
+  max-width: 46px;
+  max-height: 38px;
+  font-size: 1.2rem;
+  color: #6c757d;
+  padding: 4px;
+  cursor: pointer;
+}
+.arrow-btn:hover {
+  color: black;
+}

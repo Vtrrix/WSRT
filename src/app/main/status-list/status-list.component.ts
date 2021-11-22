@@ -130,7 +130,12 @@ export class StatusListComponent implements OnInit {
   // api call to get status
   fetchStatus(size: number) {
     this.statusService
-      .getStatusList(size, this.username, this.searchForm.value.searchQuery)
+      .getStatusList(
+        size,
+        this.username,
+        this.searchForm.value.searchQuer,
+        true
+      )
       .subscribe(
         (res) => {
           if (!res.data.hasMorePages) {
