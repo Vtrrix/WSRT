@@ -102,6 +102,7 @@ export class AddStatusComponent implements OnInit, OnDestroy {
 
   calculateStatusID() {
     const tempLastStatusID = this.statusService.lastStatusID;
+    console.log(tempLastStatusID);
 
     let lastStatusWeek;
     this.statusService.lastStatusID = this.statusService.fullStatusListID[0];
@@ -129,6 +130,24 @@ export class AddStatusComponent implements OnInit, OnDestroy {
                 status.data.status_list[0].status_id.lastIndexOf('-') + 1
               )
             ) + 1;
+
+          this.statusNumber = newStatusNumber.toString();
+
+          this.statusNumber = this.statusNumber.padStart(4, '0');
+
+          // update status ID
+          this.statusID =
+            this.currentdate.getFullYear() +
+            '-' +
+            this.currentdate
+              .toLocaleString('default', { month: 'short' })
+              .toUpperCase() +
+            '-WK' +
+            this.getWeek(this.currentdate) +
+            '-' +
+            this.statusNumber;
+        } else {
+          let newStatusNumber = 1;
 
           this.statusNumber = newStatusNumber.toString();
 
