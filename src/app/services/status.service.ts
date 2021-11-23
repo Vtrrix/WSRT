@@ -35,6 +35,8 @@ export class StatusService {
     searchString: string | null,
     ascending: boolean
   ) {
+    console.log(username);
+
     let url: string;
     let urlUsername = username;
     if (!urlUsername) {

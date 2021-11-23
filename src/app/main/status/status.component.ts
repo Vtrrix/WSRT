@@ -49,41 +49,42 @@ export class StatusComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.statusID = params.statusID;
-    });
-    this.statusService.getStatus(this.statusID, this.username).subscribe(
-      (res) => {
-        if (<number>(<unknown>res.statusCode) === 200) {
-          this.status = res.data;
-          this.fillData(
-            this.status.task_done,
-            this.status.next_week_plans,
-            this.status.concerns
-          );
 
-          this.remarkForm.controls['remark'].setValue(
-            res.data.managerial_remarks
-          );
+      this.statusService.getStatus(this.statusID, this.username).subscribe(
+        (res) => {
+          if (<number>(<unknown>res.statusCode) === 200) {
+            this.status = res.data;
+            this.fillData(
+              this.status.task_done,
+              this.status.next_week_plans,
+              this.status.concerns
+            );
 
-          // to post status as read by manager to API
-          if (this.username && !res.data.status_read) {
-            this.statusService
-              .addRemark(
-                this.remarkForm.value.remark,
-                this.username,
-                this.statusID
-              )
-              .subscribe((res) => {
-                console.log(res);
-              });
+            this.remarkForm.controls['remark'].setValue(
+              res.data.managerial_remarks
+            );
+
+            // to post status as read by manager to API
+            if (this.username && !res.data.status_read) {
+              this.statusService
+                .addRemark(
+                  this.remarkForm.value.remark,
+                  this.username,
+                  this.statusID
+                )
+                .subscribe((res) => {
+                  console.log(res);
+                });
+            }
+          } else {
+            console.log(res.meassage);
           }
-        } else {
-          console.log(res.meassage);
+        },
+        (error) => {
+          console.log(error);
         }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+      );
+    });
   }
 
   fillData(taskDone: string, nextWeekPlan: string, risk: string) {
@@ -114,10 +115,22 @@ export class StatusComponent implements OnInit {
     }
   }
   navigateStatus(direction: 'next' | 'prev') {
+    let tempStatusID = this.statusService.lastStatusID;
+    this.statusService.lastStatusID = this.statusID;
     if (direction === 'next') {
       this.statusService.getStatusList(1, this.username, null, true).subscribe(
         (res) => {
           console.log(res);
+          this.statusService.lastStatusID = tempStatusID;
+
+          this.router.navigate([
+            '/user',
+            'manager',
+            'teams',
+            this.teamName,
+            this.username,
+            res.data.status_list[0].status_id,
+          ]);
         },
         (error) => {
           console.log(error);
@@ -127,9 +140,14 @@ export class StatusComponent implements OnInit {
       this.statusService.getStatusList(1, this.username, null, false).subscribe(
         (res) => {
           console.log(res);
+          this.statusService.lastStatusID = tempStatusID;
+
           this.router.navigate([
             '/user',
-            'status',
+            'manager',
+            'teams',
+            this.teamName,
+            this.username,
             res.data.status_list[0].status_id,
           ]);
         },
