@@ -54,6 +54,10 @@ export class StatusComponent implements OnInit {
         (res) => {
           if (<number>(<unknown>res.statusCode) === 200) {
             this.status = res.data;
+            this.status.submit_time_stamp = this.convertDate(
+              this.status.submit_time_stamp
+            );
+
             this.fillData(
               this.status.task_done,
               this.status.next_week_plans,
@@ -92,7 +96,21 @@ export class StatusComponent implements OnInit {
     document.getElementById('nextWeekPlan')!.innerHTML = nextWeekPlan;
     document.getElementById('risk')!.innerHTML = risk;
   }
+  convertDate(stamp: string): string {
+    const date = stamp
+      .slice(0, stamp.indexOf(' '))
+      .split('-')
+      .reverse()
+      .join('/');
+    const time =
+      stamp.slice(stamp.indexOf(' '), stamp.indexOf(':')) +
+      ':' +
+      stamp
+        .slice(stamp.indexOf(':') + 1)
+        .slice(0, stamp.slice(stamp.indexOf(':') + 1).indexOf(':'));
 
+    return date + time;
+  }
   onSubmit() {
     if (this.username) {
       this.statusService
