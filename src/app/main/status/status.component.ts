@@ -122,15 +122,22 @@ export class StatusComponent implements OnInit {
         (res) => {
           console.log(res);
           this.statusService.lastStatusID = tempStatusID;
-
-          this.router.navigate([
-            '/user',
-            'manager',
-            'teams',
-            this.teamName,
-            this.username,
-            res.data.status_list[0].status_id,
-          ]);
+          if (this.isManager) {
+            this.router.navigate([
+              '/user',
+              'manager',
+              'teams',
+              this.teamName,
+              this.username,
+              res.data.status_list[0].status_id,
+            ]);
+          } else {
+            this.router.navigate([
+              '/user',
+              'status',
+              res.data.status_list[0].status_id,
+            ]);
+          }
         },
         (error) => {
           console.log(error);
@@ -142,14 +149,22 @@ export class StatusComponent implements OnInit {
           console.log(res);
           this.statusService.lastStatusID = tempStatusID;
 
-          this.router.navigate([
-            '/user',
-            'manager',
-            'teams',
-            this.teamName,
-            this.username,
-            res.data.status_list[0].status_id,
-          ]);
+          if (this.isManager) {
+            this.router.navigate([
+              '/user',
+              'manager',
+              'teams',
+              this.teamName,
+              this.username,
+              res.data.status_list[0].status_id,
+            ]);
+          } else {
+            this.router.navigate([
+              '/user',
+              'status',
+              res.data.status_list[0].status_id,
+            ]);
+          }
         },
         (error) => {
           console.log(error);
