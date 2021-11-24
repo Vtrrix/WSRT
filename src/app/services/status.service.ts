@@ -35,8 +35,6 @@ export class StatusService {
     searchString: string | null,
     ascending: boolean
   ) {
-    console.log(username);
-
     let url: string;
     let urlUsername = username;
     if (!urlUsername) {
@@ -51,10 +49,9 @@ export class StatusService {
     } else {
       url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&ascending=${ascending}`;
       if (searchString) {
-        url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&search_key=${searchString}}&ascending=${ascending}`;
+        url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&search_key=${searchString}&ascending=${ascending}`;
       }
     }
-    console.log(url);
 
     return this.http.get<{
       data: { status_list: status[]; hasMorePages: boolean };

@@ -50,11 +50,11 @@ input:-webkit-autofill {
   border-radius: 1.5rem;
   width: 60%;
   margin-left: 8px;
-  max-width: 46px;
-  max-height: 38px;
+  max-width: 48px;
+  max-height: 39px;
   font-size: 1.2rem;
   color: #6c757d;
-  padding: 4px;
+  padding-bottom: 5px;
   cursor: pointer;
 }
 .arrow-btn:hover {

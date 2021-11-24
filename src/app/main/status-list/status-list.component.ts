@@ -133,11 +133,13 @@ export class StatusListComponent implements OnInit {
       .getStatusList(
         size,
         this.username,
-        this.searchForm.value.searchQuer,
+        this.searchForm.value.searchQuery,
         true
       )
       .subscribe(
         (res) => {
+          console.log(res);
+
           if (!res.data.hasMorePages) {
             this.nextVisible = false;
           } else {
