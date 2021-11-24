@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
           '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{8,}'
         ), // minimum 8 characters, both upper case and lower case, special character and number
       ]),
+      passwordVisible: new FormControl(false),
     });
   }
 
@@ -59,5 +60,15 @@ export class LoginComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  togglePassword() {
+    let passwordInput: HTMLInputElement = <HTMLInputElement>(
+      document.getElementById('loginPassword')
+    );
+    if (passwordInput!.type === 'password') {
+      passwordInput.type = 'text';
+    } else {
+      passwordInput.type = 'password';
+    }
   }
 }
