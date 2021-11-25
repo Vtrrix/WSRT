@@ -9,12 +9,11 @@
 .option-btn {
   border: none;
   border-radius: 1.5rem;
-  width: 60%;
+  width: fit-content;
   margin-left: 25px;
   max-width: 120px;
-  min-width: 130px;
   max-height: 35px;
-  padding: 5px;
+  padding: 5px 20px;
   font-weight: 600;
   color: #6c757d;
   cursor: pointer;
