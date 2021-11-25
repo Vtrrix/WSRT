@@ -46,13 +46,105 @@
           value="Last Month"
           (click)="filterStatus('lastMonth')"
         />
-        <input
+        <!-- <input
           type="button"
           class="option-btn"
           name="filterStatusListCustom"
           value="Custom"
           (click)="collapse.toggle()"
-        />
+        /> -->
+        <div class="datepicker-container">
+          <input
+            name="datepicker"
+            class="form-control date-input"
+            ngbDatepicker
+            #datepicker="ngbDatepicker"
+            [autoClose]="'outside'"
+            (dateSelect)="onDateSelection($event)"
+            [displayMonths]="2"
+            [dayTemplate]="t"
+            outsideDays="hidden"
+            [startDate]="fromDate!"
+            tabindex="-1"
+          />
+        </div>
+
+        <div ngbDropdown class="d-inline-block">
+          <button class="option-btn" id="dropdownForm1" ngbDropdownToggle>
+            Custom
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+            <form class="form-inline">
+              <div class="form-group hidden">
+                <div class="input-group date-input-group d-flex">
+                  <div class="input-group-append">
+                    <button
+                      type="button"
+                      class="btn date-btn btn-outline-secondary calendar"
+                      (click)="datepicker.toggle()"
+                      type="button"
+                    >
+                      Select Date
+                    </button>
+                    <button
+                      type="button"
+                      class="btn date-btn btn-outline-secondary filter-btn"
+                      (click)="filterStatus('custom')"
+                    >
+                      Filter
+                    </button>
+                  </div>
+
+                  <ng-template #t let-date let-focused="focused">
+                    <span
+                      class="custom-day"
+                      [class.focused]="focused"
+                      [class.range]="isRange(date)"
+                      [class.faded]="isHovered(date) || isInside(date)"
+                      (mouseenter)="hoveredDate = date"
+                      (mouseleave)="hoveredDate = null"
+                    >
+                      {{ date.day }}
+                    </span>
+                  </ng-template>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <label class="date-range-label" for="dpFromDate">
+                    From :
+                  </label>
+
+                  <input
+                    #dpFromDate
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    name="dpFromDate"
+                    [value]="formatter.format(fromDate)"
+                    (input)="
+                      fromDate = validateInput(fromDate, dpFromDate.value)
+                    "
+                  />
+                </div>
+              </div>
+              <div class="form-group ml-2">
+                <div class="input-group">
+                  <label class="date-range-label" for="dpToDate"> To : </label>
+                  <input
+                    #dpToDate
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    name="dpToDate"
+                    [value]="formatter.format(toDate)"
+                    (input)="toDate = validateInput(toDate, dpToDate.value)"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-12">
         <div
           #collapse="ngbCollapse"
           class="custom-date-input-group"
@@ -60,92 +152,11 @@
         >
           <div class="card">
             <div class="card-body">
-              <form class="form-inline">
-                <div class="form-group hidden">
-                  <div class="input-group date-input-group d-flex">
-                    <input
-                      name="datepicker"
-                      class="form-control date-input"
-                      ngbDatepicker
-                      #datepicker="ngbDatepicker"
-                      [autoClose]="'outside'"
-                      (dateSelect)="onDateSelection($event)"
-                      [displayMonths]="2"
-                      [dayTemplate]="t"
-                      outsideDays="hidden"
-                      [startDate]="fromDate!"
-                      tabindex="-1"
-                    />
-                    <div class="input-group-append">
-                      <button
-                        type="button"
-                        class="btn date-btn btn-outline-secondary calendar"
-                        (click)="datepicker.toggle()"
-                        type="button"
-                      >
-                        Select Date
-                      </button>
-                      <button
-                        type="button"
-                        class="btn date-btn btn-outline-secondary filter-btn"
-                        (click)="filterStatus('custom')"
-                      >
-                        Filter
-                      </button>
-                    </div>
-
-                    <ng-template #t let-date let-focused="focused">
-                      <span
-                        class="custom-day"
-                        [class.focused]="focused"
-                        [class.range]="isRange(date)"
-                        [class.faded]="isHovered(date) || isInside(date)"
-                        (mouseenter)="hoveredDate = date"
-                        (mouseleave)="hoveredDate = null"
-                      >
-                        {{ date.day }}
-                      </span>
-                    </ng-template>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="input-group">
-                    <label class="date-range-label" for="dpFromDate">
-                      From :
-                    </label>
-
-                    <input
-                      #dpFromDate
-                      class="form-control"
-                      placeholder="yyyy-mm-dd"
-                      name="dpFromDate"
-                      [value]="formatter.format(fromDate)"
-                      (input)="
-                        fromDate = validateInput(fromDate, dpFromDate.value)
-                      "
-                    />
-                  </div>
-                </div>
-                <div class="form-group ml-2">
-                  <div class="input-group">
-                    <label class="date-range-label" for="dpToDate">
-                      To :
-                    </label>
-                    <input
-                      #dpToDate
-                      class="form-control"
-                      placeholder="yyyy-mm-dd"
-                      name="dpToDate"
-                      [value]="formatter.format(toDate)"
-                      (input)="toDate = validateInput(toDate, dpToDate.value)"
-                    />
-                  </div>
-                </div>
-              </form>
+              
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="col-md-3 d-flex flex-row-reverse">
         <input
           *ngIf="!inManagerView"
