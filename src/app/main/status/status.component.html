@@ -1,21 +1,35 @@
 <div class="m-5">
   <div class="container-fluid mt-4 shadow p-4 rounded">
     <div class="row justify-content-center">
-      <div class="col-lg-11 col-md-11 d-flex flex-row-reverse">
-        <input
+      <div class="col-lg-2 col-md-2 mb-4">
+        <button
           type="button"
           class="arrow-btn"
           name="filterStatusListDefault"
-          value="&rarr;"
+          [routerLink]="['/user', 'status']"
+        >
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <div class="col-lg-10 col-md-10 d-flex flex-row-reverse">
+        <button
+          type="button"
+          class="arrow-btn"
+          name="filterStatusListDefault"
           (click)="navigateStatus('next')"
-        />
-        <input
+          title="Next"
+        >
+          <i class="fa fa-arrow-right"></i>
+        </button>
+        <button
           type="button"
           class="arrow-btn"
           name="filterStatusListDefault"
-          value="&larr;"
           (click)="navigateStatus('prev')"
-        />
+          title="Previous"
+        >
+          <i class="fa fa-arrow-left"></i>
+        </button>
       </div>
 
       <div class="col-lg-11 col-md-11">
