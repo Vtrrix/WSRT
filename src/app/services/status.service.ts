@@ -44,7 +44,7 @@ export class StatusService {
     if (this.FromDate && this.ToDate) {
       url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&start_date=${this.FromDate}&end_date=${this.ToDate}&ascending=${ascending}`;
       if (searchString) {
-        url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&start_date=${this.FromDate}&end_date=${this.ToDate}&search_key=${searchString}}&ascending=${ascending}`;
+        url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&start_date=${this.FromDate}&end_date=${this.ToDate}&search_key=${searchString}&ascending=${ascending}`;
       }
     } else {
       url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${urlUsername}/statuses?key=${this.lastStatusID}&limit=${pageSize}&ascending=${ascending}`;
