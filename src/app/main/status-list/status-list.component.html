@@ -60,7 +60,12 @@
           />
         </div>
 
-        <div ngbDropdown class="d-inline-block">
+        <div
+          ngbDropdown
+          autoClose="inside"
+          #customDropdown="ngbDropdown"
+          class="d-inline-block"
+        >
           <button class="option-btn" id="dropdownForm1" ngbDropdownToggle>
             Custom
           </button>
@@ -80,7 +85,7 @@
                     <button
                       type="button"
                       class="btn date-btn btn-outline-secondary filter-btn"
-                      (click)="filterStatus('custom')"
+                      (click)="customDropdown.close(); filterStatus('custom')"
                     >
                       Filter
                     </button>
