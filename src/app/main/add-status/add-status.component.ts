@@ -63,6 +63,7 @@ export class AddStatusComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.calculateStatusID();
+    this.addLeave();
   }
   ngOnDestroy(): void {
     this.editor1.destroy();

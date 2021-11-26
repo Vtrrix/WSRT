@@ -77,11 +77,6 @@
           </div>
           <div class="col-4">
             <label>Leaves Planned:</label>
-            <span>
-              <button type="button" (click)="addLeave()" class="btn add-btn">
-                &plus;
-              </button>
-            </span>
             <div
               id="leaveContainer"
               formArrayName="leaves"
@@ -95,6 +90,9 @@
                 placeholder="Leave"
               />
             </div>
+            <button type="button" (click)="addLeave()" class="btn add-btn">
+              <i class="fa fa-plus"></i>
+            </button>
           </div>
         </div>
 
