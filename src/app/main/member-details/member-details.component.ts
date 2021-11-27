@@ -8,6 +8,7 @@ import { user, UserService } from 'src/app/services/user.service';
   styleUrls: ['./member-details.component.css'],
 })
 export class MemberDetailsComponent implements OnInit {
+  memberSelected: boolean;
   memberName: string;
   teamName: string;
   memberList: user[];
@@ -15,12 +16,14 @@ export class MemberDetailsComponent implements OnInit {
     this.memberName = '';
     this.teamName = '';
     this.memberList = [];
+    this.memberSelected = false;
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.memberName = params.memberName;
       this.teamName = params.teamName;
+      this.memberSelected = this.memberName === 'none' ? false : true;
     });
 
     this.userService.getUsers().subscribe(

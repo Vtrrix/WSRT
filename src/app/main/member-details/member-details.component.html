@@ -3,7 +3,10 @@
     <div class="col-12 d-flex flex-row-reverse">
       <div ngbDropdown class="d-inline-block">
         <button class="btn mx-4" id="dropdownBasic1" ngbDropdownToggle>
-          Select User
+          <span *ngIf="memberSelected; else notSelected"> Switch User </span>
+          <ng-template #notSelected>
+            <span>Select User</span>
+          </ng-template>
         </button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <button
