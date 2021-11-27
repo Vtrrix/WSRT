@@ -15,6 +15,7 @@ import { MemberStatusComponent } from './main/member-status/member-status.compon
 import { StatusListComponent } from './main/status-list/status-list.component';
 import { StatusComponent } from './main/status/status.component';
 import { TeamsComponent } from './main/teams/teams.component';
+import { UpdatePasswordComponent } from './main/update-password/update-password.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent },
       { path: 'edit-profile', component: EditProfileComponent },
+      { path: 'change-password', component: UpdatePasswordComponent },
       { path: 'status', component: StatusListComponent },
       { path: 'status/:statusID', component: StatusComponent },
       { path: 'add-status', component: AddStatusComponent },

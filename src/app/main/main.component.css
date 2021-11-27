@@ -1,5 +1,6 @@
 .logo {
   max-width: 200px;
+  cursor: pointer;
   /* width: 70%; */
   /* margin: 0 auto 5% auto; */
 }

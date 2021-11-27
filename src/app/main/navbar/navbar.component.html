@@ -35,7 +35,7 @@
       </li>
     </ul>
   </div>
-  <div ngbDropdown class="d-inline-block">
+  <div ngbDropdown #navDrop="ngbDropdown" class="d-inline-block">
     <button
       class="btn btn-options fw-bold"
       id="dropdownBasic1"
@@ -49,6 +49,14 @@
       aria-labelledby="dropdownBasic1"
       class="dropdown-menu-right"
     >
+      <button
+        type="button"
+        [routerLink]="['/user', 'change-password']"
+        routerLinkActive="router-link-active"
+        ngbDropdownItem
+      >
+        Change Password
+      </button>
       <button type="submit" (click)="onLogout()" ngbDropdownItem>
         Sign Out
       </button>
