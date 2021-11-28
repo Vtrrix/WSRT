@@ -12,8 +12,11 @@ export class ChangePasswordComponent implements OnInit {
   otpSent: boolean;
   changePasswordForm: FormGroup;
   requestOtpForm: FormGroup;
-
+  showAlert: boolean;
+  errorMessage: string;
   constructor(private authService: AuthService, private router: Router) {
+    this.showAlert = false;
+    this.errorMessage = '';
     this.otpSent = false;
     this.requestOtpForm = new FormGroup({
       username: new FormControl(null, Validators.required),
@@ -45,11 +48,11 @@ export class ChangePasswordComponent implements OnInit {
   onRequestOTP() {
     this.authService.requestOtp(this.requestOtpForm.value.username).subscribe(
       (res) => {
-        console.log(res);
         this.otpSent = true;
       },
       (error) => {
-        console.log(error);
+        this.showAlert = true;
+        this.errorMessage = error.error.message;
       }
     );
   }
@@ -62,11 +65,11 @@ export class ChangePasswordComponent implements OnInit {
       )
       .subscribe(
         (res) => {
-          console.log(res);
           this.router.navigate(['/login']);
         },
         (error) => {
-          console.log(error);
+          this.showAlert = true;
+          this.errorMessage = error.error.message;
         }
       );
     console.log(this.changePasswordForm);

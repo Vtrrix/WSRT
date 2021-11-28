@@ -15,6 +15,8 @@ export class AddTeamComponent implements OnInit {
   addTeamForm: FormGroup;
   managerList: string[];
   selectedStatusFrequency: string;
+  showAlert: boolean;
+  alertMessage: string;
   // staticData----------------------
   statusFrequencyList: string[];
   weekDayList: string[];
@@ -26,6 +28,8 @@ export class AddTeamComponent implements OnInit {
     private router: Router,
     private staticDataService: StaticDataService
   ) {
+    this.showAlert = false;
+    this.alertMessage = '';
     this.managerList = [];
     this.userList = [];
     this.statusFrequencyList = [];
@@ -70,6 +74,8 @@ export class AddTeamComponent implements OnInit {
         },
         (error) => {
           console.log(error);
+          this.showAlert = true;
+          this.alertMessage = error.error.message;
         }
       );
     } else {
@@ -84,6 +90,8 @@ export class AddTeamComponent implements OnInit {
       },
       (error) => {
         console.log(error);
+        this.showAlert = true;
+        this.alertMessage = error.error.message;
       }
     );
     this.addTeamForm.valueChanges.subscribe((data) => {
@@ -108,6 +116,8 @@ export class AddTeamComponent implements OnInit {
         },
         (error) => {
           console.log(error);
+          this.showAlert = true;
+          this.alertMessage = error.error.message;
         }
       );
   }

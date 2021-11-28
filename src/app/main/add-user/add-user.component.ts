@@ -16,7 +16,8 @@ export class AddUserComponent implements OnInit {
   inviteUserForm: FormGroup;
   teams: team[];
   managers: string[];
-
+  showAlert: boolean;
+  alertMessage: string;
   // staticData----------------------
   jobPositions: string[];
   //---------------------------------
@@ -27,6 +28,9 @@ export class AddUserComponent implements OnInit {
     private router: Router,
     private staticDataService: StaticDataService
   ) {
+    this.alertMessage = '';
+    this.showAlert = false;
+
     this.closeModal = () => {};
     this.inviteUserForm = new FormGroup({
       username: new FormControl(null, [
@@ -54,6 +58,8 @@ export class AddUserComponent implements OnInit {
           this.jobPositions = this.staticDataService.staticData.job_titles;
         },
         (error) => {
+          this.showAlert = true;
+          this.alertMessage = error.error.message;
           console.log(error);
         }
       );
@@ -66,6 +72,8 @@ export class AddUserComponent implements OnInit {
         this.teams = res.data;
       },
       (error) => {
+        this.showAlert = true;
+        this.alertMessage = error.error.message;
         console.log(error);
       }
     );
@@ -97,6 +105,8 @@ export class AddUserComponent implements OnInit {
           this.router.navigate(['/user', 'manager', 'teams', 'All']);
         },
         (error) => {
+          this.showAlert = true;
+          this.alertMessage = error.error.message;
           console.log(error);
         }
       );

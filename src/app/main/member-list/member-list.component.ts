@@ -15,6 +15,8 @@ export class MemberListComponent implements OnInit {
   teamShortName: string;
   teamsList: team[];
   memberList: user[];
+  showAlert: boolean;
+  alertMessage: string;
   constructor(
     private route: ActivatedRoute,
     private teamsService: TeamsService,
@@ -23,6 +25,8 @@ export class MemberListComponent implements OnInit {
     private profileService: ProfileService,
     private router: Router
   ) {
+    this.showAlert = false;
+    this.alertMessage = '';
     this.role = null;
     this.teamShortName = '';
     this.memberList = [];
@@ -45,6 +49,8 @@ export class MemberListComponent implements OnInit {
         }
       },
       (error) => {
+        this.showAlert = true;
+        this.alertMessage = error.error.message;
         console.log(error);
       }
     );
@@ -59,6 +65,8 @@ export class MemberListComponent implements OnInit {
           }
         },
         (error) => {
+          this.showAlert = true;
+          this.alertMessage = error.error.message;
           console.log(error);
         }
       );

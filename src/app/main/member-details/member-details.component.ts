@@ -12,8 +12,12 @@ export class MemberDetailsComponent implements OnInit {
   memberName: string;
   teamName: string;
   memberList: user[];
+  showAlert: boolean;
+  alertMessage: string;
   constructor(private route: ActivatedRoute, private userService: UserService) {
     this.memberName = '';
+    this.showAlert = false;
+    this.alertMessage = '';
     this.teamName = '';
     this.memberList = [];
     this.memberSelected = false;
@@ -33,6 +37,8 @@ export class MemberDetailsComponent implements OnInit {
       },
       (error) => {
         console.log(error);
+        this.showAlert = true;
+        this.alertMessage = error.error.message;
       }
     );
   }

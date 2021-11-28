@@ -40,4 +40,6 @@
     *ngIf="memberName !== 'none'"
     [inManagerView]="true"
   ></app-status-list>
+
+  <app-alert *ngIf="showAlert" [errorMessage]="alertMessage"></app-alert>
 </div>
