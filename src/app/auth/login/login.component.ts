@@ -47,6 +47,8 @@ export class LoginComponent implements OnInit {
         if (res.statusCode === 200) {
           localStorage.setItem('token', res.data.id_token);
           localStorage.setItem('username', res.data.username);
+          localStorage.setItem('accessToken', res.data.access_token);
+
           this.router.navigate(['']);
           // route to home page
         } else {

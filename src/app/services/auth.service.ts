@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 interface loginResponse {
@@ -8,6 +8,7 @@ interface loginResponse {
   data: {
     username: string;
     id_token: string;
+    access_token: string;
   };
 }
 
@@ -51,6 +52,25 @@ export class AuthService {
     );
   }
 
+  updatePassword(oldPassword: string, newPassword: string) {
+    return this.http.post<{
+      data: string;
+      message: string;
+      status_code: number;
+    }>(
+      'https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/change_password',
+      {
+        old_password: oldPassword,
+        new_password: newPassword,
+      },
+      {
+        headers: new HttpHeaders({
+          token: <string>localStorage.getItem('token'),
+          access_token: <string>localStorage.getItem('accessToken'),
+        }),
+      }
+    );
+  }
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
