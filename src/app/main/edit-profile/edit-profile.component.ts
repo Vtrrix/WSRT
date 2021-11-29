@@ -47,6 +47,17 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.editProfileForm.reset();
+    this.profileService.getProfile(localStorage.getItem('username')).subscribe(
+      (res) => {
+        //how do i fill name???
+        // this.editProfileForm.setValue({
+        // });
+      },
+      (error) => {
+        this.alertMessage = error.error.message;
+        this.showAlert = true;
+      }
+    );
   }
   onSave() {
     const name = `${this.editProfileForm.value.firstName} ${
@@ -70,7 +81,6 @@ export class EditProfileComponent implements OnInit {
       },
       (error) => {
         this.alertMessage = error.error.message;
-
         this.showAlert = true;
       }
     );
