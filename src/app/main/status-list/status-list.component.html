@@ -17,10 +17,11 @@
       </div>
       <div class="options-container col-md-9 mt-2 d-flex flex-row">
         <input
+          *ngIf="filtered"
           type="button"
-          class="option-btn mx-0"
+          class="option-btn"
           name="filterStatusListDefault"
-          value="Default"
+          value="Reset"
           (click)="filterStatus('default')"
         />
         <input
@@ -59,15 +60,16 @@
             <form class="form-inline">
               <div class="form-group hidden">
                 <div class="input-group date-input-group d-flex">
-                  <div class="input-group-append">
-                    <button
+                  <!--   <div class="input-group-append">
+                    for range calander 
+                     <button
                       type="button"
                       class="btn date-btn btn-outline-secondary calendar"
                       (click)="datepicker.toggle()"
                       type="button"
                     >
                       Select Date
-                    </button>
+                    </button> 
                     <input
                       name="datepicker"
                       class="form-control date-input"
@@ -88,7 +90,7 @@
                     >
                       Filter
                     </button>
-                  </div>
+                  </div>-->
 
                   <ng-template #t let-date let-focused="focused">
                     <span
@@ -138,6 +140,15 @@
                 </div>
               </div>
             </form>
+            <div class="d-flex px-3 flex-row-reverse">
+              <button
+                type="button"
+                class="btn date-btn btn-outline-secondary"
+                (click)="customDropdown.close(); filterStatus('custom')"
+              >
+                OK
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -158,7 +169,7 @@
         <input
           *ngIf="!inManagerView"
           type="button"
-          class="option-btn"
+          class="option-btn mx-0"
           name="btnAddMore"
           value="Add Status"
           [routerLink]="['/user', 'add-status']"

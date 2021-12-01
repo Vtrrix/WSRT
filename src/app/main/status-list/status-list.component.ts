@@ -17,6 +17,7 @@ import { StatusService } from 'src/app/services/status.service';
 export class StatusListComponent implements OnInit {
   searchForm: FormGroup;
 
+  filtered: boolean;
   // for managerial view
   username: string | null;
   @Input() inManagerView: boolean;
@@ -65,6 +66,7 @@ export class StatusListComponent implements OnInit {
     //3. To use teamname in routing on specific status click
     this.teamName = '';
     // -----------------------------------------------
+    this.filtered = false;
     this.nextVisible = true;
     this.prevVisible = false;
     this.showAlert = false;
@@ -214,10 +216,13 @@ export class StatusListComponent implements OnInit {
     this.statusService.fullStatusListID = ['-1'];
 
     if (type === 'default') {
+      this.filtered = false;
+
       this.statusService.FromDate = null;
       this.statusService.ToDate = null;
     }
     if (type === 'thisMonth') {
+      this.filtered = true;
       const date = new Date();
       const toDate = new Date(date.getFullYear(), date.getMonth(), 1);
       this.statusService.FromDate = `${toDate.getFullYear()}-${
@@ -228,6 +233,8 @@ export class StatusListComponent implements OnInit {
       }-${date.getDate()}`;
     }
     if (type === 'lastMonth') {
+      this.filtered = true;
+
       const date = new Date();
       const fromDate = new Date(date.getFullYear(), date.getMonth() - 1, 1);
       const toDate = new Date(date.getFullYear(), date.getMonth(), 0);
@@ -240,6 +247,8 @@ export class StatusListComponent implements OnInit {
       }-${toDate.getDate()}`;
     }
     if (type === 'custom') {
+      this.filtered = true;
+
       this.statusService.FromDate = `${this.fromDate?.year}-${this.fromDate?.month}-${this.fromDate?.day}`;
       this.statusService.ToDate = `${this.toDate?.year}-${this.toDate?.month}-${this.toDate?.day}`;
     }
