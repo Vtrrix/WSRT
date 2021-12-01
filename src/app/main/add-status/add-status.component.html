@@ -75,6 +75,9 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="row mt-4">
           <div class="col-4">
             <label>Leaves Planned:</label>
             <div
@@ -94,19 +97,16 @@
               <i class="fa fa-plus"></i>
             </button>
           </div>
-        </div>
-
-        <div class="row mt-4">
-          <div id="btn-container" class="col-sm-12">
+          <div class="col-sm-8 align-items-center d-flex flex-row-reverse">
+            <button class="btn btn-save fw-bold text-uppercase" type="submit">
+              Submit
+            </button>
             <button
               type="button"
               [routerLink]="['/user', 'status']"
               class="btn btn-save fw-bold text-uppercase"
             >
               Cancel
-            </button>
-            <button class="btn btn-save fw-bold text-uppercase" type="submit">
-              Submit
             </button>
           </div>
         </div>

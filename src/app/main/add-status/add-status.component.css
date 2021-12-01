@@ -23,7 +23,7 @@
 
 .form-card input,
 .form-card textarea {
-  padding: 10px 15px 0px 15px;
+  padding: 0 15px;
   border: none;
   border: 1px solid lightgrey;
   border-radius: 6px;
@@ -98,6 +98,7 @@ g-invalid.ng-touched {
   line-height: 20px;
   color: #fff;
   margin-bottom: 24px;
+  max-height: 50px;
 }
 .btn:hover {
   border: 1px solid #ef4223;
