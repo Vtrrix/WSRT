@@ -49,9 +49,23 @@ export class EditProfileComponent implements OnInit {
     this.editProfileForm.reset();
     this.profileService.getProfile(localStorage.getItem('username')).subscribe(
       (res) => {
-        //how do i fill name???
-        // this.editProfileForm.setValue({
-        // });
+        let name = [''];
+        name = res.data.name ? res.data.name?.split(' ') : [''];
+        let middleName = [''];
+
+        if (name.length > 2) {
+          middleName = res.data.name ? res.data.name?.split(' ') : [''];
+          middleName.pop();
+          middleName.shift();
+        }
+
+        this.editProfileForm.setValue({
+          firstName: name[0],
+          lastName: name[name.length - 1],
+          middleName: middleName?.join(' '),
+          phone: res.data.phone,
+          address: res.data.address,
+        });
       },
       (error) => {
         this.alertMessage = error.error.message;
