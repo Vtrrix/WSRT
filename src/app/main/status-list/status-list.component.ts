@@ -124,6 +124,8 @@ export class StatusListComponent implements OnInit {
         .slice(stamp.indexOf(':') + 1)
         .slice(0, stamp.slice(stamp.indexOf(':') + 1).indexOf(':'));
 
+    // const amOrPm =
+
     return date + time;
   }
 
@@ -138,8 +140,6 @@ export class StatusListComponent implements OnInit {
       )
       .subscribe(
         (res) => {
-          console.log(res);
-
           if (!res.data.hasMorePages) {
             this.nextVisible = false;
           } else {
@@ -148,13 +148,15 @@ export class StatusListComponent implements OnInit {
           if (res.statusCode === 200) {
             if (res.data.status_list.length !== 0) {
               // to update current view -------------
-              res.data.status_list.map((status) => {
-                status.submit_time_stamp = this.convertDate(
-                  status.submit_time_stamp
-                );
-              });
+
+              // to convert time stamp if required
+              // res.data.status_list.map((status) => {
+              //   status.submit_time_stamp = this.convertDate(
+              //     status.submit_time_stamp
+              //   );
+              // });
               this.currentStatusList = [...res.data.status_list];
-              //-----------------------------------
+              //--------------------------------------
 
               // to update fullStatusListID if needed------------------
               if (

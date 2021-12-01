@@ -54,9 +54,11 @@ export class StatusComponent implements OnInit {
         (res) => {
           if (<number>(<unknown>res.statusCode) === 200) {
             this.status = res.data;
-            this.status.submit_time_stamp = this.convertDate(
-              this.status.submit_time_stamp
-            );
+
+            // to change time stamp if needed
+            // this.status.submit_time_stamp = this.convertDate(
+            //   this.status.submit_time_stamp
+            // );
 
             this.fillData(
               this.status.task_done,

@@ -12,7 +12,7 @@ import { StatusService } from 'src/app/services/status.service';
 export class AddStatusComponent implements OnInit, OnDestroy {
   showAlert: boolean;
   alertMessage: string;
-  timeStamp: string;
+  // timeStamp: string;
   statusID: string = '';
   currentdate = new Date();
   statusNumber: string = '0001';
@@ -32,7 +32,7 @@ export class AddStatusComponent implements OnInit, OnDestroy {
     this.leaveID = 0;
     const currentdate = new Date();
 
-    this.timeStamp = currentdate.toLocaleString();
+    // this.timeStamp = currentdate.toLocaleString();
 
     this.editor1 = new Editor();
     this.editor2 = new Editor();
