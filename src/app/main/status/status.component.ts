@@ -13,6 +13,8 @@ export class StatusComponent implements OnInit {
   @Input() isManager: boolean;
   @Input() teamName: string;
 
+  remarks: string | null;
+
   remarkForm: FormGroup;
 
   statusID: string;
@@ -22,6 +24,7 @@ export class StatusComponent implements OnInit {
     private statusService: StatusService,
     private router: Router
   ) {
+    this.remarks = null;
     this.username = null;
     this.isManager = false;
     this.teamName = '';
@@ -63,11 +66,8 @@ export class StatusComponent implements OnInit {
             this.fillData(
               this.status.task_done,
               this.status.next_week_plans,
-              this.status.concerns
-            );
-
-            this.remarkForm.controls['remark'].setValue(
-              res.data.managerial_remarks
+              this.status.concerns,
+              this.status.managerial_remarks
             );
 
             // to post status as read by manager to API
@@ -93,10 +93,16 @@ export class StatusComponent implements OnInit {
     });
   }
 
-  fillData(taskDone: string, nextWeekPlan: string, risk: string) {
+  fillData(
+    taskDone: string,
+    nextWeekPlan: string,
+    risk: string,
+    managerialRemarks: string
+  ) {
     document.getElementById('taskDone')!.innerHTML = taskDone;
     document.getElementById('nextWeekPlan')!.innerHTML = nextWeekPlan;
     document.getElementById('risk')!.innerHTML = risk;
+    this.remarks = managerialRemarks;
   }
   convertDate(stamp: string): string {
     const date = stamp
@@ -190,6 +196,19 @@ export class StatusComponent implements OnInit {
           console.log(error);
         }
       );
+    }
+  }
+  closeStatus() {
+    if (this.isManager) {
+      this.router.navigate([
+        '/user',
+        'manager',
+        'teams',
+        this.teamName,
+        this.username,
+      ]);
+    } else {
+      this.router.navigate(['/user', 'status']);
     }
   }
 }

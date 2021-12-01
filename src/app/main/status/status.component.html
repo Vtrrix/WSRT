@@ -6,7 +6,7 @@
           type="button"
           class="arrow-btn"
           name="filterStatusListDefault"
-          [routerLink]="['/user', 'status']"
+          (click)="closeStatus()"
         >
           <i class="fa fa-times"></i>
         </button>
@@ -61,10 +61,7 @@
             </div>
           </div>
         </div>
-        <div
-          *ngIf="status.managerial_remarks && !isManager"
-          class="row d-flex mt-3"
-        >
+        <div *ngIf="status.managerial_remarks" class="row d-flex mt-3">
           <hr />
           <div class="col-12">
             <h4 class="mb-3">Remarks :</h4>
@@ -73,7 +70,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="isManager" class="row d-flex mt-3">
+        <div *ngIf="isManager && !remarks" class="row d-flex mt-3">
           <hr />
           <div class="col-12">
             <form
