@@ -15,6 +15,9 @@ export class StatusComponent implements OnInit {
 
   remarks: string | null;
 
+  nextStatusID: string;
+  prevStatusID: string;
+
   remarkForm: FormGroup;
 
   statusID: string;
@@ -29,7 +32,8 @@ export class StatusComponent implements OnInit {
     this.isManager = false;
     this.teamName = '';
     this.statusID = '';
-
+    this.nextStatusID = '';
+    this.prevStatusID = '';
     this.remarkForm = new FormGroup({
       remark: new FormControl('', [
         Validators.required,
@@ -90,6 +94,7 @@ export class StatusComponent implements OnInit {
           console.log(error);
         }
       );
+      this.loadNextAndPrevStatusID();
     });
   }
 
@@ -119,6 +124,41 @@ export class StatusComponent implements OnInit {
 
     return date + time;
   }
+
+  loadNextAndPrevStatusID() {
+    let tempStatusID = this.statusService.lastStatusID;
+    this.statusService.lastStatusID = this.statusID;
+    this.statusService.getStatusList(1, this.username, null, true).subscribe(
+      (res) => {
+        if (res.data.status_list.length) {
+          this.statusService.lastStatusID = tempStatusID;
+          this.nextStatusID = res.data.status_list[0].status_id;
+          console.log(this.nextStatusID);
+        } else {
+          this.nextStatusID = '';
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.statusService.getStatusList(1, this.username, null, false).subscribe(
+      (res) => {
+        if (res.data.status_list.length) {
+          this.statusService.lastStatusID = tempStatusID;
+          this.prevStatusID = res.data.status_list[0].status_id;
+          console.log(this.prevStatusID);
+        } else {
+          this.prevStatusID = '';
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   onSubmit() {
     if (this.username) {
       this.statusService
@@ -141,61 +181,32 @@ export class StatusComponent implements OnInit {
     }
   }
   navigateStatus(direction: 'next' | 'prev') {
-    let tempStatusID = this.statusService.lastStatusID;
-    this.statusService.lastStatusID = this.statusID;
     if (direction === 'next') {
-      this.statusService.getStatusList(1, this.username, null, true).subscribe(
-        (res) => {
-          console.log(res);
-          this.statusService.lastStatusID = tempStatusID;
-          if (this.isManager) {
-            this.router.navigate([
-              '/user',
-              'manager',
-              'teams',
-              this.teamName,
-              this.username,
-              res.data.status_list[0].status_id,
-            ]);
-          } else {
-            this.router.navigate([
-              '/user',
-              'status',
-              res.data.status_list[0].status_id,
-            ]);
-          }
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      if (this.isManager) {
+        this.router.navigate([
+          '/user',
+          'manager',
+          'teams',
+          this.teamName,
+          this.username,
+          this.nextStatusID,
+        ]);
+      } else {
+        this.router.navigate(['/user', 'status', this.nextStatusID]);
+      }
     } else {
-      this.statusService.getStatusList(1, this.username, null, false).subscribe(
-        (res) => {
-          console.log(res);
-          this.statusService.lastStatusID = tempStatusID;
-
-          if (this.isManager) {
-            this.router.navigate([
-              '/user',
-              'manager',
-              'teams',
-              this.teamName,
-              this.username,
-              res.data.status_list[0].status_id,
-            ]);
-          } else {
-            this.router.navigate([
-              '/user',
-              'status',
-              res.data.status_list[0].status_id,
-            ]);
-          }
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      if (this.isManager) {
+        this.router.navigate([
+          '/user',
+          'manager',
+          'teams',
+          this.teamName,
+          this.username,
+          this.prevStatusID,
+        ]);
+      } else {
+        this.router.navigate(['/user', 'status', this.prevStatusID]);
+      }
     }
   }
   closeStatus() {
