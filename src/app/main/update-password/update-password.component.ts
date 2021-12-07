@@ -49,7 +49,9 @@ export class UpdatePasswordComponent implements OnInit {
       )
       .subscribe(
         (res) => {
-          if (res.status_code === 201) {
+          console.log(res);
+
+          if (res.statusCode === 201) {
             this.router.navigate(['/user']);
           } else {
             this.showAlert = true;

@@ -29,6 +29,11 @@ export class MainComponent implements OnInit {
           : document.getElementById('wrapper')!.classList.add('toggled');
       });
 
+    // if full name does not exists reroute to edit profile
+    if (!this.profileService.getProfile.name) {
+      this.router.navigate(['/user', 'edit-profile']);
+    }
+
     // If profile data does not exist call api else get data from service state
     if (this.profileService.getProfileData.teams_managed) {
       // to change visibility of navbar

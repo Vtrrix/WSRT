@@ -56,7 +56,7 @@ export class AuthService {
     return this.http.post<{
       data: string;
       message: string;
-      status_code: number;
+      statusCode: number;
     }>(
       'https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/change_password',
       {
