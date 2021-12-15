@@ -54,9 +54,9 @@ export class AddStatusComponent implements OnInit, OnDestroy {
         Validators.minLength(5),
         Validators.maxLength(30),
       ]),
-      taskDone: new FormControl(null, [Validators.required]),
-      risk: new FormControl(null, [Validators.required]),
-      nextWeekPlan: new FormControl(null, [Validators.required]),
+      taskDone: new FormControl(null, Validators.required),
+      risk: new FormControl(null),
+      nextWeekPlan: new FormControl(null),
       leaves: new FormArray([]),
     });
   }
@@ -103,7 +103,6 @@ export class AddStatusComponent implements OnInit, OnDestroy {
 
   calculateStatusID() {
     const tempLastStatusID = this.statusService.lastStatusID;
-    console.log(tempLastStatusID);
 
     let lastStatusWeek;
     this.statusService.lastStatusID = this.statusService.fullStatusListID[0];
@@ -182,15 +181,20 @@ export class AddStatusComponent implements OnInit, OnDestroy {
     (<FormArray>this.addStatusForm.get('leaves')).push(new FormControl(null));
   }
   onSubmit() {
-    const html = toHTML(this.addStatusForm.value.taskDone);
     this.statusService
       .addStatus(
         this.statusID,
         this.addStatusForm.value.title,
         'submitted',
-        toHTML(this.addStatusForm.value.taskDone),
-        toHTML(this.addStatusForm.value.nextWeekPlan),
-        toHTML(this.addStatusForm.value.risk),
+        this.addStatusForm.value.taskDone
+          ? toHTML(this.addStatusForm.value.taskDone)
+          : '',
+        this.addStatusForm.value.nextWeekPlan
+          ? toHTML(this.addStatusForm.value.nextWeekPlan)
+          : '',
+        this.addStatusForm.value.risk
+          ? toHTML(this.addStatusForm.value.risk)
+          : '',
         this.addStatusForm.value.leaves
       )
       .subscribe(
