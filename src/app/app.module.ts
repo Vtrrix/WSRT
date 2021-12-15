@@ -30,6 +30,7 @@ import { MemberStatusComponent } from './main/member-status/member-status.compon
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 import { LoginComponent } from './auth/login/login.component';
 import { UpdatePasswordComponent } from './main/update-password/update-password.component';
+import { BackToTopComponent } from './main/back-to-top/back-to-top.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { UpdatePasswordComponent } from './main/update-password/update-password.
     ChangePasswordComponent,
     LoginComponent,
     UpdatePasswordComponent,
+    BackToTopComponent,
   ],
   imports: [
     BrowserModule,

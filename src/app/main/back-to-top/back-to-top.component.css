@@ -1,0 +1,10 @@
+#btn-back-to-top {
+  position: fixed;
+  bottom: 20px;
+  padding: 6px 12px;
+  right: 20px;
+  border-radius: 50%;
+  display: none;
+  background: #ec1e24;
+  color: whitesmoke;
+}
