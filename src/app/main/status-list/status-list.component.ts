@@ -71,7 +71,7 @@ export class StatusListComponent implements OnInit {
     this.prevVisible = false;
     this.showAlert = false;
     this.alertMessage = '';
-    this.pageSize = 5;
+    this.pageSize = 15;
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     this.currentPage = 0;

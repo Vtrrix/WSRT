@@ -15,8 +15,6 @@ export class BackToTopComponent implements OnInit {
 
   ngOnInit(): void {
     window.onscroll = () => {
-      console.log('das');
-
       this.scrollFunction();
     };
   }
