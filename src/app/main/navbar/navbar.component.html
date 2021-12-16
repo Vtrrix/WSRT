@@ -1,41 +1,39 @@
-<nav class="navbar navbar-expand-lg navbar-light">
-  <button class="btn" id="menu-toggle">
-    <i class="fa fa-bars"></i>
-  </button>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul *ngIf="visible" class="navbar-nav mt-2 mt-lg-0">
-      <li class="nav-item">
-        <a
-          class="nav-link text-light"
-          [routerLink]="['/user']"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          >My View
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link text-light"
-          [routerLink]="['/user', 'manager']"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          >Manager View</a
-        >
-      </li>
-    </ul>
+<nav class="navbar navbar-expand-lg navbar-light justify-content-between">
+  <div class="d-flex align-items-center">
+    <button class="btn" id="menu-toggle">
+      <i class="fa fa-bars"></i>
+    </button>
+
+    <div class="navbar-expand" id="navbarSupportedContent">
+      <ul *ngIf="visible" class="navbar-nav mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link text-light"
+            [routerLink]="['/user']"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >My View
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-light"
+            [routerLink]="['/user', 'manager']"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Manager View</a
+          >
+        </li>
+      </ul>
+    </div>
   </div>
-  <div ngbDropdown #navDrop="ngbDropdown" class="d-inline-block">
+
+  <div
+    ngbDropdown
+    display="dynamic"
+    #navDrop="ngbDropdown"
+    class="d-inline-block"
+  >
     <button
       class="btn btn-options fw-bold mx-4"
       id="dropdownBasic1"
