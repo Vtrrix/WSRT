@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProfileService } from '../services/profile.service';
 
@@ -10,6 +10,7 @@ import { ProfileService } from '../services/profile.service';
 export class MainComponent implements OnInit {
   navbarVisible: boolean;
   // visible true if manager to show navbar navigation
+  @ViewChild('wrapper') div: ElementRef | undefined;
 
   constructor(private router: Router, private profileService: ProfileService) {
     this.navbarVisible = false;
@@ -24,9 +25,9 @@ export class MainComponent implements OnInit {
       .getElementById('menu-toggle')!
       .addEventListener('click', (event) => {
         event.preventDefault();
-        document.getElementById('wrapper')!.classList.contains('toggled')
-          ? document.getElementById('wrapper')!.classList.remove('toggled')
-          : document.getElementById('wrapper')!.classList.add('toggled');
+        this.div?.nativeElement.classList.contains('toggled')
+          ? this.div?.nativeElement.classList.remove('toggled')
+          : this.div?.nativeElement.classList.add('toggled');
       });
 
     // if full name does not exists reroute to edit profile
