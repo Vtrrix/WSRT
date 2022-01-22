@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageDataService } from '../core/services/local-storage-data.service';
 import { ProfileService } from '../services/profile.service';
 
 @Component({
@@ -12,12 +13,16 @@ export class MainComponent implements OnInit {
   // visible true if manager to show navbar navigation
   @ViewChild('wrapper') div: ElementRef | undefined;
 
-  constructor(private router: Router, private profileService: ProfileService) {
+  constructor(
+    private router: Router,
+    private profileService: ProfileService,
+    private localStorageDataService: LocalStorageDataService
+  ) {
     this.navbarVisible = false;
   }
 
   ngOnInit(): void {
-    if (!localStorage.getItem('token')) {
+    if (!this.localStorageDataService.getJwtToken) {
       this.router.navigate(['login']);
     }
 
