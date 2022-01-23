@@ -50,9 +50,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password).subscribe(
       (res) => {
         if (res.statusCode === 200) {
-          this.localStorageDataService.jwtToken = res.data.id_token;
+          this.localStorageDataService.setJwtToken = res.data.id_token;
           this.localStorageDataService.setUsername = res.data.username;
-          this.localStorageDataService.accessToken = res.data.access_token;
+          this.localStorageDataService.setAccessToken = res.data.access_token;
 
           this.router.navigate(['']);
           // route to home page

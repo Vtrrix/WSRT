@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LocalStorageDataService } from 'src/app/core/services/local-storage-data.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
@@ -14,9 +15,10 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private localStorageDataService: LocalStorageDataService
   ) {
-    this.username = localStorage.getItem('username');
+    this.username = this.localStorageDataService.getUsername;
     this.visible = true;
   }
 

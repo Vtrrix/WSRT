@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LocalStorageDataService } from '../core/services/local-storage-data.service';
 
 export interface status {
   title: string;
@@ -22,7 +23,10 @@ export class StatusService {
   public FromDate: string | null;
   public ToDate: string | null;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private localStorageDataService: LocalStorageDataService
+  ) {
     this.fullStatusListID = ['-1'];
     this.lastStatusID = '-1';
     this.FromDate = null;
@@ -38,7 +42,7 @@ export class StatusService {
     let url: string;
     let urlUsername = username;
     if (!urlUsername) {
-      urlUsername = localStorage.getItem('username');
+      urlUsername = this.localStorageDataService.getUsername;
     }
 
     if (this.FromDate && this.ToDate) {
@@ -58,15 +62,13 @@ export class StatusService {
       statusCode: number;
     }>(url, {
       headers: new HttpHeaders({
-        token: `${localStorage.getItem('token')}`,
+        token: `${this.localStorageDataService.getJwtToken}`,
       }),
     });
   }
 
   getStatus(statusID: string, username: string | null) {
-    let url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${localStorage.getItem(
-      'username'
-    )}/statuses/${statusID}`;
+    let url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${this.localStorageDataService.getUsername}/statuses/${statusID}`;
 
     if (username) {
       url = `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${username}/statuses/${statusID}`;
@@ -77,7 +79,7 @@ export class StatusService {
       statusCode: number;
     }>(url, {
       headers: new HttpHeaders({
-        token: `${localStorage.getItem('token')}`,
+        token: `${this.localStorageDataService.getJwtToken}`,
       }),
     });
   }
@@ -95,9 +97,7 @@ export class StatusService {
       data: string;
       statusCode: number;
     }>(
-      `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${localStorage.getItem(
-        'username'
-      )}/statuses`,
+      `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${this.localStorageDataService.getUsername}/statuses`,
       {
         status_id: status_id,
         title: title,
@@ -109,7 +109,7 @@ export class StatusService {
       },
       {
         headers: new HttpHeaders({
-          token: `${localStorage.getItem('token')}`,
+          token: `${this.localStorageDataService.getJwtToken}`,
         }),
       }
     );
@@ -133,7 +133,7 @@ export class StatusService {
       reqBody,
       {
         headers: new HttpHeaders({
-          token: `${localStorage.getItem('token')}`,
+          token: `${this.localStorageDataService.getJwtToken}`,
         }),
       }
     );

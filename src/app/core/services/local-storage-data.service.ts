@@ -38,4 +38,8 @@ export class LocalStorageDataService {
   get getJwtToken() {
     return this.jwtToken ? this.jwtToken : localStorage.getItem('token');
   }
+
+  removeData(key: string) {
+    localStorage.removeItem(key);
+  }
 }
