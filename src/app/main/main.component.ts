@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageDataService } from '../core/services/local-storage-data.service';
 import { ProfileService } from '../services/profile.service';
 
 @Component({
@@ -10,13 +11,18 @@ import { ProfileService } from '../services/profile.service';
 export class MainComponent implements OnInit {
   navbarVisible: boolean;
   // visible true if manager to show navbar navigation
+  @ViewChild('wrapper') div: ElementRef | undefined;
 
-  constructor(private router: Router, private profileService: ProfileService) {
+  constructor(
+    private router: Router,
+    private profileService: ProfileService,
+    private localStorageDataService: LocalStorageDataService
+  ) {
     this.navbarVisible = false;
   }
 
   ngOnInit(): void {
-    if (!localStorage.getItem('token')) {
+    if (!this.localStorageDataService.getJwtToken) {
       this.router.navigate(['login']);
     }
 
@@ -24,9 +30,9 @@ export class MainComponent implements OnInit {
       .getElementById('menu-toggle')!
       .addEventListener('click', (event) => {
         event.preventDefault();
-        document.getElementById('wrapper')!.classList.contains('toggled')
-          ? document.getElementById('wrapper')!.classList.remove('toggled')
-          : document.getElementById('wrapper')!.classList.add('toggled');
+        this.div?.nativeElement.classList.contains('toggled')
+          ? this.div?.nativeElement.classList.remove('toggled')
+          : this.div?.nativeElement.classList.add('toggled');
       });
 
     // if full name does not exists reroute to edit profile

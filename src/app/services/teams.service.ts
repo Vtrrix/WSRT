@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LocalStorageDataService } from '../core/services/local-storage-data.service';
 
 export interface team {
   team_name: string;
@@ -15,7 +16,10 @@ export interface team {
 })
 export class TeamsService {
   teamsList: team[];
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private localStorageDataService: LocalStorageDataService
+  ) {
     this.teamsList = [];
   }
 
@@ -25,12 +29,10 @@ export class TeamsService {
       message: string;
       statusCode: number;
     }>(
-      `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/teams?username=${localStorage.getItem(
-        'username'
-      )}`,
+      `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/teams?username=${this.localStorageDataService.getUsername}`,
       {
         headers: new HttpHeaders({
-          token: `${localStorage.getItem('token')}`,
+          token: `${this.localStorageDataService.getJwtToken}`,
         }),
       }
     );
@@ -55,7 +57,7 @@ export class TeamsService {
       },
       {
         headers: new HttpHeaders({
-          token: `${localStorage.getItem('token')}`,
+          token: `${this.localStorageDataService.getJwtToken}`,
         }),
       }
     );

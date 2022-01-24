@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalStorageDataService } from 'src/app/core/services/local-storage-data.service';
 import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
@@ -14,7 +15,11 @@ export class EditProfileComponent implements OnInit {
   //using reactive form for edit profile form
 
   editProfileForm: FormGroup;
-  constructor(private profileService: ProfileService, private router: Router) {
+  constructor(
+    private profileService: ProfileService,
+    private router: Router,
+    private localStorageDataService: LocalStorageDataService
+  ) {
     this.alertMessage = '';
     this.showAlert = false;
     this.editProfileForm = new FormGroup({
@@ -47,31 +52,33 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.editProfileForm.reset();
-    this.profileService.getProfile(localStorage.getItem('username')).subscribe(
-      (res) => {
-        let name = [''];
-        name = res.data.name ? res.data.name?.split(' ') : [''];
-        let middleName = [''];
+    this.profileService
+      .getProfile(this.localStorageDataService.getUsername)
+      .subscribe(
+        (res) => {
+          let name = [''];
+          name = res.data.name ? res.data.name?.split(' ') : [''];
+          let middleName = [''];
 
-        if (name.length > 2) {
-          middleName = res.data.name ? res.data.name?.split(' ') : [''];
-          middleName.pop();
-          middleName.shift();
+          if (name.length > 2) {
+            middleName = res.data.name ? res.data.name?.split(' ') : [''];
+            middleName.pop();
+            middleName.shift();
+          }
+
+          this.editProfileForm.setValue({
+            firstName: name[0],
+            lastName: name[name.length - 1],
+            middleName: middleName?.join(' '),
+            phone: res.data.phone,
+            address: res.data.address,
+          });
+        },
+        (error) => {
+          this.alertMessage = error.error.message;
+          this.showAlert = true;
         }
-
-        this.editProfileForm.setValue({
-          firstName: name[0],
-          lastName: name[name.length - 1],
-          middleName: middleName?.join(' '),
-          phone: res.data.phone,
-          address: res.data.address,
-        });
-      },
-      (error) => {
-        this.alertMessage = error.error.message;
-        this.showAlert = true;
-      }
-    );
+      );
   }
   onSave() {
     const name = `${this.editProfileForm.value.firstName} ${

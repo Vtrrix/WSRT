@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LocalStorageDataService } from '../core/services/local-storage-data.service';
 
 interface loginResponse {
   message: string;
@@ -14,7 +15,11 @@ interface loginResponse {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private localStorageDataService: LocalStorageDataService
+  ) {}
 
   login(username: string, password: string) {
     return this.http.post<loginResponse>(
@@ -65,15 +70,15 @@ export class AuthService {
       },
       {
         headers: new HttpHeaders({
-          token: <string>localStorage.getItem('token'),
-          access_token: <string>localStorage.getItem('accessToken'),
+          token: <string>this.localStorageDataService.getJwtToken,
+          access_token: <string>this.localStorageDataService.accessToken,
         }),
       }
     );
   }
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
+    this.localStorageDataService.removeData('token');
+    this.localStorageDataService.removeData('username');
     this.router.navigate(['/login']);
   }
 }

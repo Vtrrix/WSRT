@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalStorageDataService } from 'src/app/core/services/local-storage-data.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -15,7 +16,11 @@ export class LoginComponent implements OnInit {
   showAlert: Boolean;
   // to control alert message visibility
   errorMessage: string;
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private localStorageDataService: LocalStorageDataService
+  ) {
     this.errorMessage = 'Incorrect Credentials';
     this.showAlert = false;
     this.loginForm = new FormGroup({
@@ -45,9 +50,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password).subscribe(
       (res) => {
         if (res.statusCode === 200) {
-          localStorage.setItem('token', res.data.id_token);
-          localStorage.setItem('username', res.data.username);
-          localStorage.setItem('accessToken', res.data.access_token);
+          this.localStorageDataService.setJwtToken = res.data.id_token;
+          this.localStorageDataService.setUsername = res.data.username;
+          this.localStorageDataService.setAccessToken = res.data.access_token;
 
           this.router.navigate(['']);
           // route to home page

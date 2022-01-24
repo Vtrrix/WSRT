@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { LocalStorageDataService } from 'src/app/core/services/local-storage-data.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { SideMenuService } from 'src/app/services/side-menu.service';
 
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
     private profileService: ProfileService,
     private sideMenuService: SideMenuService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private localStorageDataService: LocalStorageDataService
   ) {
     // To handle home component with manager view member
 
@@ -60,16 +62,19 @@ export class HomeComponent implements OnInit {
             } else {
               this.showAlert = true;
               this.alertMessage = <string>(<unknown>res.message);
-              localStorage.removeItem('username');
-              localStorage.removeItem('token');
+              this.localStorageDataService;
+              this.localStorageDataService.removeData('username');
+              this.localStorageDataService.removeData('token');
+              this.localStorageDataService.removeData('accessToken');
               this.router.navigate(['/login']);
             }
           },
           (error) => {
             this.showAlert = true;
             this.alertMessage = error.error.message;
-            localStorage.removeItem('username');
-            localStorage.removeItem('token');
+            this.localStorageDataService.removeData('username');
+            this.localStorageDataService.removeData('token');
+            this.localStorageDataService.removeData('accessToken');
             this.router.navigate(['/login']);
           }
         );
