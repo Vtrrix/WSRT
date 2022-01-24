@@ -8,9 +8,7 @@ export default interface staticData {
   weekly_status_days: string[];
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class StaticDataService {
   staticData: staticData;
   constructor(

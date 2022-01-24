@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -31,7 +30,7 @@ import { ChangePasswordComponent } from './auth/change-password/change-password.
 import { LoginComponent } from './auth/login/login.component';
 import { UpdatePasswordComponent } from './main/update-password/update-password.component';
 import { BackToTopComponent } from './main/back-to-top/back-to-top.component';
-import { JwtTokenInterceptor } from './core/interceptors/jwt-token.interceptor';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -61,6 +60,7 @@ import { JwtTokenInterceptor } from './core/interceptors/jwt-token.interceptor';
     BackToTopComponent,
   ],
   imports: [
+    CoreModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -103,13 +103,7 @@ import { JwtTokenInterceptor } from './core/interceptors/jwt-token.interceptor';
     }),
     NgbModule,
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtTokenInterceptor,
-      multi: true,
-    },
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
