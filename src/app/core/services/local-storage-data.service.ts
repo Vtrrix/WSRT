@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LocalStorageDataService {
-  username: string | null;
-  accessToken: string | null;
-  jwtToken: string | null;
+  private username: string | null;
+  private accessToken: string | null;
+  private jwtToken: string | null;
 
   constructor() {
     this.username = localStorage.getItem('username');

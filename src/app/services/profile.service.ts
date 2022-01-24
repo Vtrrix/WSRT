@@ -58,9 +58,7 @@ export class ProfileService {
       message: string;
       statusCode: number;
     }>(url, {
-      headers: new HttpHeaders({
-        token: `${this.localStorageDataService.getJwtToken}`,
-      }),
+      headers: new HttpHeaders(),
     });
   }
 
@@ -74,9 +72,7 @@ export class ProfileService {
         phone: phone,
       },
       {
-        headers: new HttpHeaders({
-          token: `${this.localStorageDataService.getJwtToken}`,
-        }),
+        headers: new HttpHeaders(),
       }
     );
   }
