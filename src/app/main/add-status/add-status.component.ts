@@ -109,6 +109,9 @@ export class AddStatusComponent implements OnInit, OnDestroy {
     this.statusService
       .getStatusList(1, null, null, true)
       .subscribe((status) => {
+        const week = this.getWeek(this.currentdate).toString().padStart(2, '0');
+        console.log(status);
+
         if (status.data.status_list.length === 0) {
           this.statusID =
             this.currentdate.getFullYear() +
@@ -117,7 +120,7 @@ export class AddStatusComponent implements OnInit, OnDestroy {
               .toLocaleString('default', { month: 'short' })
               .toUpperCase() +
             '-WK' +
-            this.getWeek(this.currentdate) +
+            week +
             '-0001';
         } else {
           lastStatusWeek = status.data.status_list[0].status_id.slice(
@@ -125,7 +128,7 @@ export class AddStatusComponent implements OnInit, OnDestroy {
           );
           lastStatusWeek = lastStatusWeek.slice(0, lastStatusWeek.indexOf('-'));
 
-          if (lastStatusWeek == this.getWeek(this.currentdate).toString()) {
+          if (lastStatusWeek == week) {
             let newStatusNumber =
               parseInt(
                 status.data.status_list[0].status_id.slice(
@@ -145,7 +148,7 @@ export class AddStatusComponent implements OnInit, OnDestroy {
                 .toLocaleString('default', { month: 'short' })
                 .toUpperCase() +
               '-WK' +
-              this.getWeek(this.currentdate) +
+              week +
               '-' +
               this.statusNumber;
           } else {
@@ -163,7 +166,7 @@ export class AddStatusComponent implements OnInit, OnDestroy {
                 .toLocaleString('default', { month: 'short' })
                 .toUpperCase() +
               '-WK' +
-              this.getWeek(this.currentdate) +
+              week +
               '-' +
               this.statusNumber;
           }
@@ -199,6 +202,8 @@ export class AddStatusComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         (res) => {
+          console.log(res);
+
           if (res.statusCode === 201) {
             this.router.navigate(['/user', 'status']);
           } else {

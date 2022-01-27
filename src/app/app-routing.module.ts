@@ -69,7 +69,6 @@ const routes: Routes = [
     ],
   },
   { path: '**', component: NotFoundComponent },
-  // add 404 component
 ];
 
 @NgModule({

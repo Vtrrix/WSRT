@@ -31,6 +31,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { UpdatePasswordComponent } from './main/update-password/update-password.component';
 import { BackToTopComponent } from './main/back-to-top/back-to-top.component';
 import { CoreModule } from './core/core.module';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { CoreModule } from './core/core.module';
     LoginComponent,
     UpdatePasswordComponent,
     BackToTopComponent,
+    TableComponent,
   ],
   imports: [
     CoreModule,

@@ -241,9 +241,7 @@ input:-webkit-autofill {
 .custom-day.faded {
   background-color: rgba(2, 117, 216, 0.5);
 }
-tbody tr {
-  cursor: pointer;
-}
+
 .page-size {
   padding: 5px 10px;
   font-weight: 600;

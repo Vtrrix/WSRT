@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 
+@Injectable()
+//   {
+//   providedIn: 'root',
+// }
 export class LocalStorageDataService {
   private username: string | null;
   private accessToken: string | null;

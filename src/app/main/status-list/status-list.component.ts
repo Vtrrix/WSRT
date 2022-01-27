@@ -17,6 +17,8 @@ import { StatusService } from 'src/app/services/status.service';
 export class StatusListComponent implements OnInit {
   searchForm: FormGroup;
 
+  tableColumns: string[];
+
   filtered: boolean;
   // for managerial view
   username: string | null;
@@ -53,7 +55,6 @@ export class StatusListComponent implements OnInit {
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter,
     private sideMenuService: SideMenuService,
-    private router: Router,
     private route: ActivatedRoute
   ) {
     // To handle home component with manager view member
@@ -76,7 +77,12 @@ export class StatusListComponent implements OnInit {
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     this.currentPage = 0;
     this.currentStatusList = [];
-
+    this.tableColumns = [
+      'Status ID',
+      'Title',
+      'Status',
+      'Submitted Date & Time',
+    ];
     this.searchForm = new FormGroup({
       searchQuery: new FormControl(null, [Validators.required]),
     });
@@ -113,23 +119,23 @@ export class StatusListComponent implements OnInit {
     this.fetchStatus(this.pageSize);
   }
 
-  convertDate(stamp: string): string {
-    const date = stamp
-      .slice(0, stamp.indexOf(' '))
-      .split('-')
-      .reverse()
-      .join('/');
-    const time =
-      stamp.slice(stamp.indexOf(' '), stamp.indexOf(':')) +
-      ':' +
-      stamp
-        .slice(stamp.indexOf(':') + 1)
-        .slice(0, stamp.slice(stamp.indexOf(':') + 1).indexOf(':'));
+  // convertDate(stamp: string): string {
+  //   const date = stamp
+  //     .slice(0, stamp.indexOf(' '))
+  //     .split('-')
+  //     .reverse()
+  //     .join('/');
+  //   const time =
+  //     stamp.slice(stamp.indexOf(' '), stamp.indexOf(':')) +
+  //     ':' +
+  //     stamp
+  //       .slice(stamp.indexOf(':') + 1)
+  //       .slice(0, stamp.slice(stamp.indexOf(':') + 1).indexOf(':'));
 
-    // const amOrPm =
+  //   // const amOrPm =
 
-    return date + time;
-  }
+  //   return date + time;
+  // }
 
   // api call to get status
   fetchStatus(size: number) {
@@ -300,20 +306,5 @@ export class StatusListComponent implements OnInit {
     return parsed && this.calendar.isValid(NgbDate.from(parsed))
       ? NgbDate.from(parsed)
       : currentValue;
-  }
-
-  onStatusClick(id: string) {
-    if (this.inManagerView) {
-      this.router.navigate([
-        '/user',
-        'manager',
-        'teams',
-        this.teamName,
-        this.username,
-        id,
-      ]);
-    } else {
-      this.router.navigate(['/user', 'status', id]);
-    }
   }
 }
