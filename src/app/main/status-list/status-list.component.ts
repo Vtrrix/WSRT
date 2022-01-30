@@ -20,6 +20,7 @@ export class StatusListComponent implements OnInit {
   tableColumns: string[];
 
   filtered: boolean;
+
   // for managerial view
   username: string | null;
   @Input() inManagerView: boolean;
@@ -49,7 +50,8 @@ export class StatusListComponent implements OnInit {
     submit_time_stamp: string;
     managerial_remarks: string;
   }[];
-
+  statusData: Iterable<any>[];
+  highlightRowList: boolean[];
   constructor(
     private statusService: StatusService,
     private calendar: NgbCalendar,
@@ -70,13 +72,17 @@ export class StatusListComponent implements OnInit {
     this.filtered = false;
     this.nextVisible = true;
     this.prevVisible = false;
+
     this.showAlert = false;
     this.alertMessage = '';
+
     this.pageSize = 15;
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     this.currentPage = 0;
     this.currentStatusList = [];
+    this.statusData = [];
+    this.highlightRowList = [];
     this.tableColumns = [
       'Status ID',
       'Title',
@@ -155,7 +161,7 @@ export class StatusListComponent implements OnInit {
           }
           if (res.statusCode === 200) {
             if (res.data.status_list.length !== 0) {
-              // to update current view -------------
+              // to update current view ----------------------------------------
 
               // to convert time stamp if required
               // res.data.status_list.map((status) => {
@@ -164,9 +170,25 @@ export class StatusListComponent implements OnInit {
               //   );
               // });
               this.currentStatusList = [...res.data.status_list];
-              //--------------------------------------
 
-              // to update fullStatusListID if needed------------------
+              this.highlightRowList = [];
+              this.currentStatusList.map((status) => {
+                this.statusData.push([
+                  status.status_id,
+                  status.title,
+                  status.status_read ? 'Seen' : 'Submitted',
+                  status.submit_time_stamp,
+                ]);
+
+                status.status_read
+                  ? this.highlightRowList.push(false)
+                  : this.highlightRowList.push(true);
+              });
+              console.log(this.statusData);
+
+              //---------------------------------------------------------------------
+
+              // to update fullStatusListID if needed----------------------------------
               if (
                 !this.statusService.fullStatusListID.includes(
                   this.currentStatusList[this.currentStatusList.length - 1]
@@ -178,7 +200,7 @@ export class StatusListComponent implements OnInit {
                     .status_id
                 );
               }
-              //----------------------------------------------------
+              //---------------------------------------------------------------------
             } else {
               this.currentStatusList = [];
             }

@@ -10,20 +10,20 @@
   </thead>
   <tbody>
     <tr
-      *ngFor="let status of statusList"
+      *ngFor="let status of statusList; index as i"
       (click)="onStatusClick(status.status_id)"
       class="border-bottom"
       [ngStyle]="{
         background:
-          status.status_read === false && inManagerView ? '#EFEFEF' : '#FCFCFC'
+          highlightRowList[i] === true && inManagerView ? '#EFEFEF' : '#FCFCFC'
       }"
     >
-      <td>
+      <td *ngFor="let dataEle of data[i]">
         <div class="py-2 mx-5">
-          <span class="font-weight-bold">{{ status.status_id }}</span>
+          <span class="font-weight-bold">{{ dataEle }}</span>
         </div>
       </td>
-      <td>
+      <!-- <td>
         <div class="py-2 mx-5">
           <span class="font-weight-bold">{{ status.title }}</span>
         </div>
@@ -49,7 +49,7 @@
           </ng-template>
 
           <span
-            *ngIf="status.status_read; else Submitted"
+            *ngIf="!highlightRowList[i]; else Submitted"
             class="font-weight-bold"
             >Seen</span
           >
@@ -59,7 +59,7 @@
         <div class="py-2 mx-5">
           <span class="font-weight-bold">{{ status.submit_time_stamp }}</span>
         </div>
-      </td>
+      </td> -->
     </tr>
   </tbody>
 </table>

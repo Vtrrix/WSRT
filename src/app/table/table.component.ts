@@ -8,10 +8,12 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class TableComponent implements OnInit {
   @Input() columns: string[];
+  @Input() data: Iterable<any>[];
   // for managerial view
-  username: string | null;
+  @Input() username: string | null;
   @Input() inManagerView: boolean;
-  teamName: string;
+  @Input() teamName: string;
+  @Input() highlightRowList: boolean[];
 
   @Input() statusList: {
     title: string;
@@ -26,8 +28,9 @@ export class TableComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.columns = [];
-
+    this.highlightRowList = [];
     this.statusList = [];
+    this.data = [];
     // To handle home component with manager view member
 
     // 1. To check if manager checking member
