@@ -15,21 +15,21 @@ export class TableComponent implements OnInit {
   // @Input() teamName: string;
   @Input() highlightRowList: boolean[];
 
-  @Input() statusList: {
-    title: string;
-    concerns: string;
-    status_read: boolean;
-    task_done: string;
-    status_id: string;
-    next_week_plans: string;
-    submit_time_stamp: string;
-    managerial_remarks: string;
-  }[];
+  // @Input() statusList: {
+  //   title: string;
+  //   concerns: string;
+  //   status_read: boolean;
+  //   task_done: string;
+  //   status_id: string;
+  //   next_week_plans: string;
+  //   submit_time_stamp: string;
+  //   managerial_remarks: string;
+  // }[];
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.columns = [];
     this.highlightRowList = [];
-    this.statusList = [];
+    // this.statusList = [];
     this.data = [];
     this.inManagerView = false;
   }
