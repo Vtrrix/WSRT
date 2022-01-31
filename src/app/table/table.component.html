@@ -1,0 +1,27 @@
+<table
+  class="table table-hover table-borderless table-responsive shadow card-1 p-4"
+>
+  <thead>
+    <tr class="border-bottom">
+      <th *ngFor="let column of columns">
+        <span class="mx-3">{{ column }}</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let dataRow of data; index as i"
+      class="border-bottom"
+      [ngStyle]="{
+        background:
+          highlightRowList[i] === true && inManagerView ? '#EFEFEF' : '#FCFCFC'
+      }"
+    >
+      <td *ngFor="let dataEle of dataRow">
+        <div class="py-2 mx-2">
+          <span class="font-weight-bold">{{ dataEle }}</span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

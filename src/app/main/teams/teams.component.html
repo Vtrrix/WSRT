@@ -9,62 +9,7 @@
       *ngIf="isAdmin"
       [routerLink]="['/user', 'manager', 'add-team']"
     />
-    <table
-      class="
-        table table-borderless table-hover table-responsive
-        shadow
-        card-1
-        p-4
-      "
-    >
-      <thead>
-        <tr class="border-bottom">
-          <th><span class="ml-3">Name</span></th>
-          <th><span class="ml-3">Short Name</span></th>
-          <th><span class="ml-3">Status Frequency</span></th>
-          <th><span class="ml-3">Description</span></th>
-          <th><span class="ml-3">Manager</span></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="let team of teamsList"
-          (click)="onTeamClick(team.team_short_name)"
-          class="border-bottom"
-        >
-          <td>
-            <div class="p-2">
-              <span class="font-weight-bold">{{ team.team_name }} </span>
-            </div>
-          </td>
-          <td>
-            <div class="p-2">
-              <span class="font-weight-bold"> {{ team.team_short_name }} </span>
-            </div>
-          </td>
-          <td>
-            <div class="p-2">
-              <span class="font-weight-bold">{{ team.status_frequency }}</span>
-              <span
-                *ngIf="team.status_frequency === 'weekly'"
-                class="font-weight-bold mx-1"
-                >({{ team.weekly_status_day }})</span
-              >
-            </div>
-          </td>
-          <td>
-            <div class="p-2">
-              <span class="font-weight-bold">{{ team.description }}</span>
-            </div>
-          </td>
-          <td>
-            <div *ngFor="let manager of team.managers" class="p-2">
-              <span class="font-weight-bold"> {{ manager }} </span>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <app-table [columns]="tableColumns" [data]="tableData"> </app-table>
   </div>
   <app-alert [errorMessage]="alertMessage" *ngIf="showAlert"></app-alert>
 </div>

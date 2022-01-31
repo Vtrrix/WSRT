@@ -176,82 +176,12 @@
         />
       </div>
     </div>
-
-    <table
-      class="
-        table table-hover table-borderless table-responsive
-        shadow
-        card-1
-        p-4
-      "
-    >
-      <thead>
-        <tr class="border-bottom">
-          <th><span class="mx-5">Status ID</span></th>
-          <th><span class="mx-5">Title</span></th>
-          <th><span class="mx-5">Status</span></th>
-          <th><span class="mx-5">Submitted Date & Time</span></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="let status of currentStatusList"
-          (click)="onStatusClick(status.status_id)"
-          class="border-bottom"
-          [ngStyle]="{
-            background:
-              status.status_read === false && inManagerView
-                ? '#EFEFEF'
-                : '#FCFCFC'
-          }"
-        >
-          <td>
-            <div class="py-2 mx-5">
-              <span class="font-weight-bold">{{ status.status_id }}</span>
-            </div>
-          </td>
-          <td>
-            <div class="py-2 mx-5">
-              <span class="font-weight-bold">{{ status.title }}</span>
-            </div>
-          </td>
-          <td>
-            <ng-template #UserView>
-              <div class="py-2 mx-5">
-                <ng-template #Submitted>
-                  <span class="font-weight-bold">Submitted</span>
-                </ng-template>
-
-                <span
-                  *ngIf="status.status_read; else Submitted"
-                  class="font-weight-bold"
-                  >Seen</span
-                >
-              </div>
-            </ng-template>
-
-            <div *ngIf="inManagerView; else UserView" class="py-2 mx-5">
-              <ng-template #Submitted>
-                <span class="font-weight-bold">New Status</span>
-              </ng-template>
-
-              <span
-                *ngIf="status.status_read; else Submitted"
-                class="font-weight-bold"
-                >Seen</span
-              >
-            </div>
-          </td>
-          <td>
-            <div class="py-2 mx-5">
-              <span class="font-weight-bold">{{
-                status.submit_time_stamp
-              }}</span>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <app-table
+      [columns]="tableColumns"
+      [data]="statusData"
+      [inManagerView]="inManagerView"
+      [highlightRowList]="highlightRowList"
+    ></app-table>
     <div class="row footer mb-5 mt-4">
       <div class="col-md-6">
         <div class="btn-group mr-3">

@@ -31,9 +31,7 @@ export class TeamsService {
     }>(
       `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/teams?username=${this.localStorageDataService.getUsername}`,
       {
-        headers: new HttpHeaders({
-          token: `${this.localStorageDataService.getJwtToken}`,
-        }),
+        headers: new HttpHeaders(),
       }
     );
   }
@@ -56,9 +54,7 @@ export class TeamsService {
         managers: managers,
       },
       {
-        headers: new HttpHeaders({
-          token: `${this.localStorageDataService.getJwtToken}`,
-        }),
+        headers: new HttpHeaders(),
       }
     );
   }

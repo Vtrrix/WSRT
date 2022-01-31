@@ -13,6 +13,10 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class MemberListComponent implements OnInit {
   role: string | null;
   teamShortName: string;
+
+  tableColumns: string[];
+  tableData: string[][];
+
   teamsList: team[];
   memberList: user[];
   showAlert: boolean;
@@ -31,14 +35,34 @@ export class MemberListComponent implements OnInit {
     this.teamShortName = '';
     this.memberList = [];
     this.teamsList = [];
+    this.tableColumns = [
+      'Name',
+      'Job Title',
+      'Team',
+      'Mobile',
+      'E-mail',
+      'Status Notification',
+    ];
+    this.tableData = [];
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.teamShortName = params.teamName;
+
       this.userService.getUsers(this.teamShortName).subscribe((res) => {
         this.memberList = res.data;
         this.userService.userList = this.memberList;
+        this.memberList.map((member) => {
+          this.tableData.push([
+            member.name,
+            member.job_title,
+            member.team,
+            member.phone,
+            member.email,
+            member.latest_status_seen ? 'Seen' : 'New Status',
+          ]);
+        });
       });
     });
     this.teamsService.getTeams().subscribe(

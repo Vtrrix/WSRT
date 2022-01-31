@@ -61,6 +61,7 @@ export class StatusComponent implements OnInit {
         (res) => {
           if (<number>(<unknown>res.statusCode) === 200) {
             this.status = res.data;
+            console.log(res);
 
             // to change time stamp if needed
             // this.status.submit_time_stamp = this.convertDate(
@@ -109,21 +110,21 @@ export class StatusComponent implements OnInit {
     document.getElementById('risk')!.innerHTML = risk;
     this.remarks = managerialRemarks;
   }
-  convertDate(stamp: string): string {
-    const date = stamp
-      .slice(0, stamp.indexOf(' '))
-      .split('-')
-      .reverse()
-      .join('/');
-    const time =
-      stamp.slice(stamp.indexOf(' '), stamp.indexOf(':')) +
-      ':' +
-      stamp
-        .slice(stamp.indexOf(':') + 1)
-        .slice(0, stamp.slice(stamp.indexOf(':') + 1).indexOf(':'));
+  // convertDate(stamp: string): string {
+  //   const date = stamp
+  //     .slice(0, stamp.indexOf(' '))
+  //     .split('-')
+  //     .reverse()
+  //     .join('/');
+  //   const time =
+  //     stamp.slice(stamp.indexOf(' '), stamp.indexOf(':')) +
+  //     ':' +
+  //     stamp
+  //       .slice(stamp.indexOf(':') + 1)
+  //       .slice(0, stamp.slice(stamp.indexOf(':') + 1).indexOf(':'));
 
-    return date + time;
-  }
+  //   return date + time;
+  // }
 
   loadNextAndPrevStatusID() {
     let tempStatusID = this.statusService.lastStatusID;
@@ -133,7 +134,6 @@ export class StatusComponent implements OnInit {
         if (res.data.status_list.length) {
           this.statusService.lastStatusID = tempStatusID;
           this.nextStatusID = res.data.status_list[0].status_id;
-          console.log(this.nextStatusID);
         } else {
           this.nextStatusID = '';
         }

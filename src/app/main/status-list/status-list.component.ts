@@ -17,7 +17,10 @@ import { StatusService } from 'src/app/services/status.service';
 export class StatusListComponent implements OnInit {
   searchForm: FormGroup;
 
+  tableColumns: string[];
+
   filtered: boolean;
+
   // for managerial view
   username: string | null;
   @Input() inManagerView: boolean;
@@ -47,13 +50,13 @@ export class StatusListComponent implements OnInit {
     submit_time_stamp: string;
     managerial_remarks: string;
   }[];
-
+  statusData: Iterable<any>[];
+  highlightRowList: boolean[];
   constructor(
     private statusService: StatusService,
     private calendar: NgbCalendar,
     public formatter: NgbDateParserFormatter,
     private sideMenuService: SideMenuService,
-    private router: Router,
     private route: ActivatedRoute
   ) {
     // To handle home component with manager view member
@@ -69,14 +72,23 @@ export class StatusListComponent implements OnInit {
     this.filtered = false;
     this.nextVisible = true;
     this.prevVisible = false;
+
     this.showAlert = false;
     this.alertMessage = '';
+
     this.pageSize = 15;
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     this.currentPage = 0;
     this.currentStatusList = [];
-
+    this.statusData = [];
+    this.highlightRowList = [];
+    this.tableColumns = [
+      'Status ID',
+      'Title',
+      'Status',
+      'Submitted Date & Time',
+    ];
     this.searchForm = new FormGroup({
       searchQuery: new FormControl(null, [Validators.required]),
     });
@@ -113,23 +125,23 @@ export class StatusListComponent implements OnInit {
     this.fetchStatus(this.pageSize);
   }
 
-  convertDate(stamp: string): string {
-    const date = stamp
-      .slice(0, stamp.indexOf(' '))
-      .split('-')
-      .reverse()
-      .join('/');
-    const time =
-      stamp.slice(stamp.indexOf(' '), stamp.indexOf(':')) +
-      ':' +
-      stamp
-        .slice(stamp.indexOf(':') + 1)
-        .slice(0, stamp.slice(stamp.indexOf(':') + 1).indexOf(':'));
+  // convertDate(stamp: string): string {
+  //   const date = stamp
+  //     .slice(0, stamp.indexOf(' '))
+  //     .split('-')
+  //     .reverse()
+  //     .join('/');
+  //   const time =
+  //     stamp.slice(stamp.indexOf(' '), stamp.indexOf(':')) +
+  //     ':' +
+  //     stamp
+  //       .slice(stamp.indexOf(':') + 1)
+  //       .slice(0, stamp.slice(stamp.indexOf(':') + 1).indexOf(':'));
 
-    // const amOrPm =
+  //   // const amOrPm =
 
-    return date + time;
-  }
+  //   return date + time;
+  // }
 
   // api call to get status
   fetchStatus(size: number) {
@@ -149,7 +161,7 @@ export class StatusListComponent implements OnInit {
           }
           if (res.statusCode === 200) {
             if (res.data.status_list.length !== 0) {
-              // to update current view -------------
+              // to update current view ----------------------------------------
 
               // to convert time stamp if required
               // res.data.status_list.map((status) => {
@@ -158,9 +170,25 @@ export class StatusListComponent implements OnInit {
               //   );
               // });
               this.currentStatusList = [...res.data.status_list];
-              //--------------------------------------
 
-              // to update fullStatusListID if needed------------------
+              this.highlightRowList = [];
+              this.currentStatusList.map((status) => {
+                this.statusData.push([
+                  status.status_id,
+                  status.title,
+                  status.status_read ? 'Seen' : 'Submitted',
+                  status.submit_time_stamp,
+                ]);
+
+                status.status_read
+                  ? this.highlightRowList.push(false)
+                  : this.highlightRowList.push(true);
+              });
+              console.log(this.statusData);
+
+              //---------------------------------------------------------------------
+
+              // to update fullStatusListID if needed----------------------------------
               if (
                 !this.statusService.fullStatusListID.includes(
                   this.currentStatusList[this.currentStatusList.length - 1]
@@ -172,7 +200,7 @@ export class StatusListComponent implements OnInit {
                     .status_id
                 );
               }
-              //----------------------------------------------------
+              //---------------------------------------------------------------------
             } else {
               this.currentStatusList = [];
             }
@@ -300,20 +328,5 @@ export class StatusListComponent implements OnInit {
     return parsed && this.calendar.isValid(NgbDate.from(parsed))
       ? NgbDate.from(parsed)
       : currentValue;
-  }
-
-  onStatusClick(id: string) {
-    if (this.inManagerView) {
-      this.router.navigate([
-        '/user',
-        'manager',
-        'teams',
-        this.teamName,
-        this.username,
-        id,
-      ]);
-    } else {
-      this.router.navigate(['/user', 'status', id]);
-    }
   }
 }

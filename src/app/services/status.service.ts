@@ -61,9 +61,7 @@ export class StatusService {
       data: { status_list: status[]; hasMorePages: boolean };
       statusCode: number;
     }>(url, {
-      headers: new HttpHeaders({
-        token: `${this.localStorageDataService.getJwtToken}`,
-      }),
+      headers: new HttpHeaders(),
     });
   }
 
@@ -78,9 +76,7 @@ export class StatusService {
       meassage: string;
       statusCode: number;
     }>(url, {
-      headers: new HttpHeaders({
-        token: `${this.localStorageDataService.getJwtToken}`,
-      }),
+      headers: new HttpHeaders(),
     });
   }
   addStatus(
@@ -108,9 +104,7 @@ export class StatusService {
         leaves_planned: leaves_planned,
       },
       {
-        headers: new HttpHeaders({
-          token: `${this.localStorageDataService.getJwtToken}`,
-        }),
+        headers: new HttpHeaders(),
       }
     );
   }
@@ -132,9 +126,7 @@ export class StatusService {
       `https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/${username}/statuses/${statusID}`,
       reqBody,
       {
-        headers: new HttpHeaders({
-          token: `${this.localStorageDataService.getJwtToken}`,
-        }),
+        headers: new HttpHeaders(),
       }
     );
   }

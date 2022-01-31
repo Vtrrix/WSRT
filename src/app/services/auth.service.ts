@@ -70,8 +70,7 @@ export class AuthService {
       },
       {
         headers: new HttpHeaders({
-          token: <string>this.localStorageDataService.getJwtToken,
-          access_token: <string>this.localStorageDataService.accessToken,
+          access_token: <string>this.localStorageDataService.getAccessToken,
         }),
       }
     );

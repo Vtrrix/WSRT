@@ -37,9 +37,7 @@ export class UserService {
     return this.http.get<{ data: user[]; message: string; statusCode: number }>(
       url,
       {
-        headers: new HttpHeaders({
-          token: `${this.localStorageDataService.getJwtToken}`,
-        }),
+        headers: new HttpHeaders(),
       }
     );
   }
@@ -65,9 +63,7 @@ export class UserService {
         manager: manager,
       },
       {
-        headers: new HttpHeaders({
-          token: `${this.localStorageDataService.getJwtToken}`,
-        }),
+        headers: new HttpHeaders(),
       }
     );
   }

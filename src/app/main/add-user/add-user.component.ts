@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { StaticDataService } from 'src/app/services/static-data.service';
+import { StaticDataService } from 'src/app/core/services/static-data.service';
 import { team, TeamsService } from 'src/app/services/teams.service';
 import { UserService } from 'src/app/services/user.service';
 

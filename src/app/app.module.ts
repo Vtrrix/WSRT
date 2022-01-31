@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { AuthComponent } from './auth/auth.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './main/home/home.component';
 import { NavbarComponent } from './main/navbar/navbar.component';
 import { SideMenuComponent } from './main/side-menu/side-menu.component';
@@ -31,6 +30,8 @@ import { ChangePasswordComponent } from './auth/change-password/change-password.
 import { LoginComponent } from './auth/login/login.component';
 import { UpdatePasswordComponent } from './main/update-password/update-password.component';
 import { BackToTopComponent } from './main/back-to-top/back-to-top.component';
+import { CoreModule } from './core/core.module';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
@@ -58,8 +59,10 @@ import { BackToTopComponent } from './main/back-to-top/back-to-top.component';
     LoginComponent,
     UpdatePasswordComponent,
     BackToTopComponent,
+    TableComponent,
   ],
   imports: [
+    CoreModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

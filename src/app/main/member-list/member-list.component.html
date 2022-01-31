@@ -32,72 +32,8 @@
         />
       </div>
     </div>
+    <app-table [columns]="tableColumns" [data]="tableData"></app-table>
 
-    <table
-      class="
-        table table-hover table-borderless table-responsive
-        shadow
-        card-1
-        p-4
-      "
-    >
-      <thead>
-        <tr class="border-bottom">
-          <th><span class="mx-4">Name</span></th>
-          <th><span class="mx-2">Job Title</span></th>
-          <th><span class="mx-2">Team</span></th>
-          <th><span class="mx-2">Mobile</span></th>
-          <th><span class="mx-2">E-mail</span></th>
-          <th><span class="mx-2">Status Notification</span></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="let member of memberList"
-          (click)="onMemberClick(member.username)"
-          class="border-bottom"
-        >
-          <td>
-            <div class="py-2 mx-4">
-              <span class="font-weight-bold"> {{ member.name }} </span>
-            </div>
-          </td>
-          <td>
-            <div class="py-2 mx-2">
-              <span class="font-weight-bold"> {{ member.job_title }} </span>
-            </div>
-          </td>
-          <td>
-            <div class="py-2 mx-2">
-              <span class="font-weight-bold">{{ member.team }}</span>
-            </div>
-          </td>
-          <td>
-            <div class="py-2 mx-2">
-              <span class="font-weight-bold">{{ member.phone }}</span>
-            </div>
-          </td>
-          <td>
-            <div class="py-2 mx-2">
-              <span class="font-weight-bold">{{ member.email }} </span>
-            </div>
-          </td>
-          <td>
-            <div class="py-2 mx-2">
-              <ng-template #noStatus>
-                <span class="font-weight-bold"> No Status </span></ng-template
-              >
-              <span
-                *ngIf="member.latest_status_seen !== undefined; else noStatus"
-                class="font-weight-bold"
-              >
-                {{ member.latest_status_seen ? "Seen" : "New Status" }}
-              </span>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
     <ng-template #content let-modal>
       <div class="modal-header">
         <h4 class="modal-title">Invite User</h4>

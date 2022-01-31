@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LocalStorageDataService } from '../core/services/local-storage-data.service';
+import { LocalStorageDataService } from './local-storage-data.service';
 
 export default interface staticData {
   job_titles: string[];
@@ -8,9 +8,7 @@ export default interface staticData {
   weekly_status_days: string[];
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class StaticDataService {
   staticData: staticData;
   constructor(
@@ -32,9 +30,7 @@ export class StaticDataService {
     }>(
       'https://pa4favllgg.execute-api.ap-south-1.amazonaws.com/prod/static_data',
       {
-        headers: new HttpHeaders({
-          token: `${this.localStorageDataService.getJwtToken}`,
-        }),
+        headers: new HttpHeaders(),
       }
     );
   }
