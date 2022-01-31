@@ -103,12 +103,6 @@ span.focused {
   border-radius: 0 !important;
 }
 
-thead tr:nth-child(3) th {
-  font-weight: bold !important;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
 .dow,
 .old-day,
 .day,

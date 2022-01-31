@@ -10,56 +10,18 @@
   </thead>
   <tbody>
     <tr
-      *ngFor="let status of statusList; index as i"
-      (click)="onStatusClick(status.status_id)"
+      *ngFor="let dataRow of data; index as i"
       class="border-bottom"
       [ngStyle]="{
         background:
           highlightRowList[i] === true && inManagerView ? '#EFEFEF' : '#FCFCFC'
       }"
     >
-      <td *ngFor="let dataEle of data[i]">
+      <td *ngFor="let dataEle of dataRow">
         <div class="py-2 mx-5">
           <span class="font-weight-bold">{{ dataEle }}</span>
         </div>
       </td>
-      <!-- <td>
-        <div class="py-2 mx-5">
-          <span class="font-weight-bold">{{ status.title }}</span>
-        </div>
-      </td>
-      <td>
-        <ng-template #UserView>
-          <div class="py-2 mx-5">
-            <ng-template #Submitted>
-              <span class="font-weight-bold">Submitted</span>
-            </ng-template>
-
-            <span
-              *ngIf="status.status_read; else Submitted"
-              class="font-weight-bold"
-              >Seen</span
-            >
-          </div>
-        </ng-template>
-
-        <div *ngIf="inManagerView; else UserView" class="py-2 mx-5">
-          <ng-template #Submitted>
-            <span class="font-weight-bold">New Status</span>
-          </ng-template>
-
-          <span
-            *ngIf="!highlightRowList[i]; else Submitted"
-            class="font-weight-bold"
-            >Seen</span
-          >
-        </div>
-      </td>
-      <td>
-        <div class="py-2 mx-5">
-          <span class="font-weight-bold">{{ status.submit_time_stamp }}</span>
-        </div>
-      </td> -->
     </tr>
   </tbody>
 </table>
